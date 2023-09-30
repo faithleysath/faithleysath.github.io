@@ -1,4 +1,4 @@
 ---
 title: about
-layout: about
+layout: profile
 ---
