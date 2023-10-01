@@ -25,5 +25,3 @@ categories: Tips
 > 来源：https://www.sqlsec.com/2018/05/termux.html
 >
 > 作者：国光
-
-{% pdf /Assets/eBooks/CS/Linux/Termux入门指南（简线条）.pdf 1000px %}
