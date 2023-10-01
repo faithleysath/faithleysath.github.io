@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Faith Leysath">
+
+
+
+
+
+<title>【Proxy】网络代理设置解决方案合集 | Matrix&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/Programmer-male.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Matrix&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Matrix&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">【Proxy】网络代理设置解决方案合集</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Faith Leysath</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">October 1, 2023&nbsp;&nbsp;9:44:18</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Tips/">Tips</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>本文用于记录一些<code>命令行</code>工具的代理设置方法，<code>UWP应用</code>的代理设置，<code>WSL2</code>的代理设置等等</p>
+<h1 id="UWP应用走代理"><a href="#UWP应用走代理" class="headerlink" title="UWP应用走代理"></a>UWP应用走代理</h1><blockquote>
+<p>引用自：<a target="_blank" rel="noopener" href="https://www.duohuohub.cn/threads/49/#post-101">https://www.duohuohub.cn/threads/49/#post-101</a></p>
+</blockquote>
+<p>微软的OneDrive真好用…但偶尔会出现怎么样都无法登陆的情况</p>
+<p>本质上是因为 微软 uwp 应用默认直连，所以开了代理就用不了</p>
+<h2 id="【最终解决方案】"><a href="#【最终解决方案】" class="headerlink" title="【最终解决方案】"></a>【最终解决方案】</h2><p>无脑批量解除所有UWP应用限制（管理员）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Get-ChildItem -Path Registry::<span class="string">&quot;HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Mappings\&quot; -name | ForEach-Object &#123;CheckNetIsolation.exe LoopbackExempt -a -p=&quot;</span><span class="variable">$_</span><span class="string">&quot;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="【其他尝试（未生效）】"><a href="#【其他尝试（未生效）】" class="headerlink" title="【其他尝试（未生效）】"></a>【其他尝试（未生效）】</h2><ul>
+<li>Clash中开启UWP应用联网限制解除工具</li>
+<li>Clash开启Tun模式</li>
+<li>重置OneDrive</li>
+<li>出国（bushi</li>
+</ul>
+<h1 id="PowerShell下使用代理"><a href="#PowerShell下使用代理" class="headerlink" title="PowerShell下使用代理"></a>PowerShell下使用代理</h1><blockquote>
+<p>引用自：<a target="_blank" rel="noopener" href="https://anuoua.github.io/2019/08/11/%E9%85%8D%E7%BD%AEPowershell%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86/">https://anuoua.github.io/2019/08/11/配置Powershell命令行代理/</a></p>
+</blockquote>
+<p>在日常windows环境开发中，powershell经常需要用到代理，但是每次去系统变量中配置环境变量还是显得过于麻烦了，所以我们可以定义两个命令：</p>
+<ul>
+<li>应用代理环境变量</li>
+<li>取消代理环境变量</li>
+</ul>
+<p>直接在powershell中调用这两命令就方便很多了。</p>
+<h2 id="编写脚本"><a href="#编写脚本" class="headerlink" title="编写脚本"></a>编写脚本</h2><ol>
+<li><p>使用管理员权限打开<code>PowerShell</code>，并执行<code>Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser</code></p>
+</li>
+<li><p>输入<code>code $PROFILE</code>使用<code>vscode</code>打开配置文件，如果没有<code>vscode</code>，可输入<code>$PROFILE</code>查看配置文件地址，使用其他文本编辑器打开。</p>
+</li>
+<li><p>在配置文件中输入以下代码：</p>
+ <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">set_proxy_variable</span></span> &#123;</span><br><span class="line">    <span class="built_in">Set-Item</span> Env:http_proxy <span class="string">&quot;http://127.0.0.1:33210&quot;</span>  <span class="comment"># 代理地址</span></span><br><span class="line">    <span class="built_in">Set-Item</span> Env:https_proxy <span class="string">&quot;http://127.0.0.1:33210&quot;</span> <span class="comment"># 代理地址</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">unset_proxy_variable</span></span> &#123;</span><br><span class="line">    <span class="built_in">Remove-Item</span> Env:http_proxy</span><br><span class="line">    <span class="built_in">Remove-Item</span> Env:https_proxy</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">New-Alias</span> <span class="literal">-Name</span> spp <span class="literal">-Value</span> set_proxy_variable</span><br><span class="line"><span class="built_in">New-Alias</span> <span class="literal">-Name</span> upp <span class="literal">-Value</span> unset_proxy_variable</span><br></pre></td></tr></table></figure></li>
+<li><p>保存关闭</p>
+</li>
+</ol>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><ul>
+<li><code>spp</code> 启用代理</li>
+<li><code>upp</code> 取消代理</li>
+</ul>
+<h1 id="CMD下使用代理"><a href="#CMD下使用代理" class="headerlink" title="CMD下使用代理"></a>CMD下使用代理</h1><p>打开<code>cmd</code>，输入以下命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> HTTP_PROXY=http://127.0.0.1:1080</span><br><span class="line"><span class="built_in">set</span> HTTPS_PROXY=http://127.0.0.1:1080</span><br></pre></td></tr></table></figure>
+
+<p>不过要注意的都是，上面设置的命令行代码作用的范围是一次性的，也就是关闭cmd窗口后，就失效了，如果需要永久生效的话，是需要配置系统的环境变量的</p>
+<h1 id="Git设置代理"><a href="#Git设置代理" class="headerlink" title="Git设置代理"></a>Git设置代理</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#有些朋友好像为什么设置http和socket5其实设置哪种都是可以的，具体看你们自己代理软件都支持的协议有哪些，就可以了</span></span><br><span class="line"><span class="comment">#记得修改端口号，比如我的是1080，记得改成自己代理软件的所配置的端口号</span></span><br><span class="line"><span class="comment">#下面配置的都是全局，如果需要设置局部的把【--global】删除即可。</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#http代理</span></span><br><span class="line">git config --global http.proxy <span class="string">&#x27;http://127.0.0.1:1080&#x27;</span></span><br><span class="line"><span class="comment">#https代理</span></span><br><span class="line">git config --global https.proxy <span class="string">&#x27;http://127.0.0.1:1080&#x27;</span></span><br><span class="line"><span class="comment">#http代理</span></span><br><span class="line">git config --global http.proxy <span class="string">&#x27;socks5://127.0.0.1:1080&#x27;</span></span><br><span class="line"><span class="comment">#https代理</span></span><br><span class="line">git config --global https.proxy <span class="string">&#x27;socks5://127.0.0.1:1080&#x27;</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#取消http代理</span></span><br><span class="line">git config --global --<span class="built_in">unset</span> http.proxy</span><br><span class="line"><span class="comment">#取消https代理</span></span><br><span class="line">git config --global --<span class="built_in">unset</span> https.proxy</span><br></pre></td></tr></table></figure>
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Faith Leysath</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://faithleysath.github.io/2023/10/01/proxySolution/">https://faithleysath.github.io/2023/10/01/proxySolution/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2023 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do not go gentle into that good night.</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Tips/"># Tips</a>
+                    
+                        <a href="/tags/Windows/"># Windows</a>
+                    
+                        <a href="/tags/Linux/"># Linux</a>
+                    
+                        <a href="/tags/Proxy/"># Proxy</a>
+                    
+                        <a href="/tags/Solution/"># Solution</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2023/10/01/hello-world/">Hello World</a>
+            
+            
+            <a class="next" rel="next" href="/2023/09/30/blogStarter/">博客上线啦！</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Faith Leysath | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
