@@ -5,6 +5,10 @@
     <url>/2023/09/30/hello-world/</url>
     <content><![CDATA[<h1 id="博客上线啦"><a class="markdownIt-Anchor" href="#博客上线啦"></a> 博客上线啦！</h1>
 <p>本博客采用<code>Chic</code>主题，使用<code>Hexo</code>驱动，支持<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>LaTeX</mtext></mrow><annotation encoding="application/x-tex">\LaTeX</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.89883em;vertical-align:-0.2155em;"></span><span class="mord text"><span class="mord textrm">L</span><span class="mspace" style="margin-right:-0.36em;"></span><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.68333em;"><span style="top:-2.904999em;"><span class="pstrut" style="height:2.7em;"></span><span class="mord"><span class="mord textrm mtight sizing reset-size6 size3">A</span></span></span></span></span></span><span class="mspace" style="margin-right:-0.15em;"></span><span class="mord text"><span class="mord textrm">T</span><span class="mspace" style="margin-right:-0.1667em;"></span><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.46782999999999997em;"><span style="top:-2.7845em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord textrm">E</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2155em;"><span></span></span></span></span><span class="mspace" style="margin-right:-0.125em;"></span><span class="mord textrm">X</span></span></span></span></span></span>，托管于<code>Github Page</code>上，永久访问地址<a href="https://faithleysath.github.io">https://faithleysath.github.io</a></p>
+<blockquote class="blockquote-center">
+<p>Elegant in code, simple in core</p>
+
+</blockquote>
 ]]></content>
       <categories>
         <category>公告</category>
