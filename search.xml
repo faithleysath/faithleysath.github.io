@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>博客上线啦！</title>
+    <url>/2023/09/30/hello-world/</url>
+    <content><![CDATA[<h1 id="博客上线啦"><a class="markdownIt-Anchor" href="#博客上线啦"></a> 博客上线啦！</h1>
+<p>本博客采用<code>Chic</code>主题，使用<code>Hexo</code>驱动，支持<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>LaTeX</mtext></mrow><annotation encoding="application/x-tex">\LaTeX</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.89883em;vertical-align:-0.2155em;"></span><span class="mord text"><span class="mord textrm">L</span><span class="mspace" style="margin-right:-0.36em;"></span><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.68333em;"><span style="top:-2.904999em;"><span class="pstrut" style="height:2.7em;"></span><span class="mord"><span class="mord textrm mtight sizing reset-size6 size3">A</span></span></span></span></span></span><span class="mspace" style="margin-right:-0.15em;"></span><span class="mord text"><span class="mord textrm">T</span><span class="mspace" style="margin-right:-0.1667em;"></span><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.46782999999999997em;"><span style="top:-2.7845em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord textrm">E</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2155em;"><span></span></span></span></span><span class="mspace" style="margin-right:-0.125em;"></span><span class="mord textrm">X</span></span></span></span></span></span>，托管于<code>Github Page</code>上，永久访问地址<a href="https://faithleysath.github.io">https://faithleysath.github.io</a></p>
+]]></content>
+      <categories>
+        <category>公告</category>
+      </categories>
+      <tags>
+        <tag>公告</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【Proxy】网络代理设置解决方案合集</title>
+    <url>/2023/10/01/proxySolution/</url>
+    <content><![CDATA[<h1 id="引言"><a class="markdownIt-Anchor" href="#引言"></a> 引言</h1>
+<p>本文用于记录一些<code>命令行</code>工具的代理设置方法，<code>UWP应用</code>的代理设置，<code>WSL2</code>的代理设置等等</p>
+<h1 id="uwp应用走代理"><a class="markdownIt-Anchor" href="#uwp应用走代理"></a> UWP应用走代理</h1>
+<blockquote>
+<p>引用自：<a href="https://www.duohuohub.cn/threads/49/#post-101">https://www.duohuohub.cn/threads/49/#post-101</a></p>
+</blockquote>
+<p>微软的OneDrive真好用…但偶尔会出现怎么样都无法登陆的情况</p>
+<p>本质上是因为 微软 uwp 应用默认直连，所以开了代理就用不了</p>
+<h2 id="最终解决方案"><a class="markdownIt-Anchor" href="#最终解决方案"></a> 【最终解决方案】</h2>
+<p>无脑批量解除所有UWP应用限制（管理员）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Get-ChildItem -Path Registry::<span class="string">&quot;HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Mappings\&quot; -name | ForEach-Object &#123;CheckNetIsolation.exe LoopbackExempt -a -p=&quot;</span><span class="variable">$_</span><span class="string">&quot;&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="其他尝试未生效"><a class="markdownIt-Anchor" href="#其他尝试未生效"></a> 【其他尝试（未生效）】</h2>
+<ul>
+<li>Clash中开启UWP应用联网限制解除工具</li>
+<li>Clash开启Tun模式</li>
+<li>重置OneDrive</li>
+<li>出国（bushi</li>
+</ul>
+<h1 id="powershell下使用代理"><a class="markdownIt-Anchor" href="#powershell下使用代理"></a> PowerShell下使用代理</h1>
+<blockquote>
+<p>引用自：<a href="https://anuoua.github.io/2019/08/11/%E9%85%8D%E7%BD%AEPowershell%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86/">https://anuoua.github.io/2019/08/11/配置Powershell命令行代理/</a></p>
+</blockquote>
+<p>在日常windows环境开发中，powershell经常需要用到代理，但是每次去系统变量中配置环境变量还是显得过于麻烦了，所以我们可以定义两个命令：</p>
+<ul>
+<li>应用代理环境变量</li>
+<li>取消代理环境变量</li>
+</ul>
+<p>直接在powershell中调用这两命令就方便很多了。</p>
+<h2 id="编写脚本"><a class="markdownIt-Anchor" href="#编写脚本"></a> 编写脚本</h2>
+<ol>
+<li>
+<p>使用管理员权限打开<code>PowerShell</code>，并执行<code>Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser</code></p>
+</li>
+<li>
+<p>输入<code>code $PROFILE</code>使用<code>vscode</code>打开配置文件，如果没有<code>vscode</code>，可输入<code>$PROFILE</code>查看配置文件地址，使用其他文本编辑器打开。</p>
+</li>
+<li>
+<p>在配置文件中输入以下代码：</p>
+ <figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">set_proxy_variable</span></span> &#123;</span><br><span class="line">    <span class="built_in">Set-Item</span> Env:http_proxy <span class="string">&quot;http://127.0.0.1:33210&quot;</span>  <span class="comment"># 代理地址</span></span><br><span class="line">    <span class="built_in">Set-Item</span> Env:https_proxy <span class="string">&quot;http://127.0.0.1:33210&quot;</span> <span class="comment"># 代理地址</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">unset_proxy_variable</span></span> &#123;</span><br><span class="line">    <span class="built_in">Remove-Item</span> Env:http_proxy</span><br><span class="line">    <span class="built_in">Remove-Item</span> Env:https_proxy</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">New-Alias</span> <span class="literal">-Name</span> spp <span class="literal">-Value</span> set_proxy_variable</span><br><span class="line"><span class="built_in">New-Alias</span> <span class="literal">-Name</span> upp <span class="literal">-Value</span> unset_proxy_variable</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>保存关闭</p>
+</li>
+</ol>
+<h2 id="使用"><a class="markdownIt-Anchor" href="#使用"></a> 使用</h2>
+<ul>
+<li><code>spp</code> 启用代理</li>
+<li><code>upp</code> 取消代理</li>
+</ul>
+<h1 id="cmd下使用代理"><a class="markdownIt-Anchor" href="#cmd下使用代理"></a> CMD下使用代理</h1>
+<p>打开<code>cmd</code>，输入以下命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> HTTP_PROXY=http://127.0.0.1:1080</span><br><span class="line"><span class="built_in">set</span> HTTPS_PROXY=http://127.0.0.1:1080</span><br></pre></td></tr></table></figure>
+<p>不过要注意的都是，上面设置的命令行代码作用的范围是一次性的，也就是关闭cmd窗口后，就失效了，如果需要永久生效的话，是需要配置系统的环境变量的</p>
+<h1 id="git设置代理"><a class="markdownIt-Anchor" href="#git设置代理"></a> Git设置代理</h1>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#有些朋友好像为什么设置http和socket5其实设置哪种都是可以的，具体看你们自己代理软件都支持的协议有哪些，就可以了</span></span><br><span class="line"><span class="comment">#记得修改端口号，比如我的是1080，记得改成自己代理软件的所配置的端口号</span></span><br><span class="line"><span class="comment">#下面配置的都是全局，如果需要设置局部的把【--global】删除即可。</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#http代理</span></span><br><span class="line">git config --global http.proxy <span class="string">&#x27;http://127.0.0.1:1080&#x27;</span></span><br><span class="line"><span class="comment">#https代理</span></span><br><span class="line">git config --global https.proxy <span class="string">&#x27;http://127.0.0.1:1080&#x27;</span></span><br><span class="line"><span class="comment">#http代理</span></span><br><span class="line">git config --global http.proxy <span class="string">&#x27;socks5://127.0.0.1:1080&#x27;</span></span><br><span class="line"><span class="comment">#https代理</span></span><br><span class="line">git config --global https.proxy <span class="string">&#x27;socks5://127.0.0.1:1080&#x27;</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#取消http代理</span></span><br><span class="line">git config --global --<span class="built_in">unset</span> http.proxy</span><br><span class="line"><span class="comment">#取消https代理</span></span><br><span class="line">git config --global --<span class="built_in">unset</span> https.proxy</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Tips</category>
+      </categories>
+      <tags>
+        <tag>Tips</tag>
+        <tag>Windows</tag>
+        <tag>Linux</tag>
+        <tag>Proxy</tag>
+        <tag>Solution</tag>
+      </tags>
+  </entry>
+</search>
