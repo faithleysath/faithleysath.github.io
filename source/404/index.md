@@ -11,6 +11,7 @@ comments: false
     <title>404</title>
 </head>
 <body>
-    <p>页面走丢了.....5秒后将自动跳转到主页</p>
+    <h1>404</h1>
+    <p>页面走丢了，5秒后将自动跳转到主页........</p>
 </body>
 </html>
