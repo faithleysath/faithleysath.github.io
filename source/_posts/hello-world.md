@@ -8,4 +8,4 @@ categories: 公告
 
 # 博客上线啦！
 
-本博客采用`Chic`主题，使用`Hexo`驱动，支持$\LaTeX$，托管与`Github Page`上，永久访问地址https://faithleysath.github.io
+本博客采用`Chic`主题，使用`Hexo`驱动，支持$\LaTeX$，托管于`Github Page`上，永久访问地址https://faithleysath.github.io
