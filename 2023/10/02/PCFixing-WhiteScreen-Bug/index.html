@@ -24,32 +24,32 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"faithleysath.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.18.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":true,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="引言 本文用于记录一些命令行工具的代理设置方法，UWP应用的代理设置，WSL2的代理设置等等  UWP应用走代理  引用自：https:&#x2F;&#x2F;www.duohuohub.cn&#x2F;threads&#x2F;49&#x2F;#post-101  微软的OneDrive真好用…但偶尔会出现怎么样都无法登陆的情况 本质上是因为 微软 uwp 应用默认直连，所以开了代理就用不了  【最终解决方案】 无脑批量解除所有UWP应用限制">
+    <meta name="description" content="故障演示    故障原因 一句话概括：KB5022913补丁和startallback插件有冲突引起的 参考链接：  https:&#x2F;&#x2F;www.chiphell.com&#x2F;thread-2500922-1-1.html https:&#x2F;&#x2F;www.chiphell.com&#x2F;thread-2500697-1-1.html   解决方案 强制重启三次电脑，自动进入安全模式后，卸载KB5022913补丁或st">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【Proxy】网络代理设置解决方案合集">
-<meta property="og:url" content="https://faithleysath.github.io/2023/10/01/proxySolution/index.html">
+<meta property="og:title" content="【修机】Win11白屏闪烁故障原因及解决方法">
+<meta property="og:url" content="https://faithleysath.github.io/2023/10/02/PCFixing-WhiteScreen-Bug/index.html">
 <meta property="og:site_name" content="Matrix&#39;s Blog">
-<meta property="og:description" content="引言 本文用于记录一些命令行工具的代理设置方法，UWP应用的代理设置，WSL2的代理设置等等  UWP应用走代理  引用自：https:&#x2F;&#x2F;www.duohuohub.cn&#x2F;threads&#x2F;49&#x2F;#post-101  微软的OneDrive真好用…但偶尔会出现怎么样都无法登陆的情况 本质上是因为 微软 uwp 应用默认直连，所以开了代理就用不了  【最终解决方案】 无脑批量解除所有UWP应用限制">
+<meta property="og:description" content="故障演示    故障原因 一句话概括：KB5022913补丁和startallback插件有冲突引起的 参考链接：  https:&#x2F;&#x2F;www.chiphell.com&#x2F;thread-2500922-1-1.html https:&#x2F;&#x2F;www.chiphell.com&#x2F;thread-2500697-1-1.html   解决方案 强制重启三次电脑，自动进入安全模式后，卸载KB5022913补丁或st">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-10-01T01:44:18.000Z">
+<meta property="article:published_time" content="2023-10-02T13:14:21.000Z">
 <meta property="article:modified_time" content="2023-10-02T15:31:41.249Z">
 <meta property="article:author" content="Faith Leysath">
+<meta property="article:tag" content="PC">
+<meta property="article:tag" content="Fixing">
 <meta property="article:tag" content="Solution">
+<meta property="article:tag" content="修机">
 <meta property="article:tag" content="Windows">
-<meta property="article:tag" content="Tips">
-<meta property="article:tag" content="Linux">
-<meta property="article:tag" content="Proxy">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://faithleysath.github.io/2023/10/01/proxySolution/">
+<link rel="canonical" href="https://faithleysath.github.io/2023/10/02/PCFixing-WhiteScreen-Bug/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://faithleysath.github.io/2023/10/01/proxySolution/","path":"2023/10/01/proxySolution/","title":"【Proxy】网络代理设置解决方案合集"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://faithleysath.github.io/2023/10/02/PCFixing-WhiteScreen-Bug/","path":"2023/10/02/PCFixing-WhiteScreen-Bug/","title":"【修机】Win11白屏闪烁故障原因及解决方法"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>【Proxy】网络代理设置解决方案合集 | Matrix's Blog</title>
+<title>【修机】Win11白屏闪烁故障原因及解决方法 | Matrix's Blog</title>
   
 
 
@@ -148,7 +148,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text"> 引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#uwp%E5%BA%94%E7%94%A8%E8%B5%B0%E4%BB%A3%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text"> UWP应用走代理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E7%BB%88%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">2.1.</span> <span class="nav-text"> 【最终解决方案】</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%B0%9D%E8%AF%95%E6%9C%AA%E7%94%9F%E6%95%88"><span class="nav-number">2.2.</span> <span class="nav-text"> 【其他尝试（未生效）】</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#powershell%E4%B8%8B%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text"> PowerShell下使用代理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E5%86%99%E8%84%9A%E6%9C%AC"><span class="nav-number">3.1.</span> <span class="nav-text"> 编写脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8"><span class="nav-number">3.2.</span> <span class="nav-text"> 使用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cmd%E4%B8%8B%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text"> CMD下使用代理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#git%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86"><span class="nav-number">5.</span> <span class="nav-text"> Git设置代理</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%85%E9%9A%9C%E6%BC%94%E7%A4%BA"><span class="nav-number">1.</span> <span class="nav-text"> 故障演示</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%85%E9%9A%9C%E5%8E%9F%E5%9B%A0"><span class="nav-number">2.</span> <span class="nav-text"> 故障原因</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">3.</span> <span class="nav-text"> 解决方案</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -212,7 +212,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://faithleysath.github.io/2023/10/01/proxySolution/">
+    <link itemprop="mainEntityOfPage" href="https://faithleysath.github.io/2023/10/02/PCFixing-WhiteScreen-Bug/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://avatars.githubusercontent.com/u/120073078">
@@ -225,12 +225,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="【Proxy】网络代理设置解决方案合集 | Matrix's Blog">
+      <meta itemprop="name" content="【修机】Win11白屏闪烁故障原因及解决方法 | Matrix's Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          【Proxy】网络代理设置解决方案合集
+          【修机】Win11白屏闪烁故障原因及解决方法
         </h1>
 
         <div class="post-meta-container">
@@ -240,15 +240,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2023-10-01 09:44:18" itemprop="dateCreated datePublished" datetime="2023-10-01T09:44:18+08:00">2023-10-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-02 23:31:41" itemprop="dateModified" datetime="2023-10-02T23:31:41+08:00">2023-10-02</time>
+      <time title="创建时间：2023-10-02 21:14:21 / 修改时间：23:31:41" itemprop="dateCreated datePublished" datetime="2023-10-02T21:14:21+08:00">2023-10-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -256,7 +250,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Tips/" itemprop="url" rel="index"><span itemprop="name">Tips</span></a>
+          <a href="/categories/%E4%BF%AE%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">修机</span></a>
         </span>
     </span>
 
@@ -269,61 +263,19 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="引言"><a class="markdownIt-Anchor" href="#引言"></a> 引言</h1>
-<p>本文用于记录一些<code>命令行</code>工具的代理设置方法，<code>UWP应用</code>的代理设置，<code>WSL2</code>的代理设置等等</p>
-<h1 id="uwp应用走代理"><a class="markdownIt-Anchor" href="#uwp应用走代理"></a> UWP应用走代理</h1>
-<blockquote>
-<p>引用自：<a target="_blank" rel="noopener" href="https://www.duohuohub.cn/threads/49/#post-101">https://www.duohuohub.cn/threads/49/#post-101</a></p>
-</blockquote>
-<p>微软的OneDrive真好用…但偶尔会出现怎么样都无法登陆的情况</p>
-<p>本质上是因为 微软 uwp 应用默认直连，所以开了代理就用不了</p>
-<h2 id="最终解决方案"><a class="markdownIt-Anchor" href="#最终解决方案"></a> 【最终解决方案】</h2>
-<p>无脑批量解除所有UWP应用限制（管理员）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Get-ChildItem -Path Registry::<span class="string">&quot;HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Mappings\&quot; -name | ForEach-Object &#123;CheckNetIsolation.exe LoopbackExempt -a -p=&quot;</span><span class="variable">$_</span><span class="string">&quot;&#125;</span></span><br></pre></td></tr></table></figure>
-<h2 id="其他尝试未生效"><a class="markdownIt-Anchor" href="#其他尝试未生效"></a> 【其他尝试（未生效）】</h2>
+    <div class="post-body" itemprop="articleBody"><h1 id="故障演示"><a class="markdownIt-Anchor" href="#故障演示"></a> 故障演示</h1>
+<iframe src="//player.bilibili.com/player.html?aid=449210841&bvid=BV1jj411b7dz&cid=1286850679&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="width: 100%; height: 500px; max-width: 100%；align:center; padding:20px 0;"> </iframe>
+<h1 id="故障原因"><a class="markdownIt-Anchor" href="#故障原因"></a> 故障原因</h1>
+<p>一句话概括：KB5022913补丁和startallback插件有冲突引起的</p>
+<p>参考链接：</p>
 <ul>
-<li>Clash中开启UWP应用联网限制解除工具</li>
-<li>Clash开启Tun模式</li>
-<li>重置OneDrive</li>
-<li>出国（bushi</li>
+<li><a target="_blank" rel="noopener" href="https://www.chiphell.com/thread-2500922-1-1.html">https://www.chiphell.com/thread-2500922-1-1.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.chiphell.com/thread-2500697-1-1.html">https://www.chiphell.com/thread-2500697-1-1.html</a></li>
 </ul>
-<h1 id="powershell下使用代理"><a class="markdownIt-Anchor" href="#powershell下使用代理"></a> PowerShell下使用代理</h1>
-<blockquote>
-<p>引用自：<a target="_blank" rel="noopener" href="https://anuoua.github.io/2019/08/11/%E9%85%8D%E7%BD%AEPowershell%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86/">https://anuoua.github.io/2019/08/11/配置Powershell命令行代理/</a></p>
-</blockquote>
-<p>在日常windows环境开发中，powershell经常需要用到代理，但是每次去系统变量中配置环境变量还是显得过于麻烦了，所以我们可以定义两个命令：</p>
-<ul>
-<li>应用代理环境变量</li>
-<li>取消代理环境变量</li>
-</ul>
-<p>直接在powershell中调用这两命令就方便很多了。</p>
-<h2 id="编写脚本"><a class="markdownIt-Anchor" href="#编写脚本"></a> 编写脚本</h2>
-<ol>
-<li>
-<p>使用管理员权限打开<code>PowerShell</code>，并执行<code>Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser</code></p>
-</li>
-<li>
-<p>输入<code>code $PROFILE</code>使用<code>vscode</code>打开配置文件，如果没有<code>vscode</code>，可输入<code>$PROFILE</code>查看配置文件地址，使用其他文本编辑器打开。</p>
-</li>
-<li>
-<p>在配置文件中输入以下代码：</p>
- <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">set_proxy_variable</span></span> &#123;</span><br><span class="line">    <span class="built_in">Set-Item</span> Env:http_proxy <span class="string">&quot;http://127.0.0.1:33210&quot;</span>  <span class="comment"># 代理地址</span></span><br><span class="line">    <span class="built_in">Set-Item</span> Env:https_proxy <span class="string">&quot;http://127.0.0.1:33210&quot;</span> <span class="comment"># 代理地址</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">unset_proxy_variable</span></span> &#123;</span><br><span class="line">    <span class="built_in">Remove-Item</span> Env:http_proxy</span><br><span class="line">    <span class="built_in">Remove-Item</span> Env:https_proxy</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">New-Alias</span> <span class="literal">-Name</span> spp <span class="literal">-Value</span> set_proxy_variable</span><br><span class="line"><span class="built_in">New-Alias</span> <span class="literal">-Name</span> upp <span class="literal">-Value</span> unset_proxy_variable</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>保存关闭</p>
-</li>
-</ol>
-<h2 id="使用"><a class="markdownIt-Anchor" href="#使用"></a> 使用</h2>
-<ul>
-<li><code>spp</code> 启用代理</li>
-<li><code>upp</code> 取消代理</li>
-</ul>
-<h1 id="cmd下使用代理"><a class="markdownIt-Anchor" href="#cmd下使用代理"></a> CMD下使用代理</h1>
-<p>打开<code>cmd</code>，输入以下命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> HTTP_PROXY=http://127.0.0.1:1080</span><br><span class="line"><span class="built_in">set</span> HTTPS_PROXY=http://127.0.0.1:1080</span><br></pre></td></tr></table></figure>
-<p>不过要注意的都是，上面设置的命令行代码作用的范围是一次性的，也就是关闭cmd窗口后，就失效了，如果需要永久生效的话，是需要配置系统的环境变量的</p>
-<h1 id="git设置代理"><a class="markdownIt-Anchor" href="#git设置代理"></a> Git设置代理</h1>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#有些朋友好像为什么设置http和socket5其实设置哪种都是可以的，具体看你们自己代理软件都支持的协议有哪些，就可以了</span></span><br><span class="line"><span class="comment">#记得修改端口号，比如我的是1080，记得改成自己代理软件的所配置的端口号</span></span><br><span class="line"><span class="comment">#下面配置的都是全局，如果需要设置局部的把【--global】删除即可。</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#http代理</span></span><br><span class="line">git config --global http.proxy <span class="string">&#x27;http://127.0.0.1:1080&#x27;</span></span><br><span class="line"><span class="comment">#https代理</span></span><br><span class="line">git config --global https.proxy <span class="string">&#x27;http://127.0.0.1:1080&#x27;</span></span><br><span class="line"><span class="comment">#http代理</span></span><br><span class="line">git config --global http.proxy <span class="string">&#x27;socks5://127.0.0.1:1080&#x27;</span></span><br><span class="line"><span class="comment">#https代理</span></span><br><span class="line">git config --global https.proxy <span class="string">&#x27;socks5://127.0.0.1:1080&#x27;</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#取消http代理</span></span><br><span class="line">git config --global --<span class="built_in">unset</span> http.proxy</span><br><span class="line"><span class="comment">#取消https代理</span></span><br><span class="line">git config --global --<span class="built_in">unset</span> https.proxy</span><br></pre></td></tr></table></figure>
+<h1 id="解决方案"><a class="markdownIt-Anchor" href="#解决方案"></a> 解决方案</h1>
+<p>强制重启三次电脑，自动进入安全模式后，卸载KB5022913补丁或startallback插件即可</p>
+<p>也可进入PE进行卸载。</p>
+
     </div>
 
     
@@ -340,7 +292,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://faithleysath.github.io/2023/10/01/proxySolution/" title="【Proxy】网络代理设置解决方案合集">https://faithleysath.github.io/2023/10/01/proxySolution/</a>
+      <a href="https://faithleysath.github.io/2023/10/02/PCFixing-WhiteScreen-Bug/" title="【修机】Win11白屏闪烁故障原因及解决方法">https://faithleysath.github.io/2023/10/02/PCFixing-WhiteScreen-Bug/</a>
   </li>
   <li class="post-copyright-license">
       <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -349,24 +301,24 @@
 </div>
 
           <div class="post-tags">
+              <a href="/tags/PC/" rel="tag"># PC</a>
+              <a href="/tags/Fixing/" rel="tag"># Fixing</a>
               <a href="/tags/Solution/" rel="tag"># Solution</a>
+              <a href="/tags/%E4%BF%AE%E6%9C%BA/" rel="tag"># 修机</a>
               <a href="/tags/Windows/" rel="tag"># Windows</a>
-              <a href="/tags/Tips/" rel="tag"># Tips</a>
-              <a href="/tags/Linux/" rel="tag"># Linux</a>
-              <a href="/tags/Proxy/" rel="tag"># Proxy</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2023/09/30/hello-world/" rel="prev" title="博客上线啦！">
-                  <i class="fa fa-angle-left"></i> 博客上线啦！
+                <a href="/2023/10/01/termuxTips/" rel="prev" title="【Termux】关于Termux的配置与资源汇集">
+                  <i class="fa fa-angle-left"></i> 【Termux】关于Termux的配置与资源汇集
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2023/10/01/termuxTips/" rel="next" title="【Termux】关于Termux的配置与资源汇集">
-                  【Termux】关于Termux的配置与资源汇集 <i class="fa fa-angle-right"></i>
+                <a href="/2023/10/02/PCFixing-HuaweiShare-Network-Error/" rel="next" title="【修机】华为共享引起的无法上网问题">
+                  【修机】华为共享引起的无法上网问题 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
@@ -447,7 +399,7 @@
 
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
-  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://faithleysath.github.io/2023/10/01/proxySolution/"}</script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://faithleysath.github.io/2023/10/02/PCFixing-WhiteScreen-Bug/"}</script>
   <script src="/js/third-party/quicklink.js"></script>
 <script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"faithleysath/faithleysath.github.io","issue_term":"pathname","theme":"github-dark"}</script>
 <script src="/js/third-party/comments/utterances.js"></script>

@@ -1,6 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>【修机】华为共享引起的无法上网问题</title>
+    <url>/2023/10/02/PCFixing-HuaweiShare-Network-Error/</url>
+    <content><![CDATA[<h1 id="故障描述"><a class="markdownIt-Anchor" href="#故障描述"></a> 故障描述</h1>
+<p>据客户描述，她需要使用「华为共享」在华为笔记本与华为手机之间传输文件，而在关闭「华为共享」后，则出现了无法上网的情况。</p>
+<p>且无论是「网络重置」，还是用手机「USB共享热点」，皆无法上网。</p>
+<h1 id="故障排查"><a class="markdownIt-Anchor" href="#故障排查"></a> 故障排查</h1>
+<h2 id="网络重置"><a class="markdownIt-Anchor" href="#网络重置"></a> 网络重置</h2>
+<p>当得知「网络重置」这一招也无法奏效时，问题顿时变得棘手起来。因为「网络重置」是位于 <code>设置&gt;网络和Internet&gt;高级网络设置 &gt;网络重置</code> 的一个选项。根据Windows设置的描述：</p>
+<blockquote>
+<p>应用「网络重置」将删除所有网络适配器然后重新安装它们，并将其他网络组件设回为原始设置，你随后可能需要重新安装其他网络软件 VPN 客户端软件或虚拟交换机</p>
+</blockquote>
+<p>按理说，重置能解决99%的问题，但这次是个例外，除了这次，还有一次也是例外。</p>
+<h2 id="pe测试"><a class="markdownIt-Anchor" href="#pe测试"></a> PE测试</h2>
+<p>为了排除物理网卡的硬件故障，我们选择进入一个带网卡驱动的PE系统。经过测试，PE系统中的网络一切正常，可正常上网，这说明不存在硬件故障。</p>
+<h2 id="重新检查网络设置"><a class="markdownIt-Anchor" href="#重新检查网络设置"></a> 重新检查网络设置</h2>
+<p>无奈之下，我们只能重新检查网络设置，结果有了意外发现，如下：</p>
+<p><img src="/images/PCFixing-HuaweiShare-Network-Error/1.jpg" alt="意外发现" /></p>
+<p>虽然 <code>IP设置</code> 和 <code>DNS设置</code> 都写的 <code>自动(DHCP)</code> ，但上面的那行<font color=red>红字</font>清晰地告诉我们，<font color=red>不使用下面的设置</font>，也就是说，它实际上并不是 <code>DHCP</code> 模式获取的，而是手动设置的。</p>
+<p>之前没有发现这个，可能是因为太过于相信「网络重置」的力量，认为「重置」之后，IP与DNS设置应该也会被重置，且下面写的明明是 <code>自动(DHCP)</code> ，看的太快，而忽视了那行红字。两个原因综合起来，导致我们忽略了这个地方。</p>
+<h2 id="故障解决"><a class="markdownIt-Anchor" href="#故障解决"></a> 故障解决</h2>
+<p>点击<font color=navy>“更改所有 WIFI 网路的 IP 设置”</font>后，设置页面变成如下：</p>
+<p><img src="/images/PCFixing-HuaweiShare-Network-Error/2.jpg" alt="真实设置" /></p>
+<p>从中可以看到，<code>IP分配</code> 变成手动的了。我们将其改为自动，网络自然也就恢复了。</p>
+<h1 id="深入思考"><a class="markdownIt-Anchor" href="#深入思考"></a> 深入思考</h1>
+<p>其实，关于 <code>DNS</code> 与 <code>IP</code> 的设置，<code>win7</code> 与 <code>win10/11</code> 有一些区别。而我熟悉的是 <code>win7</code> 的那一套设置，也就导致这一次没有很快定位到问题所在。下面讲讲区别所在。</p>
+<p>众所周知，<code>win7</code> 的系统设置是在「控制面板」中的，而 <code>win10/11</code> 加入了一个新的「设置」应用，同时也保留了传统的「控制面板」。</p>
+<p>关于 <code>DNS</code> 与 <code>IP</code> 的设置，在「控制面板」与「设置」中，都能操作。我们可能认为这两个设置是同步的，操作的是同一个配置，但其实不是。</p>
+<p>先分别讲讲「控制面板」与「设置」中的 <code>DNS</code> 与 <code>IP</code> 的设置吧。</p>
+<h2 id="控制面板"><a class="markdownIt-Anchor" href="#控制面板"></a> 「控制面板」</h2>
+<ol>
+<li>首先打开「网络连接」设置页面。有很多途径进入这个页面，这里讲个最快的途径。先按Win+R打开「运行」，输入 <code>ncpa.cpl</code> ，按回车。</li>
+<li>右键「WLAN」，点击「属性」<br />
+<img src="/images/PCFixing-HuaweiShare-Network-Error/3.png" alt="网络连接" /></li>
+<li>双击「Internet 协议版本 4（TCP/IPV4）」<br />
+<img src="/images/PCFixing-HuaweiShare-Network-Error/4.png" alt="属性" /></li>
+<li>进入页面<br />
+<img src="/images/PCFixing-HuaweiShare-Network-Error/5.png" alt="IP设置" /></li>
+</ol>
+<h2 id="设置"><a class="markdownIt-Anchor" href="#设置"></a> 「设置」</h2>
+<p>同样有很多种途径可以进入页面，这里讲最快的。</p>
+<ol>
+<li>点击这个<code>&gt;</code><br />
+<img src="/images/PCFixing-HuaweiShare-Network-Error/6.jpg" alt="wifi" /></li>
+<li>点击「属性」<br />
+<img src="/images/PCFixing-HuaweiShare-Network-Error/7.jpg" alt="列表" /></li>
+<li>进入页面<br />
+<img src="/images/PCFixing-HuaweiShare-Network-Error/8.jpg" alt="属性" /></li>
+</ol>
+<p>注意到，「设置」里的页面为 <code>WLAN &gt; 1304_5G</code>，这意味着这个页面的设置是对 <code>1304_5G</code> 这个wifi的单独设置。也就是对这个wifi的ip和dns进行手动设置，连接其他wifi并不是手动设置，不同wifi的设置是独立的。</p>
+<p>而「控制面板」里的设置，是对 <code>WLAN</code> 这个适配器的设置，而所有wifi都是属于 <code>WLAN</code> 这个适配器的，这意味着在「控制面板」的设置，对所有wifi都生效。</p>
+<p>那么谁的优先级高呢，自然是「控制面板」的优先级高。</p>
+<ul>
+<li>
+<p>若「控制面板」设置的是 <code>自动(DHCP)</code>，而「设置」里使用 <code>手动</code> ，则使用「设置」里的设置。</p>
+</li>
+<li>
+<p>若「控制面板」设置的是 <code>手动</code> ，则「设置」里的设置不会生效。这时就会出现那行<font color=red>红字</font>。</p>
+</li>
+</ul>
+<p><img src="/images/PCFixing-HuaweiShare-Network-Error/1.jpg" alt="红字" /></p>
+<p>其实在「设置」里也有一个页面和「控制面板」的设置等效，那就是对适配器的设置，如下：</p>
+<p><img src="/images/PCFixing-HuaweiShare-Network-Error/9.jpg" alt="适配器设置" /></p>
+<h1 id="尾声"><a class="markdownIt-Anchor" href="#尾声"></a> 尾声</h1>
+<p>本文其实还留下一些疑点，比如为何「华为共享」关闭后没有恢复ip与dns设置，以及「网络重置」为何没有重置ip与dns设置。不过这些问题暂时还没有结果。</p>
+<p>总之，关于网络的问题很多时候都是疑难杂症，只能用排除法一点点去找出问题根源所在。像前文提到的另一个例外，就是一个很特殊的情况，后面有机会再提吧。</p>
+]]></content>
+      <categories>
+        <category>修机</category>
+      </categories>
+      <tags>
+        <tag>PC</tag>
+        <tag>Fixing</tag>
+        <tag>Solution</tag>
+        <tag>修机</tag>
+        <tag>Windows</tag>
+        <tag>华为</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【修机】Win11白屏闪烁故障原因及解决方法</title>
+    <url>/2023/10/02/PCFixing-WhiteScreen-Bug/</url>
+    <content><![CDATA[<h1 id="故障演示"><a class="markdownIt-Anchor" href="#故障演示"></a> 故障演示</h1>
+<iframe src="//player.bilibili.com/player.html?aid=449210841&bvid=BV1jj411b7dz&cid=1286850679&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="width: 100%; height: 500px; max-width: 100%；align:center; padding:20px 0;"> </iframe>
+<h1 id="故障原因"><a class="markdownIt-Anchor" href="#故障原因"></a> 故障原因</h1>
+<p>一句话概括：KB5022913补丁和startallback插件有冲突引起的</p>
+<p>参考链接：</p>
+<ul>
+<li><a href="https://www.chiphell.com/thread-2500922-1-1.html">https://www.chiphell.com/thread-2500922-1-1.html</a></li>
+<li><a href="https://www.chiphell.com/thread-2500697-1-1.html">https://www.chiphell.com/thread-2500697-1-1.html</a></li>
+</ul>
+<h1 id="解决方案"><a class="markdownIt-Anchor" href="#解决方案"></a> 解决方案</h1>
+<p>强制重启三次电脑，自动进入安全模式后，卸载KB5022913补丁或startallback插件即可</p>
+<p>也可进入PE进行卸载。</p>
+]]></content>
+      <categories>
+        <category>修机</category>
+      </categories>
+      <tags>
+        <tag>PC</tag>
+        <tag>Fixing</tag>
+        <tag>Solution</tag>
+        <tag>修机</tag>
+        <tag>Windows</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>博客上线啦！</title>
     <url>/2023/09/30/hello-world/</url>
     <content><![CDATA[<h1 id="博客上线啦"><a class="markdownIt-Anchor" href="#博客上线啦"></a> 博客上线啦！</h1>
@@ -79,11 +185,11 @@
         <category>Tips</category>
       </categories>
       <tags>
-        <tag>Tips</tag>
+        <tag>Solution</tag>
         <tag>Windows</tag>
+        <tag>Tips</tag>
         <tag>Linux</tag>
         <tag>Proxy</tag>
-        <tag>Solution</tag>
       </tags>
   </entry>
   <entry>
@@ -92,14 +198,14 @@
     <content><![CDATA[<h1 id="引言"><a class="markdownIt-Anchor" href="#引言"></a> 引言</h1>
 <p>众所周知，Termux是安卓上的一个终端模拟器。其官方介绍如下（懒</p>
 <blockquote>
-<p>Termux是一个适用于 Android 的终端模拟器，其环境类似于 Linux 环境。 无需Root或设置即可使用。 Termux 会自动进行最小安装 - 使用 APT 包管理器即可获得其他软件包。</p>
-<p><a href="https://termux.dev/cn/index.html">https://termux.dev/cn/index.html</a></p>
+<p>Termux是一个适用于 Android 的终端模拟器，其环境类似于 Linux 环境。 无需Root或设置即可使用。 Termux 会自动进行最小安装 - 使用 APT 包管理器即可获得其他软件包。<br />
+<a href="https://termux.dev/cn/index.html">https://termux.dev/cn/index.html</a></p>
 </blockquote>
 <p>那么如何发挥Termux的全部功能呢。本文收录了Termux教程与脚本，基本涵盖了Termux的进阶玩法。</p>
 <h1 id="termux入门指南"><a class="markdownIt-Anchor" href="#termux入门指南"></a> Termux入门指南</h1>
 <blockquote>
-<p>来源：<a href="https://www.sqlsec.com/2018/05/termux.html">https://www.sqlsec.com/2018/05/termux.html</a></p>
-<p>作者：国光</p>
+<p>来源：<a href="https://www.sqlsec.com/2018/05/termux.html">https://www.sqlsec.com/2018/05/termux.html</a><br />
+作者：国光</p>
 </blockquote>
 ]]></content>
       <categories>
