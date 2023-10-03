@@ -80,6 +80,25 @@
       </tags>
   </entry>
   <entry>
+    <title>【修机】进PE后读不到盘</title>
+    <url>/2023/10/03/PCFixing-PE-CANNOT-FOUND-DISK/</url>
+    <content><![CDATA[<p>参考这两个链接</p>
+<ul>
+<li><a href="https://www.dell.com/support/kbdoc/zh-cn/000149444/">【DELL】安装系统时看不到固态硬盘的解决方案</a></li>
+<li><a href="https://www.intel.cn/content/www/cn/zh/support/articles/000057787/memory-and-storage/intel-optane-memory.html">如何使用 英特尔® RST 驱动程序启用英特尔® VMD兼容 RAID 或英特尔® 傲腾™内存配置的平台</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>修机</category>
+      </categories>
+      <tags>
+        <tag>PC</tag>
+        <tag>Fixing</tag>
+        <tag>修机</tag>
+        <tag>PE</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【修机】Win11白屏闪烁故障原因及解决方法</title>
     <url>/2023/10/02/PCFixing-WhiteScreen-Bug/</url>
     <content><![CDATA[<h1 id="故障演示"><a class="markdownIt-Anchor" href="#故障演示"></a> 故障演示</h1>
