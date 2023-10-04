@@ -132,7 +132,7 @@
 <p>CSDN = Copy, Steal and pay-Download Net</p>
 
 </blockquote>
-<div class="note warning"><h3 id="本文若引起您的不适请立即停止浏览并寻求专业心理咨询"><a class="markdownIt-Anchor" href="#本文若引起您的不适请立即停止浏览并寻求专业心理咨询"></a> 本文若引起您的不适，请立即停止浏览，并寻求专业心理咨询。</h3>
+<div class="note warning"><h3 id="若本文引起您的不适请立即停止浏览并寻求专业心理咨询"><a class="markdownIt-Anchor" href="#若本文引起您的不适请立即停止浏览并寻求专业心理咨询"></a> 若本文引起您的不适，请立即停止浏览，并寻求专业心理咨询。</h3>
 <p>您不必赞同本文观点，本文仅从技术层面探究全网屏蔽CSDN的方案。<br />
 若您的观点与本文保持一致，希望本文对您有一些帮助。</p>
 </div>
@@ -156,8 +156,8 @@
 以 %s 代替查询的 URL：<a href="https://cn.bing.com/search?q=%25s+-csdn">https://cn.bing.com/search?q=%s+-csdn</a></li>
 </ol>
 <h1 id="至于其他搜索引擎"><a class="markdownIt-Anchor" href="#至于其他搜索引擎"></a> 至于其他搜索引擎</h1>
-<p>首先，我不用百度，因为百度也是个很垃圾的搜索引擎。</p>
-<p>其次，我不常用Google，因为Google常年退出中国大陆，对简中互联网的收录不是很完善。</p>
+<p>首先，我不用百度，因为百度是个很垃圾的搜索引擎。</p>
+<p>其次，我不常用Google，因为Google常年退出中国大陆，对简中互联网的收录不是很完全。</p>
 <p>按理说，简中互联网搜索上做的最好的应该是百度，但百度的竞价排名广告毁了这一切。</p>
 <p>所以只有一个选择，那就是必应了。</p>
 <h1 id="起因"><a class="markdownIt-Anchor" href="#起因"></a> 起因</h1>
