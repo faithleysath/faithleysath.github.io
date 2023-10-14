@@ -17,12 +17,12 @@
 <p>为了排除物理网卡的硬件故障，我们选择进入一个带网卡驱动的PE系统。经过测试，PE系统中的网络一切正常，可正常上网，这说明不存在硬件故障。</p>
 <h2 id="重新检查网络设置"><a class="markdownIt-Anchor" href="#重新检查网络设置"></a> 重新检查网络设置</h2>
 <p>无奈之下，我们只能重新检查网络设置，结果有了意外发现，如下：</p>
-<p><img src="/images/PCFixing-HuaweiShare-Network-Error/1.jpg" alt="意外发现" /></p>
+<p><img data-src="/images/PCFixing-HuaweiShare-Network-Error/1.jpg" alt="意外发现" /></p>
 <p>虽然 <code>IP设置</code> 和 <code>DNS设置</code> 都写的 <code>自动(DHCP)</code> ，但上面的那行<font color=red>红字</font>清晰地告诉我们，<font color=red>不使用下面的设置</font>，也就是说，它实际上并不是 <code>DHCP</code> 模式获取的，而是手动设置的。</p>
 <p>之前没有发现这个，可能是因为太过于相信「网络重置」的力量，认为「重置」之后，IP与DNS设置应该也会被重置，且下面写的明明是 <code>自动(DHCP)</code> ，看的太快，而忽视了那行红字。两个原因综合起来，导致我们忽略了这个地方。</p>
 <h2 id="故障解决"><a class="markdownIt-Anchor" href="#故障解决"></a> 故障解决</h2>
 <p>点击<font color=navy>“更改所有 WIFI 网路的 IP 设置”</font>后，设置页面变成如下：</p>
-<p><img src="/images/PCFixing-HuaweiShare-Network-Error/2.jpg" alt="真实设置" /></p>
+<p><img data-src="/images/PCFixing-HuaweiShare-Network-Error/2.jpg" alt="真实设置" /></p>
 <p>从中可以看到，<code>IP分配</code> 变成手动的了。我们将其改为自动，网络自然也就恢复了。</p>
 <h1 id="深入思考"><a class="markdownIt-Anchor" href="#深入思考"></a> 深入思考</h1>
 <p>其实，关于 <code>DNS</code> 与 <code>IP</code> 的设置，<code>win7</code> 与 <code>win10/11</code> 有一些区别。而我熟悉的是 <code>win7</code> 的那一套设置，也就导致这一次没有很快定位到问题所在。下面讲讲区别所在。</p>
@@ -33,21 +33,21 @@
 <ol>
 <li>首先打开「网络连接」设置页面。有很多途径进入这个页面，这里讲个最快的途径。先按Win+R打开「运行」，输入 <code>ncpa.cpl</code> ，按回车。</li>
 <li>右键「WLAN」，点击「属性」<br />
-<img src="/images/PCFixing-HuaweiShare-Network-Error/3.png" alt="网络连接" /></li>
+<img data-src="/images/PCFixing-HuaweiShare-Network-Error/3.png" alt="网络连接" /></li>
 <li>双击「Internet 协议版本 4（TCP/IPV4）」<br />
-<img src="/images/PCFixing-HuaweiShare-Network-Error/4.png" alt="属性" /></li>
+<img data-src="/images/PCFixing-HuaweiShare-Network-Error/4.png" alt="属性" /></li>
 <li>进入页面<br />
-<img src="/images/PCFixing-HuaweiShare-Network-Error/5.png" alt="IP设置" /></li>
+<img data-src="/images/PCFixing-HuaweiShare-Network-Error/5.png" alt="IP设置" /></li>
 </ol>
 <h2 id="设置"><a class="markdownIt-Anchor" href="#设置"></a> 「设置」</h2>
 <p>同样有很多种途径可以进入页面，这里讲最快的。</p>
 <ol>
 <li>点击这个<code>&gt;</code><br />
-<img src="/images/PCFixing-HuaweiShare-Network-Error/6.jpg" alt="wifi" /></li>
+<img data-src="/images/PCFixing-HuaweiShare-Network-Error/6.jpg" alt="wifi" /></li>
 <li>点击「属性」<br />
-<img src="/images/PCFixing-HuaweiShare-Network-Error/7.jpg" alt="列表" /></li>
+<img data-src="/images/PCFixing-HuaweiShare-Network-Error/7.jpg" alt="列表" /></li>
 <li>进入页面<br />
-<img src="/images/PCFixing-HuaweiShare-Network-Error/8.jpg" alt="属性" /></li>
+<img data-src="/images/PCFixing-HuaweiShare-Network-Error/8.jpg" alt="属性" /></li>
 </ol>
 <p>注意到，「设置」里的页面为 <code>WLAN &gt; 1304_5G</code>，这意味着这个页面的设置是对 <code>1304_5G</code> 这个wifi的单独设置。也就是对这个wifi的ip和dns进行手动设置，连接其他wifi并不是手动设置，不同wifi的设置是独立的。</p>
 <p>而「控制面板」里的设置，是对 <code>WLAN</code> 这个适配器的设置，而所有wifi都是属于 <code>WLAN</code> 这个适配器的，这意味着在「控制面板」的设置，对所有wifi都生效。</p>
@@ -60,9 +60,9 @@
 <p>若「控制面板」设置的是 <code>手动</code> ，则「设置」里的设置不会生效。这时就会出现那行<font color=red>红字</font>。</p>
 </li>
 </ul>
-<p><img src="/images/PCFixing-HuaweiShare-Network-Error/1.jpg" alt="红字" /></p>
+<p><img data-src="/images/PCFixing-HuaweiShare-Network-Error/1.jpg" alt="红字" /></p>
 <p>其实在「设置」里也有一个页面和「控制面板」的设置等效，那就是对适配器的设置，如下：</p>
-<p><img src="/images/PCFixing-HuaweiShare-Network-Error/9.jpg" alt="适配器设置" /></p>
+<p><img data-src="/images/PCFixing-HuaweiShare-Network-Error/9.jpg" alt="适配器设置" /></p>
 <h1 id="尾声"><a class="markdownIt-Anchor" href="#尾声"></a> 尾声</h1>
 <p>本文其实还留下一些疑点，比如为何「华为共享」关闭后没有恢复ip与dns设置，以及「网络重置」为何没有重置ip与dns设置。不过这些问题暂时还没有结果。</p>
 <p>总之，关于网络的问题很多时候都是疑难杂症，只能用排除法一点点去找出问题根源所在。像前文提到的另一个例外，就是一个很特殊的情况，后面有机会再提吧。</p>
