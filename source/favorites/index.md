@@ -8,7 +8,7 @@ date: 2023-10-03 19:00:47
 # 友链[^友链]（不分排名先后，大概率以认识的时间先后排序）
 [^友链]:说是友链，其实有的只是单向的，只因我博客更的太少了，不好意思向别人要友链（逃
 {% lg %}
-Jerry | //a7hwc5yka2cvgg6ggzogbukhmr2mzvjmtorljtv4bqwztc366lya.b32.i2phides.me/ | for what? | /images/friend_avatar/jerry.ico
+Jerry | //jerryh0me.duckdns.org/ | for what? | /images/friend_avatar/jerry.ico
 Dustella | //www.dustella.net/ | 一个普通的前端开发、一个诗人、曾经是理想主义者 | https://github.com/Dustella.png
 Littlewith | //www.littlewith.top/ | 是零零后、网安从业、爱猫人士、摸鱼担当、popping、代码诗人 | https://github.com/littlewith.png
 北雁云依 | //stblog.penclub.club/ | 把信拿去吧，你可以假戏真做 | https://github.com/BeiyanYunyi.png
