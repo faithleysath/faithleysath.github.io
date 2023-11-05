@@ -317,6 +317,53 @@
       </tags>
   </entry>
   <entry>
+    <title>【软路由】基于openwrt的校园网多拨教程</title>
+    <url>/2023/10/18/schoolNet-mwan-tutorial/</url>
+    <content><![CDATA[<h1 id="0x00前言"><a class="markdownIt-Anchor" href="#0x00前言"></a> 0x00前言</h1>
+<p>高中曾在网上冲浪时听说过<code>多拨</code>，但因为光猫后台不好进，改不了<code>桥接</code>，故作罢。</p>
+<p>如今步入大学，从信技学长那得知校园网也能<code>多拨</code>，躁动的心便蠢蠢欲动起来。奈何本人脸皮薄，学长也守口如瓶，故并没有第一时间实现。</p>
+<p>后来给宿舍买了<code>软路由</code>，就想着把<code>多拨</code>实现了。一通上网查询后，终于找到几篇细节较为详细的教程。</p>
+<blockquote>
+<p><a href="https://blog.csdn.net/m0_59496782/article/details/121862378">拿什么拯救你，我的校园网——校园网优化之单线多拨</a><br />
+<a href="https://blog.csdn.net/m0_59496782/article/details/128275861">讲讲多拨的额外骚操作（多拨附加教程）</a><br />
+<a href="https://www.cfanz.cn/resource/detail/ygPBPyXqEYGLO">南信大校园网稳定|多拨|软路由|硬路由|保姆级教学|一步到位|openwrt|pandavan老毛子</a></p>
+</blockquote>
+<p>理论上来说，参考这三篇就已经能解决90%大学的校园网多拨了。</p>
+<h1 id="1x00准备工作"><a class="markdownIt-Anchor" href="#1x00准备工作"></a> 1x00准备工作</h1>
+<p>本人使用ASUS-ACRH17路由器作为软路由，接下来讲解刷入openwrt的过程。其他型号请自行搜索刷入方法。</p>
+<h1 id="0xff-附录"><a class="markdownIt-Anchor" href="#0xff-附录"></a> 0xFF 附录</h1>
+<p>校园网自动登录脚本</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ip=$(curl -X GET http://10.255.255.46/api/v1/ip)</span><br><span class="line">ip2=$(<span class="built_in">echo</span> <span class="variable">$ip</span> | <span class="built_in">cut</span> -d \&quot; -f 6)</span><br><span class="line">curl -s -d  <span class="string">&quot;&#123;\&quot;username\&quot;:\&quot;手机号\&quot;,\&quot;password\&quot;:\&quot;密码\&quot;,\&quot;channel\&quot;:\&quot;运营商\&quot;,\&quot;ifautologin\&quot;:\&quot;0\&quot;,\&quot;pagesign\&quot;:\&quot;secondauth\&quot;,\&quot;usripadd\&quot;:\&quot;<span class="variable">$ip2</span>\&quot;&#125;&quot;</span> http://10.255.255.46/api/v1/login</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>软路由</category>
+      </categories>
+      <tags>
+        <tag>多拨</tag>
+        <tag>软路由</tag>
+        <tag>网络</tag>
+        <tag>nuist</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【修机】Windows电源管理Bug引起的CPU占用虚高100%、风扇狂转</title>
+    <url>/2023/10/14/taskmgr-full-cpu-bug/</url>
+    <content><![CDATA[<blockquote>
+<p><a href="https://www.andrewmunsell.com/blog/oculus-rift-bug-power-plan-configuration">https://www.andrewmunsell.com/blog/oculus-rift-bug-power-plan-configuration</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>修机</category>
+      </categories>
+      <tags>
+        <tag>PC</tag>
+        <tag>Fixing</tag>
+        <tag>Windows</tag>
+        <tag>转载</tag>
+        <tag>翻译</tag>
+        <tag>CPU</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【Termux】关于Termux的配置与资源汇集</title>
     <url>/2023/10/01/termuxTips/</url>
     <content><![CDATA[<h1 id="引言"><a class="markdownIt-Anchor" href="#引言"></a> 引言</h1>
