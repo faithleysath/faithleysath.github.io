@@ -2,7 +2,10 @@
 title: NAS折腾记
 date: 2023-12-14 23:28:08
 tags:
-categories: 
+- NAS
+- 网络
+- NAT
+categories: 折腾
 ---
 
 {% cq %} 本文记录了笔者折腾NAS的完整细节 {% endcq %}
@@ -14,7 +17,7 @@ categories:
 - 内存：ddr4 2400mhz 8G x 2
 - 电源：海韵S12 II 550W
 
-笔者决定组NAS的理由之一是整合手头拥有的一些资源，使其发挥最大效用。
+笔者决定NAS的理由之一是整合手头拥有的一些资源，使其发挥最大效用。
 
 笔者整理了下掌握的资源，清单如下：
 
@@ -33,11 +36,22 @@ categories:
   
 - 硬件设备
   - ASUS ACRH-17 软路由
-  - 自组NAS
+  - 自组NAS * 1
   - Redmi AX3000 路由器 * 2（此路由器无ipv6防火墙）
+  - 华为某型号wifi6路由器一台
   - 宿舍、家中各一台台式
   - wifi插座 * 2
   - 联想个人云T1 Pro（包括一块3T机械）（家父使用中）
+  - 阿里云服务器一台，100块一年
+
+- 其他资源
+  - 域名一枚
+  - 百度网盘SVIP、阿里云盘20T超级会员
+  - 网易云音乐黑胶SVIP
+  - bilibili大会员
+  - Microsoft Office E3 MSDN订阅（25个许可证）
+  - Github学生认证包
+  - 一些正版软件永久订阅
 
 # 规划
 
@@ -51,7 +65,33 @@ categories:
 
 即重要文件3份拷贝+2种介质+1个异地。
 
-对此，笔者采用`Syncthing`+`Alist`+`Rclone`的方式
+对此，笔者采用`Syncthing`+`Alist`+`Rclone`的方式。
+
+## 第一步，挂载
+
+利用`Alist`挂载`阿里云盘`、`百度网盘`、`坚果云`等云盘存储，并转换为Webdab协议，便于其他工具调用。
+
+## 第二步，目录规划
+
+由于笔者接触编程语言，习惯以项目(Project)为单位整理文件，且许多文件都是代码，故比较合适。但也要考虑部分归档文件，不适宜以项目的形式命名。故目录规划以两个角度展开，第一是目录的属性，第二是目录的大小。
+
+- Projects目录
+
+此目录起到一个工作区的作用，平时工作在此目录下进行。Projects下的一级目录表示不同的项目。此目录需要尽可能地保持轻量化，仅保存源代码，node_modules等环境需要设置排除规则。同时，本目录与github等版本控制服务并无冲突，因为git仅保存commits，对更小的粒度的文件同步并不起作用。
+
+- VIP-File目录
+
+此目录保存常规意义下的重要文件，包括个人档案，图片，密钥等等。
+
+- RR-File目录（Rare Resource File，稀有资源文件）
+
+此目录保存部分有必要321备份，无法容忍损失的稀有资源文件（指很难在互联网上直接下载，或独此一份）比如一些稀有许可证，crack。注意，由于321备份意味着占用所有存储相同的空间，故321备份的允许容量取决于最小的存储的容量。在这里，笔者使用的`坚果云`免费计划，每月上传流量为1G，下载流量为3G，所以得省着点用。这里考虑只存放VIP-File目录的文件。
+
+## 第三步，设置同步
+
+Nas与本地设备的同步采用`Syncthing`，这是一种基于P2P的同步软件。与其类似的还有`ResilioSync`，但后者是收费的，前者是开源的。`Syncthing`本身也支持版本管理。
+
+Nas与云端存储的同步采用`Rclone`，前面已经将云端存储挂载为Webdav格式，设置定时脚本，将本地目录上传至`Rclone`。
 
 2. 高可用原则
 
@@ -84,3 +124,47 @@ categories:
 接着是qBittorrent的PT上传需要公网ipv6。qBittorrent里有设置监听端口，这个设置项有两个作用，第一个是它真的表示qb监听这个端口，第二个是上报tracker时上报的就是这个端口号，这个端口号进而会被tracker服务器通报给其他peer，其他peer就会拿着这个port来联系你了。不过ip倒不是自己上报的，而是tracker查看报文里的源ip，这个ip已经被NAT改成外网的映射ip了。那么如果我们在内网，我们的真实监听端口已经被映射成了另一个端口b了，其他peer拿着b来联系，自然联系不到。
 
 解决方法就是，先选一个转发端口号`port1`，用这个转发端口去建立映射，然后用`Natter`或`NATMap`拿到映射`ip:port2`，再用脚本把qb的监听端口号改成映射端口号`port2`。再设置一个端口转发，把`port1`的流量都转发到`port2`这。这样上报的是映射端口，其他peer联系的也是映射端口，然后流量被NAT设备导到转发端口，再转发到qb的监听端口（已经设置成与映射端口一致）。
+> 
+> 具体可参考原作者博文：https://myth.cx/p/qbittorrent-nat-tcp-hole-punching/
+> 
+> 博文关键部分快照如下：
+> 
+> 我们以 NATMap 为例。建立 NAT 映射关系或映射关系改变时，NATMap 可以触发脚本执行自定义操作。传入参数为：
+> 
+> $1: Public address (IPv4/IPv6)
+> $2: Public port
+> $3: IP4P
+> $4: Bind port (private port)
+> $5: Protocol (TCP/UDP)
+> 对于 BT 的应用场景，我们只需要关注参数 2 公网端口和参数 4 内网端口。我们的脚本需要将 qBittorrent 的监听端口设置为参数 2 公网端口，然后用 iptables 将本地的参数 4 内网端口转发至本地的参数 2 公网端口。具体实现如下：
+>
+> ```bash 
+> #!/bin/sh
+> 
+> # Natter/NATMap
+> private_port=$4 # Natter: $3; NATMap: $4
+> public_port=$2 # Natter: $5; NATMap: $2
+> 
+> # qBittorrent.
+> qb_web_port="8080"
+> qb_username="admin"
+> qb_password="adminadmin"
+> 
+> echo "Update qBittorrent listen port to $public_port..."
+> 
+> # Update qBittorrent listen port.
+> qb_cookie=$(curl -s -i --header "Referer: http://localhost:$qb_web_port" --data "username=$qb_username&password=$qb_password" http://localhost:$qb_web_port/api/v2/auth/login | grep -i set-cookie | cut -c13-48)
+> curl -X POST -b "$qb_cookie" -d 'json={"listen_port":"'$public_port'"}' "http://localhost:$qb_web_port/api/v2/app/setPreferences"
+> 
+> echo "Update iptables..."
+> 
+> # Use iptables to forward traffic.
+> LINE_NUMBER=$(iptables -t nat -nvL --line-number | grep ${private_port} | head -n 1 | grep -o '^[0-9]+')
+> iptables -t nat -D PREROUTING $LINE_NUMBER
+> iptables -t nat -I PREROUTING -p tcp --dport $private_port -j REDIRECT --to-port $public_port
+> 
+> echo "Done."
+> ```
+> 详细使用说明和脚本下载请前往我的 Github 仓库 qBittorrent NAT TCP Hole Punching。欢迎 Star。
+> 
+> 如果运行 NATMap 的设备与运行 qBittorrent 的设备不同，则需要修改脚本中 iptables 转发的部分和 qBittorrent API 中的 localhost。
