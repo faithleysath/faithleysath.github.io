@@ -24,16 +24,19 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"faithleysath.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":true,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="本文记录了笔者折腾NAS的完整细节   机子配置如下：  CPU ：i3 8100T 主板：MSI B360M PRO-VD 内存：ddr4 2400mhz 8G x 2 电源：海韵S12 II 550W  笔者决定组NAS的理由之一是整合手头拥有的一些资源，使其发挥最大效用。 笔者整理了下掌握的资源，清单如下：   存储设备  阿里云盘 22.88T 百度网盘 8T OneDrive 100T">
+    <meta name="description" content="本文记录了笔者折腾NAS的完整细节   机子配置如下：  CPU ：i3 8100T 主板：MSI B360M PRO-VD 内存：ddr4 2400mhz 8G x 2 电源：海韵S12 II 550W  笔者决定NAS的理由之一是整合手头拥有的一些资源，使其发挥最大效用。 笔者整理了下掌握的资源，清单如下：   存储设备  阿里云盘 22.88T 百度网盘 8T OneDrive 100T&#x3D;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NAS折腾记">
 <meta property="og:url" content="https://faithleysath.github.io/2023/12/14/nasDIY/index.html">
 <meta property="og:site_name" content="Matrix&#39;s Blog">
-<meta property="og:description" content="本文记录了笔者折腾NAS的完整细节   机子配置如下：  CPU ：i3 8100T 主板：MSI B360M PRO-VD 内存：ddr4 2400mhz 8G x 2 电源：海韵S12 II 550W  笔者决定组NAS的理由之一是整合手头拥有的一些资源，使其发挥最大效用。 笔者整理了下掌握的资源，清单如下：   存储设备  阿里云盘 22.88T 百度网盘 8T OneDrive 100T">
+<meta property="og:description" content="本文记录了笔者折腾NAS的完整细节   机子配置如下：  CPU ：i3 8100T 主板：MSI B360M PRO-VD 内存：ddr4 2400mhz 8G x 2 电源：海韵S12 II 550W  笔者决定NAS的理由之一是整合手头拥有的一些资源，使其发挥最大效用。 笔者整理了下掌握的资源，清单如下：   存储设备  阿里云盘 22.88T 百度网盘 8T OneDrive 100T&#x3D;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-12-14T15:28:08.000Z">
-<meta property="article:modified_time" content="2023-12-15T02:19:31.391Z">
+<meta property="article:modified_time" content="2023-12-15T12:22:53.472Z">
 <meta property="article:author" content="Faith Leysath">
+<meta property="article:tag" content="NAS">
+<meta property="article:tag" content="网络">
+<meta property="article:tag" content="NAT">
 <meta name="twitter:card" content="summary">
 
 
@@ -143,7 +146,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%84%E5%88%92"><span class="nav-number">1.</span> <span class="nav-text"> 规划</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%84%E5%88%92"><span class="nav-number">1.</span> <span class="nav-text"> 规划</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%E6%8C%82%E8%BD%BD"><span class="nav-number">1.1.</span> <span class="nav-text"> 第一步，挂载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%E7%9B%AE%E5%BD%95%E8%A7%84%E5%88%92"><span class="nav-number">1.2.</span> <span class="nav-text"> 第二步，目录规划</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%E8%AE%BE%E7%BD%AE%E5%90%8C%E6%AD%A5"><span class="nav-number">1.3.</span> <span class="nav-text"> 第三步，设置同步</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -164,12 +167,12 @@
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -243,7 +246,16 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-15 10:19:31" itemprop="dateModified" datetime="2023-12-15T10:19:31+08:00">2023-12-15</time>
+      <time title="修改时间：2023-12-15 20:22:53" itemprop="dateModified" datetime="2023-12-15T20:22:53+08:00">2023-12-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%98%E8%85%BE/" itemprop="url" rel="index"><span itemprop="name">折腾</span></a>
+        </span>
     </span>
 
   
@@ -266,7 +278,7 @@
 <li>内存：ddr4 2400mhz 8G x 2</li>
 <li>电源：海韵S12 II 550W</li>
 </ul>
-<p>笔者决定组NAS的理由之一是整合手头拥有的一些资源，使其发挥最大效用。</p>
+<p>笔者决定NAS的理由之一是整合手头拥有的一些资源，使其发挥最大效用。</p>
 <p>笔者整理了下掌握的资源，清单如下：</p>
 <ul>
 <li>
@@ -292,11 +304,25 @@
 <p>硬件设备</p>
 <ul>
 <li>ASUS ACRH-17 软路由</li>
-<li>自组NAS</li>
+<li>自组NAS * 1</li>
 <li>Redmi AX3000 路由器 * 2（此路由器无ipv6防火墙）</li>
+<li>华为某型号wifi6路由器一台</li>
 <li>宿舍、家中各一台台式</li>
 <li>wifi插座 * 2</li>
 <li>联想个人云T1 Pro（包括一块3T机械）（家父使用中）</li>
+<li>阿里云服务器一台，100块一年</li>
+</ul>
+</li>
+<li>
+<p>其他资源</p>
+<ul>
+<li>域名一枚</li>
+<li>百度网盘SVIP、阿里云盘20T超级会员</li>
+<li>网易云音乐黑胶SVIP</li>
+<li>bilibili大会员</li>
+<li>Microsoft Office E3 MSDN订阅（25个许可证）</li>
+<li>Github学生认证包</li>
+<li>一些正版软件永久订阅</li>
 </ul>
 </li>
 </ul>
@@ -311,7 +337,26 @@
 <li>文件&quot;321备份&quot;原则</li>
 </ol>
 <p>即重要文件3份拷贝+2种介质+1个异地。</p>
-<p>对此，笔者采用<code>Syncthing</code>+<code>Alist</code>+<code>Rclone</code>的方式</p>
+<p>对此，笔者采用<code>Syncthing</code>+<code>Alist</code>+<code>Rclone</code>的方式。</p>
+<h2 id="第一步挂载"><a class="markdownIt-Anchor" href="#第一步挂载"></a> 第一步，挂载</h2>
+<p>利用<code>Alist</code>挂载<code>阿里云盘</code>、<code>百度网盘</code>、<code>坚果云</code>等云盘存储，并转换为Webdab协议，便于其他工具调用。</p>
+<h2 id="第二步目录规划"><a class="markdownIt-Anchor" href="#第二步目录规划"></a> 第二步，目录规划</h2>
+<p>由于笔者接触编程语言，习惯以项目(Project)为单位整理文件，且许多文件都是代码，故比较合适。但也要考虑部分归档文件，不适宜以项目的形式命名。故目录规划以两个角度展开，第一是目录的属性，第二是目录的大小。</p>
+<ul>
+<li>Projects目录</li>
+</ul>
+<p>此目录起到一个工作区的作用，平时工作在此目录下进行。Projects下的一级目录表示不同的项目。此目录需要尽可能地保持轻量化，仅保存源代码，node_modules等环境需要设置排除规则。同时，本目录与github等版本控制服务并无冲突，因为git仅保存commits，对更小的粒度的文件同步并不起作用。</p>
+<ul>
+<li>VIP-File目录</li>
+</ul>
+<p>此目录保存常规意义下的重要文件，包括个人档案，图片，密钥等等。</p>
+<ul>
+<li>RR-File目录（Rare Resource File，稀有资源文件）</li>
+</ul>
+<p>此目录保存部分有必要321备份，无法容忍损失的稀有资源文件（指很难在互联网上直接下载，或独此一份）比如一些稀有许可证，crack。注意，由于321备份意味着占用所有存储相同的空间，故321备份的允许容量取决于最小的存储的容量。在这里，笔者使用的<code>坚果云</code>免费计划，每月上传流量为1G，下载流量为3G，所以得省着点用。这里考虑只存放VIP-File目录的文件。</p>
+<h2 id="第三步设置同步"><a class="markdownIt-Anchor" href="#第三步设置同步"></a> 第三步，设置同步</h2>
+<p>Nas与本地设备的同步采用<code>Syncthing</code>，这是一种基于P2P的同步软件。与其类似的还有<code>ResilioSync</code>，但后者是收费的，前者是开源的。<code>Syncthing</code>本身也支持版本管理。</p>
+<p>Nas与云端存储的同步采用<code>Rclone</code>，前面已经将云端存储挂载为Webdav格式，设置定时脚本，将本地目录上传至<code>Rclone</code>。</p>
 <ol start="2">
 <li>高可用原则</li>
 </ol>
@@ -334,6 +379,20 @@
 <p>接下来就是正常使用nginx反代了。</p>
 <p>接着是qBittorrent的PT上传需要公网ipv6。qBittorrent里有设置监听端口，这个设置项有两个作用，第一个是它真的表示qb监听这个端口，第二个是上报tracker时上报的就是这个端口号，这个端口号进而会被tracker服务器通报给其他peer，其他peer就会拿着这个port来联系你了。不过ip倒不是自己上报的，而是tracker查看报文里的源ip，这个ip已经被NAT改成外网的映射ip了。那么如果我们在内网，我们的真实监听端口已经被映射成了另一个端口b了，其他peer拿着b来联系，自然联系不到。</p>
 <p>解决方法就是，先选一个转发端口号<code>port1</code>，用这个转发端口去建立映射，然后用<code>Natter</code>或<code>NATMap</code>拿到映射<code>ip:port2</code>，再用脚本把qb的监听端口号改成映射端口号<code>port2</code>。再设置一个端口转发，把<code>port1</code>的流量都转发到<code>port2</code>这。这样上报的是映射端口，其他peer联系的也是映射端口，然后流量被NAT设备导到转发端口，再转发到qb的监听端口（已经设置成与映射端口一致）。</p>
+<blockquote>
+<p>具体可参考原作者博文：<a target="_blank" rel="noopener" href="https://myth.cx/p/qbittorrent-nat-tcp-hole-punching/">https://myth.cx/p/qbittorrent-nat-tcp-hole-punching/</a></p>
+<p>博文关键部分快照如下：</p>
+<p>我们以 NATMap 为例。建立 NAT 映射关系或映射关系改变时，NATMap 可以触发脚本执行自定义操作。传入参数为：</p>
+<p>$1: Public address (IPv4/IPv6)<br />
+$2: Public port<br />
+$3: IP4P<br />
+$4: Bind port (private port)<br />
+$5: Protocol (TCP/UDP)<br />
+对于 BT 的应用场景，我们只需要关注参数 2 公网端口和参数 4 内网端口。我们的脚本需要将 qBittorrent 的监听端口设置为参数 2 公网端口，然后用 iptables 将本地的参数 4 内网端口转发至本地的参数 2 公网端口。具体实现如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Natter/NATMap</span></span><br><span class="line">private_port=<span class="variable">$4</span> <span class="comment"># Natter: $3; NATMap: $4</span></span><br><span class="line">public_port=<span class="variable">$2</span> <span class="comment"># Natter: $5; NATMap: $2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># qBittorrent.</span></span><br><span class="line">qb_web_port=<span class="string">&quot;8080&quot;</span></span><br><span class="line">qb_username=<span class="string">&quot;admin&quot;</span></span><br><span class="line">qb_password=<span class="string">&quot;adminadmin&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Update qBittorrent listen port to <span class="variable">$public_port</span>...&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Update qBittorrent listen port.</span></span><br><span class="line">qb_cookie=$(curl -s -i --header <span class="string">&quot;Referer: http://localhost:<span class="variable">$qb_web_port</span>&quot;</span> --data <span class="string">&quot;username=<span class="variable">$qb_username</span>&amp;password=<span class="variable">$qb_password</span>&quot;</span> http://localhost:<span class="variable">$qb_web_port</span>/api/v2/auth/login | grep -i set-cookie | <span class="built_in">cut</span> -c13-48)</span><br><span class="line">curl -X POST -b <span class="string">&quot;<span class="variable">$qb_cookie</span>&quot;</span> -d <span class="string">&#x27;json=&#123;&quot;listen_port&quot;:&quot;&#x27;</span><span class="variable">$public_port</span><span class="string">&#x27;&quot;&#125;&#x27;</span> <span class="string">&quot;http://localhost:<span class="variable">$qb_web_port</span>/api/v2/app/setPreferences&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Update iptables...&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Use iptables to forward traffic.</span></span><br><span class="line">LINE_NUMBER=$(iptables -t nat -nvL --line-number | grep <span class="variable">$&#123;private_port&#125;</span> | <span class="built_in">head</span> -n 1 | grep -o <span class="string">&#x27;^[0-9]+&#x27;</span>)</span><br><span class="line">iptables -t nat -D PREROUTING <span class="variable">$LINE_NUMBER</span></span><br><span class="line">iptables -t nat -I PREROUTING -p tcp --dport <span class="variable">$private_port</span> -j REDIRECT --to-port <span class="variable">$public_port</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Done.&quot;</span></span><br></pre></td></tr></table></figure>
+<p>详细使用说明和脚本下载请前往我的 Github 仓库 qBittorrent NAT TCP Hole Punching。欢迎 Star。</p>
+<p>如果运行 NATMap 的设备与运行 qBittorrent 的设备不同，则需要修改脚本中 iptables 转发的部分和 qBittorrent API 中的 localhost。</p>
+</blockquote>
 
     </div>
 
@@ -359,6 +418,11 @@
 </ul>
 </div>
 
+          <div class="post-tags">
+              <a href="/tags/NAS/" rel="tag"># NAS</a>
+              <a href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag"># 网络</a>
+              <a href="/tags/NAT/" rel="tag"># NAT</a>
+          </div>
 
         
 
