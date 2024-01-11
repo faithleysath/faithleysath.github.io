@@ -248,75 +248,6 @@
       </tags>
   </entry>
   <entry>
-    <title>【Proxy】网络代理设置解决方案合集</title>
-    <url>/2023/10/01/proxySolution/</url>
-    <content><![CDATA[<h1 id="引言"><a class="markdownIt-Anchor" href="#引言"></a> 引言</h1>
-<p>本文用于记录一些<code>命令行</code>工具的代理设置方法，<code>UWP应用</code>的代理设置，<code>WSL2</code>的代理设置等等</p>
-<h1 id="uwp应用走代理"><a class="markdownIt-Anchor" href="#uwp应用走代理"></a> UWP应用走代理</h1>
-<blockquote>
-<p>引用自：<a href="https://www.duohuohub.cn/threads/49/#post-101">https://www.duohuohub.cn/threads/49/#post-101</a></p>
-</blockquote>
-<p>微软的OneDrive真好用…但偶尔会出现怎么样都无法登陆的情况</p>
-<p>本质上是因为 微软 uwp 应用默认直连，所以开了代理就用不了</p>
-<h2 id="最终解决方案"><a class="markdownIt-Anchor" href="#最终解决方案"></a> 【最终解决方案】</h2>
-<p>无脑批量解除所有UWP应用限制（管理员）</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Get-ChildItem -Path Registry::<span class="string">&quot;HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Mappings\&quot; -name | ForEach-Object &#123;CheckNetIsolation.exe LoopbackExempt -a -p=&quot;</span><span class="variable">$_</span><span class="string">&quot;&#125;</span></span><br></pre></td></tr></table></figure>
-<h2 id="其他尝试未生效"><a class="markdownIt-Anchor" href="#其他尝试未生效"></a> 【其他尝试（未生效）】</h2>
-<ul>
-<li>Clash中开启UWP应用联网限制解除工具</li>
-<li>Clash开启Tun模式</li>
-<li>重置OneDrive</li>
-<li>出国（bushi</li>
-</ul>
-<h1 id="powershell下使用代理"><a class="markdownIt-Anchor" href="#powershell下使用代理"></a> PowerShell下使用代理</h1>
-<blockquote>
-<p>引用自：<a href="https://anuoua.github.io/2019/08/11/%E9%85%8D%E7%BD%AEPowershell%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86/">https://anuoua.github.io/2019/08/11/配置Powershell命令行代理/</a></p>
-</blockquote>
-<p>在日常windows环境开发中，powershell经常需要用到代理，但是每次去系统变量中配置环境变量还是显得过于麻烦了，所以我们可以定义两个命令：</p>
-<ul>
-<li>应用代理环境变量</li>
-<li>取消代理环境变量</li>
-</ul>
-<p>直接在powershell中调用这两命令就方便很多了。</p>
-<h2 id="编写脚本"><a class="markdownIt-Anchor" href="#编写脚本"></a> 编写脚本</h2>
-<ol>
-<li>
-<p>使用管理员权限打开<code>PowerShell</code>，并执行<code>Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser</code></p>
-</li>
-<li>
-<p>输入<code>code $PROFILE</code>使用<code>vscode</code>打开配置文件，如果没有<code>vscode</code>，可输入<code>$PROFILE</code>查看配置文件地址，使用其他文本编辑器打开。</p>
-</li>
-<li>
-<p>在配置文件中输入以下代码：</p>
- <figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">set_proxy_variable</span></span> &#123;</span><br><span class="line">    <span class="built_in">Set-Item</span> Env:http_proxy <span class="string">&quot;http://127.0.0.1:33210&quot;</span>  <span class="comment"># 代理地址</span></span><br><span class="line">    <span class="built_in">Set-Item</span> Env:https_proxy <span class="string">&quot;http://127.0.0.1:33210&quot;</span> <span class="comment"># 代理地址</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">unset_proxy_variable</span></span> &#123;</span><br><span class="line">    <span class="built_in">Remove-Item</span> Env:http_proxy</span><br><span class="line">    <span class="built_in">Remove-Item</span> Env:https_proxy</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">New-Alias</span> <span class="literal">-Name</span> spp <span class="literal">-Value</span> set_proxy_variable</span><br><span class="line"><span class="built_in">New-Alias</span> <span class="literal">-Name</span> upp <span class="literal">-Value</span> unset_proxy_variable</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>保存关闭</p>
-</li>
-</ol>
-<h2 id="使用"><a class="markdownIt-Anchor" href="#使用"></a> 使用</h2>
-<ul>
-<li><code>spp</code> 启用代理</li>
-<li><code>upp</code> 取消代理</li>
-</ul>
-<h1 id="cmd下使用代理"><a class="markdownIt-Anchor" href="#cmd下使用代理"></a> CMD下使用代理</h1>
-<p>打开<code>cmd</code>，输入以下命令</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> HTTP_PROXY=http://127.0.0.1:1080</span><br><span class="line"><span class="built_in">set</span> HTTPS_PROXY=http://127.0.0.1:1080</span><br></pre></td></tr></table></figure>
-<p>不过要注意的都是，上面设置的命令行代码作用的范围是一次性的，也就是关闭cmd窗口后，就失效了，如果需要永久生效的话，是需要配置系统的环境变量的</p>
-<h1 id="git设置代理"><a class="markdownIt-Anchor" href="#git设置代理"></a> Git设置代理</h1>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#有些朋友好像为什么设置http和socket5其实设置哪种都是可以的，具体看你们自己代理软件都支持的协议有哪些，就可以了</span></span><br><span class="line"><span class="comment">#记得修改端口号，比如我的是1080，记得改成自己代理软件的所配置的端口号</span></span><br><span class="line"><span class="comment">#下面配置的都是全局，如果需要设置局部的把【--global】删除即可。</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#http代理</span></span><br><span class="line">git config --global http.proxy <span class="string">&#x27;http://127.0.0.1:1080&#x27;</span></span><br><span class="line"><span class="comment">#https代理</span></span><br><span class="line">git config --global https.proxy <span class="string">&#x27;http://127.0.0.1:1080&#x27;</span></span><br><span class="line"><span class="comment">#http代理</span></span><br><span class="line">git config --global http.proxy <span class="string">&#x27;socks5://127.0.0.1:1080&#x27;</span></span><br><span class="line"><span class="comment">#https代理</span></span><br><span class="line">git config --global https.proxy <span class="string">&#x27;socks5://127.0.0.1:1080&#x27;</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#取消http代理</span></span><br><span class="line">git config --global --<span class="built_in">unset</span> http.proxy</span><br><span class="line"><span class="comment">#取消https代理</span></span><br><span class="line">git config --global --<span class="built_in">unset</span> https.proxy</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>Tips</category>
-      </categories>
-      <tags>
-        <tag>Solution</tag>
-        <tag>Windows</tag>
-        <tag>Tips</tag>
-        <tag>Linux</tag>
-        <tag>Proxy</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>NAS折腾记</title>
     <url>/2023/12/14/nasDIY/</url>
     <content><![CDATA[<blockquote class="blockquote-center">
@@ -450,6 +381,75 @@ $5: Protocol (TCP/UDP)<br />
       </tags>
   </entry>
   <entry>
+    <title>【Proxy】网络代理设置解决方案合集</title>
+    <url>/2023/10/01/proxySolution/</url>
+    <content><![CDATA[<h1 id="引言"><a class="markdownIt-Anchor" href="#引言"></a> 引言</h1>
+<p>本文用于记录一些<code>命令行</code>工具的代理设置方法，<code>UWP应用</code>的代理设置，<code>WSL2</code>的代理设置等等</p>
+<h1 id="uwp应用走代理"><a class="markdownIt-Anchor" href="#uwp应用走代理"></a> UWP应用走代理</h1>
+<blockquote>
+<p>引用自：<a href="https://www.duohuohub.cn/threads/49/#post-101">https://www.duohuohub.cn/threads/49/#post-101</a></p>
+</blockquote>
+<p>微软的OneDrive真好用…但偶尔会出现怎么样都无法登陆的情况</p>
+<p>本质上是因为 微软 uwp 应用默认直连，所以开了代理就用不了</p>
+<h2 id="最终解决方案"><a class="markdownIt-Anchor" href="#最终解决方案"></a> 【最终解决方案】</h2>
+<p>无脑批量解除所有UWP应用限制（管理员）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Get-ChildItem -Path Registry::<span class="string">&quot;HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Mappings\&quot; -name | ForEach-Object &#123;CheckNetIsolation.exe LoopbackExempt -a -p=&quot;</span><span class="variable">$_</span><span class="string">&quot;&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="其他尝试未生效"><a class="markdownIt-Anchor" href="#其他尝试未生效"></a> 【其他尝试（未生效）】</h2>
+<ul>
+<li>Clash中开启UWP应用联网限制解除工具</li>
+<li>Clash开启Tun模式</li>
+<li>重置OneDrive</li>
+<li>出国（bushi</li>
+</ul>
+<h1 id="powershell下使用代理"><a class="markdownIt-Anchor" href="#powershell下使用代理"></a> PowerShell下使用代理</h1>
+<blockquote>
+<p>引用自：<a href="https://anuoua.github.io/2019/08/11/%E9%85%8D%E7%BD%AEPowershell%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86/">https://anuoua.github.io/2019/08/11/配置Powershell命令行代理/</a></p>
+</blockquote>
+<p>在日常windows环境开发中，powershell经常需要用到代理，但是每次去系统变量中配置环境变量还是显得过于麻烦了，所以我们可以定义两个命令：</p>
+<ul>
+<li>应用代理环境变量</li>
+<li>取消代理环境变量</li>
+</ul>
+<p>直接在powershell中调用这两命令就方便很多了。</p>
+<h2 id="编写脚本"><a class="markdownIt-Anchor" href="#编写脚本"></a> 编写脚本</h2>
+<ol>
+<li>
+<p>使用管理员权限打开<code>PowerShell</code>，并执行<code>Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser</code></p>
+</li>
+<li>
+<p>输入<code>code $PROFILE</code>使用<code>vscode</code>打开配置文件，如果没有<code>vscode</code>，可输入<code>$PROFILE</code>查看配置文件地址，使用其他文本编辑器打开。</p>
+</li>
+<li>
+<p>在配置文件中输入以下代码：</p>
+ <figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">set_proxy_variable</span></span> &#123;</span><br><span class="line">    <span class="built_in">Set-Item</span> Env:http_proxy <span class="string">&quot;http://127.0.0.1:33210&quot;</span>  <span class="comment"># 代理地址</span></span><br><span class="line">    <span class="built_in">Set-Item</span> Env:https_proxy <span class="string">&quot;http://127.0.0.1:33210&quot;</span> <span class="comment"># 代理地址</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">unset_proxy_variable</span></span> &#123;</span><br><span class="line">    <span class="built_in">Remove-Item</span> Env:http_proxy</span><br><span class="line">    <span class="built_in">Remove-Item</span> Env:https_proxy</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">New-Alias</span> <span class="literal">-Name</span> spp <span class="literal">-Value</span> set_proxy_variable</span><br><span class="line"><span class="built_in">New-Alias</span> <span class="literal">-Name</span> upp <span class="literal">-Value</span> unset_proxy_variable</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>保存关闭</p>
+</li>
+</ol>
+<h2 id="使用"><a class="markdownIt-Anchor" href="#使用"></a> 使用</h2>
+<ul>
+<li><code>spp</code> 启用代理</li>
+<li><code>upp</code> 取消代理</li>
+</ul>
+<h1 id="cmd下使用代理"><a class="markdownIt-Anchor" href="#cmd下使用代理"></a> CMD下使用代理</h1>
+<p>打开<code>cmd</code>，输入以下命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> HTTP_PROXY=http://127.0.0.1:1080</span><br><span class="line"><span class="built_in">set</span> HTTPS_PROXY=http://127.0.0.1:1080</span><br></pre></td></tr></table></figure>
+<p>不过要注意的都是，上面设置的命令行代码作用的范围是一次性的，也就是关闭cmd窗口后，就失效了，如果需要永久生效的话，是需要配置系统的环境变量的</p>
+<h1 id="git设置代理"><a class="markdownIt-Anchor" href="#git设置代理"></a> Git设置代理</h1>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#有些朋友好像为什么设置http和socket5其实设置哪种都是可以的，具体看你们自己代理软件都支持的协议有哪些，就可以了</span></span><br><span class="line"><span class="comment">#记得修改端口号，比如我的是1080，记得改成自己代理软件的所配置的端口号</span></span><br><span class="line"><span class="comment">#下面配置的都是全局，如果需要设置局部的把【--global】删除即可。</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#http代理</span></span><br><span class="line">git config --global http.proxy <span class="string">&#x27;http://127.0.0.1:1080&#x27;</span></span><br><span class="line"><span class="comment">#https代理</span></span><br><span class="line">git config --global https.proxy <span class="string">&#x27;http://127.0.0.1:1080&#x27;</span></span><br><span class="line"><span class="comment">#http代理</span></span><br><span class="line">git config --global http.proxy <span class="string">&#x27;socks5://127.0.0.1:1080&#x27;</span></span><br><span class="line"><span class="comment">#https代理</span></span><br><span class="line">git config --global https.proxy <span class="string">&#x27;socks5://127.0.0.1:1080&#x27;</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#取消http代理</span></span><br><span class="line">git config --global --<span class="built_in">unset</span> http.proxy</span><br><span class="line"><span class="comment">#取消https代理</span></span><br><span class="line">git config --global --<span class="built_in">unset</span> https.proxy</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Tips</category>
+      </categories>
+      <tags>
+        <tag>Solution</tag>
+        <tag>Windows</tag>
+        <tag>Tips</tag>
+        <tag>Linux</tag>
+        <tag>Proxy</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【软路由】基于openwrt的校园网多拨教程</title>
     <url>/2023/10/18/schoolNet-mwan-tutorial/</url>
     <content><![CDATA[<h1 id="0x00前言"><a class="markdownIt-Anchor" href="#0x00前言"></a> 0x00前言</h1>
@@ -561,7 +561,7 @@ $5: Protocol (TCP/UDP)<br />
 <p>本文在<code>Windows</code>环境下部署Lucky，其余环境可自行参考<a href="https://lucky666.cn/docs/install">官方文档</a></p>
 <ol>
 <li>
-<p>下载<a href="https://www.daji.it:6/release/">最新安装包</a>，其中分为适中版和大吉版，后者在前者的基础上增加了<code>File Browser</code>的功能，本文仅选择普通版即可。</p>
+<p>下载<a href="https://www.daji.it:6/release/">最新安装包</a>，其中分为适中版和大吉版，后者在前者的基础上增加了<code>File Browser</code>的功能，本文仅选择适中版即可。</p>
 </li>
 <li>
 <p>将安装包解压到一个固定的位置作为程序的运行环境，双击运行。</p>
@@ -602,6 +602,22 @@ $5: Protocol (TCP/UDP)<br />
 <p>(进阶)本文重点讲解端口号的固定。我们使用srv解析。</p>
 </li>
 </ol>
+<p>先添加srv解析记录，如图<img data-src="/images/uses_of_full_cone_nat/mc_srv.png" alt="srv解析" /></p>
+<p>红色部分为主机名，蓝色部分为主域名，紫色部分为第4个步骤中得到的公网地址的端口号。红色部分与蓝色部分拼起来就是第7个步骤中ip绑定的域名。</p>
+<p>这样设置后，mc客户端里就只要输入域名，而不用输入端口号了，这是因为java版mc客户端会识别srv解析。</p>
+<ol start="9">
+<li>
+<p>(动态更改srv)刚刚我们是手动设置srv解析记录，那就一定有办法自动设置。很遗憾，Lucky的ddns中并不支持srv记录。我们只能自己调用域名提供商的sdk来实现。笔者写了个简易的srv更新脚本，但只支持阿里云dns。项目开源于<a href="https://github.com/faithleysath/python-webhook%EF%BC%8C%E6%AC%A2%E8%BF%8E%E7%BB%99%E4%B8%AAStar%E3%80%82%E8%84%9A%E6%9C%AC%E4%B9%9F%E5%90%8C%E6%AD%A5%E6%9E%84%E5%BB%BA%E4%BA%86docker%E9%95%9C%E5%83%8F%E3%80%82%E6%8E%A5%E4%B8%8B%E6%9D%A5%E5%B0%86%E8%AE%B2%E8%A7%A3docker%E9%95%9C%E5%83%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E3%80%82">https://github.com/faithleysath/python-webhook，欢迎给个Star。脚本也同步构建了docker镜像。接下来将讲解docker镜像的使用。</a></p>
+</li>
+<li>
+<p>首先先把镜像pull下来，为方便起见，windows下推荐使用docker desktop，搜索<code>laysath/lucky-mate</code>，然后拉取latest版本的镜像，点击运行，会自动创建容器。容器需要对外暴露8848端口，并设置如下环境变量<img data-src="/images/uses_of_full_cone_nat/mc_lucky_mate.png" alt="容器设置" /></p>
+</li>
+</ol>
+<p>其中，第一个红圈填写第7步中获得的id和key，第二个红圈中，<code>SRV_RR</code>填写第8步中的<code>主机记录</code>，<code>SRV_RR_VALUE</code>填写你ip绑定的域名，<code>SRV_RR_ID</code>请到<a href="https://next.api.aliyun.com/api/Alidns/2015-01-09/DescribeDomainRecords">sdk调试台</a>输入你的主域名（即第8步的蓝色部分），发起调用得到id，如图<img data-src="/images/uses_of_full_cone_nat/get_srv_id.png" alt="srvID" /></p>
+<ol start="11">
+<li>到lucky的stun规则中启用Webhook，并填写如下<img data-src="/images/uses_of_full_cone_nat/edit_srv_hook.png" alt="Webhook" /></li>
+</ol>
+<p>其中，接口地址为<code>http://127.0.0.1:8848/update_srv/#&#123;port&#125;</code>，请求方法为<code>GET</code></p>
 ]]></content>
       <categories>
         <category>网络</category>

@@ -231,7 +231,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2024-01-11 14:02:31 / 修改时间：15:22:25" itemprop="dateCreated datePublished" datetime="2024-01-11T14:02:31+08:00">2024-01-11</time>
+      <time title="创建时间：2024-01-11 14:02:31 / 修改时间：16:10:55" itemprop="dateCreated datePublished" datetime="2024-01-11T14:02:31+08:00">2024-01-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -286,7 +286,7 @@
 <p>本文在<code>Windows</code>环境下部署Lucky，其余环境可自行参考<a target="_blank" rel="noopener" href="https://lucky666.cn/docs/install">官方文档</a></p>
 <ol>
 <li>
-<p>下载<a target="_blank" rel="noopener" href="https://www.daji.it:6/release/">最新安装包</a>，其中分为适中版和大吉版，后者在前者的基础上增加了<code>File Browser</code>的功能，本文仅选择普通版即可。</p>
+<p>下载<a target="_blank" rel="noopener" href="https://www.daji.it:6/release/">最新安装包</a>，其中分为适中版和大吉版，后者在前者的基础上增加了<code>File Browser</code>的功能，本文仅选择适中版即可。</p>
 </li>
 <li>
 <p>将安装包解压到一个固定的位置作为程序的运行环境，双击运行。</p>
@@ -327,6 +327,22 @@
 <p>(进阶)本文重点讲解端口号的固定。我们使用srv解析。</p>
 </li>
 </ol>
+<p>先添加srv解析记录，如图<img data-src="/images/uses_of_full_cone_nat/mc_srv.png" alt="srv解析" /></p>
+<p>红色部分为主机名，蓝色部分为主域名，紫色部分为第4个步骤中得到的公网地址的端口号。红色部分与蓝色部分拼起来就是第7个步骤中ip绑定的域名。</p>
+<p>这样设置后，mc客户端里就只要输入域名，而不用输入端口号了，这是因为java版mc客户端会识别srv解析。</p>
+<ol start="9">
+<li>
+<p>(动态更改srv)刚刚我们是手动设置srv解析记录，那就一定有办法自动设置。很遗憾，Lucky的ddns中并不支持srv记录。我们只能自己调用域名提供商的sdk来实现。笔者写了个简易的srv更新脚本，但只支持阿里云dns。项目开源于<a target="_blank" rel="noopener" href="https://github.com/faithleysath/python-webhook%EF%BC%8C%E6%AC%A2%E8%BF%8E%E7%BB%99%E4%B8%AAStar%E3%80%82%E8%84%9A%E6%9C%AC%E4%B9%9F%E5%90%8C%E6%AD%A5%E6%9E%84%E5%BB%BA%E4%BA%86docker%E9%95%9C%E5%83%8F%E3%80%82%E6%8E%A5%E4%B8%8B%E6%9D%A5%E5%B0%86%E8%AE%B2%E8%A7%A3docker%E9%95%9C%E5%83%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E3%80%82">https://github.com/faithleysath/python-webhook，欢迎给个Star。脚本也同步构建了docker镜像。接下来将讲解docker镜像的使用。</a></p>
+</li>
+<li>
+<p>首先先把镜像pull下来，为方便起见，windows下推荐使用docker desktop，搜索<code>laysath/lucky-mate</code>，然后拉取latest版本的镜像，点击运行，会自动创建容器。容器需要对外暴露8848端口，并设置如下环境变量<img data-src="/images/uses_of_full_cone_nat/mc_lucky_mate.png" alt="容器设置" /></p>
+</li>
+</ol>
+<p>其中，第一个红圈填写第7步中获得的id和key，第二个红圈中，<code>SRV_RR</code>填写第8步中的<code>主机记录</code>，<code>SRV_RR_VALUE</code>填写你ip绑定的域名，<code>SRV_RR_ID</code>请到<a target="_blank" rel="noopener" href="https://next.api.aliyun.com/api/Alidns/2015-01-09/DescribeDomainRecords">sdk调试台</a>输入你的主域名（即第8步的蓝色部分），发起调用得到id，如图<img data-src="/images/uses_of_full_cone_nat/get_srv_id.png" alt="srvID" /></p>
+<ol start="11">
+<li>到lucky的stun规则中启用Webhook，并填写如下<img data-src="/images/uses_of_full_cone_nat/edit_srv_hook.png" alt="Webhook" /></li>
+</ol>
+<p>其中，接口地址为<code>http://127.0.0.1:8848/update_srv/#&#123;port&#125;</code>，请求方法为<code>GET</code></p>
 
       
     </div>
@@ -389,7 +405,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-01-11 15:22:25" itemprop="dateModified" datetime="2024-01-11T15:22:25+08:00">2024-01-11</time>
+      <time title="修改时间：2024-01-11 16:10:55" itemprop="dateModified" datetime="2024-01-11T16:10:55+08:00">2024-01-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -593,7 +609,7 @@ $5: Protocol (TCP/UDP)<br />
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-01-11 15:22:25" itemprop="dateModified" datetime="2024-01-11T15:22:25+08:00">2024-01-11</time>
+      <time title="修改时间：2024-01-11 16:10:55" itemprop="dateModified" datetime="2024-01-11T16:10:55+08:00">2024-01-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -691,7 +707,7 @@ $5: Protocol (TCP/UDP)<br />
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-01-11 15:22:25" itemprop="dateModified" datetime="2024-01-11T15:22:25+08:00">2024-01-11</time>
+      <time title="修改时间：2024-01-11 16:10:55" itemprop="dateModified" datetime="2024-01-11T16:10:55+08:00">2024-01-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -780,7 +796,7 @@ $5: Protocol (TCP/UDP)<br />
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-01-11 15:22:25" itemprop="dateModified" datetime="2024-01-11T15:22:25+08:00">2024-01-11</time>
+      <time title="修改时间：2024-01-11 16:10:55" itemprop="dateModified" datetime="2024-01-11T16:10:55+08:00">2024-01-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -905,7 +921,7 @@ $5: Protocol (TCP/UDP)<br />
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-01-11 15:22:25" itemprop="dateModified" datetime="2024-01-11T15:22:25+08:00">2024-01-11</time>
+      <time title="修改时间：2024-01-11 16:10:55" itemprop="dateModified" datetime="2024-01-11T16:10:55+08:00">2024-01-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1031,7 +1047,7 @@ $5: Protocol (TCP/UDP)<br />
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-01-11 15:22:25" itemprop="dateModified" datetime="2024-01-11T15:22:25+08:00">2024-01-11</time>
+      <time title="修改时间：2024-01-11 16:10:55" itemprop="dateModified" datetime="2024-01-11T16:10:55+08:00">2024-01-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1120,7 +1136,7 @@ $5: Protocol (TCP/UDP)<br />
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-01-11 15:22:25" itemprop="dateModified" datetime="2024-01-11T15:22:25+08:00">2024-01-11</time>
+      <time title="修改时间：2024-01-11 16:10:55" itemprop="dateModified" datetime="2024-01-11T16:10:55+08:00">2024-01-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1267,7 +1283,7 @@ $5: Protocol (TCP/UDP)<br />
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-01-11 15:22:25" itemprop="dateModified" datetime="2024-01-11T15:22:25+08:00">2024-01-11</time>
+      <time title="修改时间：2024-01-11 16:10:55" itemprop="dateModified" datetime="2024-01-11T16:10:55+08:00">2024-01-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1363,7 +1379,7 @@ $5: Protocol (TCP/UDP)<br />
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-01-11 15:22:25" itemprop="dateModified" datetime="2024-01-11T15:22:25+08:00">2024-01-11</time>
+      <time title="修改时间：2024-01-11 16:10:55" itemprop="dateModified" datetime="2024-01-11T16:10:55+08:00">2024-01-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
