@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/manifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.css" integrity="sha256-6cQIC71/iBIYXFK+0RHAvwmjwWzkWd+r7v/BX3/vZDc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"faithleysath.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":true,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="前言 如今，随着ipv6的普及，越来越多的家庭宽带有了v6公网，可仍有部分使用场景不具备v6条件。本文介绍了一种基于Full Cone NAT的内网穿透解决方案，实现近乎原生的公网ipv6体验。  准备工作  运营商NAT级别为NAT1（Full Cone NAT，全锥型） 光猫打开桥接（路由器拨号）  首先得确认家庭网络是否为全锥型NAT。测试步骤如下：   确保光猫开启桥接并使用路由器拨号（">
+<meta property="og:type" content="article">
+<meta property="og:title" content="全锥型NAT的实用技巧">
+<meta property="og:url" content="https://faithleysath.github.io/2024/01/11/uses_of_full_cone_nat/index.html">
+<meta property="og:site_name" content="Matrix&#39;s Blog">
+<meta property="og:description" content="前言 如今，随着ipv6的普及，越来越多的家庭宽带有了v6公网，可仍有部分使用场景不具备v6条件。本文介绍了一种基于Full Cone NAT的内网穿透解决方案，实现近乎原生的公网ipv6体验。  准备工作  运营商NAT级别为NAT1（Full Cone NAT，全锥型） 光猫打开桥接（路由器拨号）  首先得确认家庭网络是否为全锥型NAT。测试步骤如下：   确保光猫开启桥接并使用路由器拨号（">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://faithleysath.github.io/images/uses_of_full_cone_nat/mcsm_select_server.png">
+<meta property="og:image" content="https://faithleysath.github.io/images/uses_of_full_cone_nat/lucky_stun_edit.png">
+<meta property="og:image" content="https://faithleysath.github.io/images/uses_of_full_cone_nat/stun_result.png">
+<meta property="article:published_time" content="2024-01-11T06:02:31.000Z">
+<meta property="article:modified_time" content="2024-01-11T07:22:25.370Z">
+<meta property="article:author" content="Faith Leysath">
+<meta property="article:tag" content="NAS">
+<meta property="article:tag" content="网络">
+<meta property="article:tag" content="NAT">
+<meta property="article:tag" content="反代">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://faithleysath.github.io/images/uses_of_full_cone_nat/mcsm_select_server.png">
+
+
+<link rel="canonical" href="https://faithleysath.github.io/2024/01/11/uses_of_full_cone_nat/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://faithleysath.github.io/2024/01/11/uses_of_full_cone_nat/","path":"2024/01/11/uses_of_full_cone_nat/","title":"全锥型NAT的实用技巧"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>全锥型NAT的实用技巧 | Matrix's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Matrix's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-收藏/友链"><a href="/favorites" rel="section"><i class="fa-solid fa-bookmark fa-fw"></i>收藏/友链</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text"> 前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text"> 准备工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#stun"><span class="nav-number">3.</span> <span class="nav-text"> STUN</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85lucky"><span class="nav-number">3.1.</span> <span class="nav-text"> 安装Lucky</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B%E4%BB%8B%E7%BB%8D"><span class="nav-number">4.</span> <span class="nav-text"> 案例介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#mc%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">4.1.</span> <span class="nav-text"> MC服务器</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Faith Leysath"
+      src="https://github.com/faithleysath.png">
+  <p class="site-author-name" itemprop="name">Faith Leysath</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/faithleysath" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;faithleysath" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/faithleysath@gmail.com" title="E-Mail → faithleysath@gmail.com" rel="noopener me"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://faithleysath.github.io/2024/01/11/uses_of_full_cone_nat/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://github.com/faithleysath.png">
+      <meta itemprop="name" content="Faith Leysath">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Matrix's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="全锥型NAT的实用技巧 | Matrix's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          全锥型NAT的实用技巧
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-01-11 14:02:31 / 修改时间：15:22:25" itemprop="dateCreated datePublished" datetime="2024-01-11T14:02:31+08:00">2024-01-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">网络</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h1>
+<p>如今，随着ipv6的普及，越来越多的家庭宽带有了v6公网，可仍有部分使用场景不具备v6条件。本文介绍了一种基于Full Cone NAT的内网穿透解决方案，实现近乎原生的公网ipv6体验。</p>
+<h1 id="准备工作"><a class="markdownIt-Anchor" href="#准备工作"></a> 准备工作</h1>
+<ul>
+<li>运营商NAT级别为NAT1（Full Cone NAT，全锥型）</li>
+<li>光猫打开桥接（路由器拨号）</li>
+</ul>
+<p>首先得确认家庭网络是否为全锥型NAT。测试步骤如下：</p>
+<ol>
+<li>
+<p>确保光猫开启桥接并使用路由器拨号（如果你不理解这段话的意思，自行上tb搜索“光猫桥接”）</p>
+</li>
+<li>
+<p>路由器中开启DMZ主机并指向你需要穿透的电脑的局域网ip</p>
+</li>
+<li>
+<p>下载<a target="_blank" rel="noopener" href="https://github.com/HMBSbige/NatTypeTester/releases">NatTypeTester</a>进行测试，若结果都显示Independent（即没有一个显示Dependent），那么恭喜，你将享受v4公网的体验。</p>
+</li>
+</ol>
+<h1 id="stun"><a class="markdownIt-Anchor" href="#stun"></a> STUN</h1>
+<p>STUN，全称为Session Traversal Utilities for NAT，是一种网络协议，它允许位于NAT（网络地址转换）后的客户端找出自己的公网地址，查找当前NAT设备对其进行的NAT类型，并在需要时保持NAT设备上的端口开放。</p>
+<p>STUN的主要作用是解决NAT穿透问题。NAT穿透是指在NAT环境中，从公网访问NAT后的私网设备的问题。由于NAT设备的存在，私网设备对外的通信地址并非其真实的IP地址，这就导致了公网设备无法直接访问私网设备。STUN通过发现设备的公网地址和NAT类型，帮助设备建立和公网的通信。</p>
+<p>目前有3种用于STUN的工具，分别为</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://lucky666.cn/">Lucky</a>：拥有友好的Web管理页面，强烈推荐</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/MikeWang000000/Natter">Natter</a>：基于Python实现的命令行工具</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/heiher/natmap">NatMap</a>：基于C++实现的命令行工具</li>
+</ul>
+<p>本文就Lucky的部署进行讲解，实际上，<a target="_blank" rel="noopener" href="https://lucky666.cn/docs/shareteach/">官方文档</a>也给出了很多网友提供的<code>经验分享</code>，可补充阅读！</p>
+<h2 id="安装lucky"><a class="markdownIt-Anchor" href="#安装lucky"></a> 安装Lucky</h2>
+<p>本文在<code>Windows</code>环境下部署Lucky，其余环境可自行参考<a target="_blank" rel="noopener" href="https://lucky666.cn/docs/install">官方文档</a></p>
+<ol>
+<li>
+<p>下载<a target="_blank" rel="noopener" href="https://www.daji.it:6/release/">最新安装包</a>，其中分为适中版和大吉版，后者在前者的基础上增加了<code>File Browser</code>的功能，本文仅选择普通版即可。</p>
+</li>
+<li>
+<p>将安装包解压到一个固定的位置作为程序的运行环境，双击运行。</p>
+</li>
+<li>
+<p>检查右下角托盘区出现lucky的logo，右键“打开Lucky后台”，也可以顺便设置开机自启。</p>
+</li>
+<li>
+<p>具体使用方法请参见<a target="_blank" rel="noopener" href="https://lucky666.cn/docs/category/%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E">官方文档</a>，如需部署<code>MC服务器</code>、<code>WEB服务</code>等，也可直接阅读本文剩余内容。</p>
+</li>
+</ol>
+<h1 id="案例介绍"><a class="markdownIt-Anchor" href="#案例介绍"></a> 案例介绍</h1>
+<h2 id="mc服务器"><a class="markdownIt-Anchor" href="#mc服务器"></a> MC服务器</h2>
+<p>本文以MCSM面板为例，其余mc服务器开设方式同理。</p>
+<ol>
+<li>
+<p>启动MC服务器，若您尚未开服，可使用<a target="_blank" rel="noopener" href="https://mcsmanager.com/">MCSM面板</a>一键开服。<img data-src="/images/uses_of_full_cone_nat/mcsm_select_server.png" alt="懒人开服" /></p>
+</li>
+<li>
+<p>确认服务器监听的端口，大多数情况下，<code>mc服务器</code>的默认端口号为<code>25565</code>，即在客户端中输入ip而不指定端口时，默认就是连接<code>25565</code>，除非特别指定端口。本文假定您的服务器开放在25565端口上，后续步骤请自行对照修改。</p>
+</li>
+<li>
+<p>进入Lucky添加STUN规则<img data-src="/images/uses_of_full_cone_nat/lucky_stun_edit.png" alt="stun规则" /></p>
+</li>
+<li>
+<p>获得公网地址<img data-src="/images/uses_of_full_cone_nat/stun_result.png" alt="stun结果" /></p>
+</li>
+<li>
+<p>若始终无法获得公网地址，说明你路由器的防火墙未开放，需要设置端口转发或DMZ主机，参见<strong>准备工作</strong>第2条。或若你的路由器支持并打开了UPnP功能，可将stun规则里的UPnP开关打开，则将自动设置路由器的端口转发。</p>
+</li>
+<li>
+<p>至此，你已经拥有一个外网可访问的地址了。但缺点是，这个地址随时可能更换（ip与端口号都是动态的），并非固定的。想要固定下来，可以继续阅读接下来的步骤。</p>
+</li>
+<li>
+<p>(进阶)首先把ip地址固定下来，可以使用ddns，在lucky中直接设置。本文不再赘述。</p>
+</li>
+<li>
+<p>(进阶)本文重点讲解端口号的固定。我们使用srv解析。</p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Faith Leysath
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://faithleysath.github.io/2024/01/11/uses_of_full_cone_nat/" title="全锥型NAT的实用技巧">https://faithleysath.github.io/2024/01/11/uses_of_full_cone_nat/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/NAS/" rel="tag"># NAS</a>
+              <a href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag"># 网络</a>
+              <a href="/tags/NAT/" rel="tag"># NAT</a>
+              <a href="/tags/%E5%8F%8D%E4%BB%A3/" rel="tag"># 反代</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/12/14/nasDIY/" rel="prev" title="NAS折腾记">
+                  <i class="fa fa-angle-left"></i> NAS折腾记
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments utterances-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">苏ICP备2023015293号 </a>
+  </div>
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Faith Leysath</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.umd.js" integrity="sha256-ytMJGN3toR+a84u7g7NuHm91VIR06Q41kMWDr2pq7Zo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.12/pdfobject.min.js","integrity":"sha256-g2xji1rlE3KsGVClvuxTbcR0Kn2+wtQADSff2Tbb4zA="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" integrity="sha256-UF1fgpAiu3tPJN/uCqEUHNe7pnr+QR0SQDNfgglgtcM=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://faithleysath.github.io/2024/01/11/uses_of_full_cone_nat/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"faithleysath/faithleysath.github.io","issue_term":"pathname","theme":"github-dark"}</script>
+<script src="/js/third-party/comments/utterances.js"></script>
+
+</body>
+</html>

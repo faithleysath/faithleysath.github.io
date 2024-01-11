@@ -153,18 +153,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -192,6 +192,158 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://faithleysath.github.io/2024/01/11/uses_of_full_cone_nat/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://github.com/faithleysath.png">
+      <meta itemprop="name" content="Faith Leysath">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Matrix's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Matrix's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/01/11/uses_of_full_cone_nat/" class="post-title-link" itemprop="url">全锥型NAT的实用技巧</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-01-11 14:02:31 / 修改时间：15:22:25" itemprop="dateCreated datePublished" datetime="2024-01-11T14:02:31+08:00">2024-01-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">网络</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h1>
+<p>如今，随着ipv6的普及，越来越多的家庭宽带有了v6公网，可仍有部分使用场景不具备v6条件。本文介绍了一种基于Full Cone NAT的内网穿透解决方案，实现近乎原生的公网ipv6体验。</p>
+<h1 id="准备工作"><a class="markdownIt-Anchor" href="#准备工作"></a> 准备工作</h1>
+<ul>
+<li>运营商NAT级别为NAT1（Full Cone NAT，全锥型）</li>
+<li>光猫打开桥接（路由器拨号）</li>
+</ul>
+<p>首先得确认家庭网络是否为全锥型NAT。测试步骤如下：</p>
+<ol>
+<li>
+<p>确保光猫开启桥接并使用路由器拨号（如果你不理解这段话的意思，自行上tb搜索“光猫桥接”）</p>
+</li>
+<li>
+<p>路由器中开启DMZ主机并指向你需要穿透的电脑的局域网ip</p>
+</li>
+<li>
+<p>下载<a target="_blank" rel="noopener" href="https://github.com/HMBSbige/NatTypeTester/releases">NatTypeTester</a>进行测试，若结果都显示Independent（即没有一个显示Dependent），那么恭喜，你将享受v4公网的体验。</p>
+</li>
+</ol>
+<h1 id="stun"><a class="markdownIt-Anchor" href="#stun"></a> STUN</h1>
+<p>STUN，全称为Session Traversal Utilities for NAT，是一种网络协议，它允许位于NAT（网络地址转换）后的客户端找出自己的公网地址，查找当前NAT设备对其进行的NAT类型，并在需要时保持NAT设备上的端口开放。</p>
+<p>STUN的主要作用是解决NAT穿透问题。NAT穿透是指在NAT环境中，从公网访问NAT后的私网设备的问题。由于NAT设备的存在，私网设备对外的通信地址并非其真实的IP地址，这就导致了公网设备无法直接访问私网设备。STUN通过发现设备的公网地址和NAT类型，帮助设备建立和公网的通信。</p>
+<p>目前有3种用于STUN的工具，分别为</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://lucky666.cn/">Lucky</a>：拥有友好的Web管理页面，强烈推荐</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/MikeWang000000/Natter">Natter</a>：基于Python实现的命令行工具</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/heiher/natmap">NatMap</a>：基于C++实现的命令行工具</li>
+</ul>
+<p>本文就Lucky的部署进行讲解，实际上，<a target="_blank" rel="noopener" href="https://lucky666.cn/docs/shareteach/">官方文档</a>也给出了很多网友提供的<code>经验分享</code>，可补充阅读！</p>
+<h2 id="安装lucky"><a class="markdownIt-Anchor" href="#安装lucky"></a> 安装Lucky</h2>
+<p>本文在<code>Windows</code>环境下部署Lucky，其余环境可自行参考<a target="_blank" rel="noopener" href="https://lucky666.cn/docs/install">官方文档</a></p>
+<ol>
+<li>
+<p>下载<a target="_blank" rel="noopener" href="https://www.daji.it:6/release/">最新安装包</a>，其中分为适中版和大吉版，后者在前者的基础上增加了<code>File Browser</code>的功能，本文仅选择普通版即可。</p>
+</li>
+<li>
+<p>将安装包解压到一个固定的位置作为程序的运行环境，双击运行。</p>
+</li>
+<li>
+<p>检查右下角托盘区出现lucky的logo，右键“打开Lucky后台”，也可以顺便设置开机自启。</p>
+</li>
+<li>
+<p>具体使用方法请参见<a target="_blank" rel="noopener" href="https://lucky666.cn/docs/category/%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E">官方文档</a>，如需部署<code>MC服务器</code>、<code>WEB服务</code>等，也可直接阅读本文剩余内容。</p>
+</li>
+</ol>
+<h1 id="案例介绍"><a class="markdownIt-Anchor" href="#案例介绍"></a> 案例介绍</h1>
+<h2 id="mc服务器"><a class="markdownIt-Anchor" href="#mc服务器"></a> MC服务器</h2>
+<p>本文以MCSM面板为例，其余mc服务器开设方式同理。</p>
+<ol>
+<li>
+<p>启动MC服务器，若您尚未开服，可使用<a target="_blank" rel="noopener" href="https://mcsmanager.com/">MCSM面板</a>一键开服。<img data-src="/images/uses_of_full_cone_nat/mcsm_select_server.png" alt="懒人开服" /></p>
+</li>
+<li>
+<p>确认服务器监听的端口，大多数情况下，<code>mc服务器</code>的默认端口号为<code>25565</code>，即在客户端中输入ip而不指定端口时，默认就是连接<code>25565</code>，除非特别指定端口。本文假定您的服务器开放在25565端口上，后续步骤请自行对照修改。</p>
+</li>
+<li>
+<p>进入Lucky添加STUN规则<img data-src="/images/uses_of_full_cone_nat/lucky_stun_edit.png" alt="stun规则" /></p>
+</li>
+<li>
+<p>获得公网地址<img data-src="/images/uses_of_full_cone_nat/stun_result.png" alt="stun结果" /></p>
+</li>
+<li>
+<p>若始终无法获得公网地址，说明你路由器的防火墙未开放，需要设置端口转发或DMZ主机，参见<strong>准备工作</strong>第2条。或若你的路由器支持并打开了UPnP功能，可将stun规则里的UPnP开关打开，则将自动设置路由器的端口转发。</p>
+</li>
+<li>
+<p>至此，你已经拥有一个外网可访问的地址了。但缺点是，这个地址随时可能更换（ip与端口号都是动态的），并非固定的。想要固定下来，可以继续阅读接下来的步骤。</p>
+</li>
+<li>
+<p>(进阶)首先把ip地址固定下来，可以使用ddns，在lucky中直接设置。本文不再赘述。</p>
+</li>
+<li>
+<p>(进阶)本文重点讲解端口号的固定。我们使用srv解析。</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -237,7 +389,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-15 21:23:28" itemprop="dateModified" datetime="2023-12-15T21:23:28+08:00">2023-12-15</time>
+      <time title="修改时间：2024-01-11 15:22:25" itemprop="dateModified" datetime="2024-01-11T15:22:25+08:00">2024-01-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -441,7 +593,7 @@ $5: Protocol (TCP/UDP)<br />
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-15 21:23:28" itemprop="dateModified" datetime="2023-12-15T21:23:28+08:00">2023-12-15</time>
+      <time title="修改时间：2024-01-11 15:22:25" itemprop="dateModified" datetime="2024-01-11T15:22:25+08:00">2024-01-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -539,7 +691,7 @@ $5: Protocol (TCP/UDP)<br />
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-15 21:23:28" itemprop="dateModified" datetime="2023-12-15T21:23:28+08:00">2023-12-15</time>
+      <time title="修改时间：2024-01-11 15:22:25" itemprop="dateModified" datetime="2024-01-11T15:22:25+08:00">2024-01-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -628,7 +780,7 @@ $5: Protocol (TCP/UDP)<br />
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-15 21:23:28" itemprop="dateModified" datetime="2023-12-15T21:23:28+08:00">2023-12-15</time>
+      <time title="修改时间：2024-01-11 15:22:25" itemprop="dateModified" datetime="2024-01-11T15:22:25+08:00">2024-01-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -753,7 +905,7 @@ $5: Protocol (TCP/UDP)<br />
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-15 21:23:28" itemprop="dateModified" datetime="2023-12-15T21:23:28+08:00">2023-12-15</time>
+      <time title="修改时间：2024-01-11 15:22:25" itemprop="dateModified" datetime="2024-01-11T15:22:25+08:00">2024-01-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -879,7 +1031,7 @@ $5: Protocol (TCP/UDP)<br />
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-15 21:23:28" itemprop="dateModified" datetime="2023-12-15T21:23:28+08:00">2023-12-15</time>
+      <time title="修改时间：2024-01-11 15:22:25" itemprop="dateModified" datetime="2024-01-11T15:22:25+08:00">2024-01-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -968,7 +1120,7 @@ $5: Protocol (TCP/UDP)<br />
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-15 21:23:28" itemprop="dateModified" datetime="2023-12-15T21:23:28+08:00">2023-12-15</time>
+      <time title="修改时间：2024-01-11 15:22:25" itemprop="dateModified" datetime="2024-01-11T15:22:25+08:00">2024-01-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1115,7 +1267,7 @@ $5: Protocol (TCP/UDP)<br />
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-15 21:23:28" itemprop="dateModified" datetime="2023-12-15T21:23:28+08:00">2023-12-15</time>
+      <time title="修改时间：2024-01-11 15:22:25" itemprop="dateModified" datetime="2024-01-11T15:22:25+08:00">2024-01-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1211,7 +1363,7 @@ $5: Protocol (TCP/UDP)<br />
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-15 21:23:28" itemprop="dateModified" datetime="2023-12-15T21:23:28+08:00">2023-12-15</time>
+      <time title="修改时间：2024-01-11 15:22:25" itemprop="dateModified" datetime="2024-01-11T15:22:25+08:00">2024-01-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1263,144 +1415,6 @@ $5: Protocol (TCP/UDP)<br />
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://faithleysath.github.io/2023/10/01/proxySolution/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://github.com/faithleysath.png">
-      <meta itemprop="name" content="Faith Leysath">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Matrix's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Matrix's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/10/01/proxySolution/" class="post-title-link" itemprop="url">【Proxy】网络代理设置解决方案合集</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-10-01 09:44:18" itemprop="dateCreated datePublished" datetime="2023-10-01T09:44:18+08:00">2023-10-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-15 21:23:28" itemprop="dateModified" datetime="2023-12-15T21:23:28+08:00">2023-12-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Tips/" itemprop="url" rel="index"><span itemprop="name">Tips</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="引言"><a class="markdownIt-Anchor" href="#引言"></a> 引言</h1>
-<p>本文用于记录一些<code>命令行</code>工具的代理设置方法，<code>UWP应用</code>的代理设置，<code>WSL2</code>的代理设置等等</p>
-<h1 id="uwp应用走代理"><a class="markdownIt-Anchor" href="#uwp应用走代理"></a> UWP应用走代理</h1>
-<blockquote>
-<p>引用自：<a target="_blank" rel="noopener" href="https://www.duohuohub.cn/threads/49/#post-101">https://www.duohuohub.cn/threads/49/#post-101</a></p>
-</blockquote>
-<p>微软的OneDrive真好用…但偶尔会出现怎么样都无法登陆的情况</p>
-<p>本质上是因为 微软 uwp 应用默认直连，所以开了代理就用不了</p>
-<h2 id="最终解决方案"><a class="markdownIt-Anchor" href="#最终解决方案"></a> 【最终解决方案】</h2>
-<p>无脑批量解除所有UWP应用限制（管理员）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Get-ChildItem -Path Registry::<span class="string">&quot;HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Mappings\&quot; -name | ForEach-Object &#123;CheckNetIsolation.exe LoopbackExempt -a -p=&quot;</span><span class="variable">$_</span><span class="string">&quot;&#125;</span></span><br></pre></td></tr></table></figure>
-<h2 id="其他尝试未生效"><a class="markdownIt-Anchor" href="#其他尝试未生效"></a> 【其他尝试（未生效）】</h2>
-<ul>
-<li>Clash中开启UWP应用联网限制解除工具</li>
-<li>Clash开启Tun模式</li>
-<li>重置OneDrive</li>
-<li>出国（bushi</li>
-</ul>
-<h1 id="powershell下使用代理"><a class="markdownIt-Anchor" href="#powershell下使用代理"></a> PowerShell下使用代理</h1>
-<blockquote>
-<p>引用自：<a target="_blank" rel="noopener" href="https://anuoua.github.io/2019/08/11/%E9%85%8D%E7%BD%AEPowershell%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86/">https://anuoua.github.io/2019/08/11/配置Powershell命令行代理/</a></p>
-</blockquote>
-<p>在日常windows环境开发中，powershell经常需要用到代理，但是每次去系统变量中配置环境变量还是显得过于麻烦了，所以我们可以定义两个命令：</p>
-<ul>
-<li>应用代理环境变量</li>
-<li>取消代理环境变量</li>
-</ul>
-<p>直接在powershell中调用这两命令就方便很多了。</p>
-<h2 id="编写脚本"><a class="markdownIt-Anchor" href="#编写脚本"></a> 编写脚本</h2>
-<ol>
-<li>
-<p>使用管理员权限打开<code>PowerShell</code>，并执行<code>Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser</code></p>
-</li>
-<li>
-<p>输入<code>code $PROFILE</code>使用<code>vscode</code>打开配置文件，如果没有<code>vscode</code>，可输入<code>$PROFILE</code>查看配置文件地址，使用其他文本编辑器打开。</p>
-</li>
-<li>
-<p>在配置文件中输入以下代码：</p>
- <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">set_proxy_variable</span></span> &#123;</span><br><span class="line">    <span class="built_in">Set-Item</span> Env:http_proxy <span class="string">&quot;http://127.0.0.1:33210&quot;</span>  <span class="comment"># 代理地址</span></span><br><span class="line">    <span class="built_in">Set-Item</span> Env:https_proxy <span class="string">&quot;http://127.0.0.1:33210&quot;</span> <span class="comment"># 代理地址</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">unset_proxy_variable</span></span> &#123;</span><br><span class="line">    <span class="built_in">Remove-Item</span> Env:http_proxy</span><br><span class="line">    <span class="built_in">Remove-Item</span> Env:https_proxy</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">New-Alias</span> <span class="literal">-Name</span> spp <span class="literal">-Value</span> set_proxy_variable</span><br><span class="line"><span class="built_in">New-Alias</span> <span class="literal">-Name</span> upp <span class="literal">-Value</span> unset_proxy_variable</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>保存关闭</p>
-</li>
-</ol>
-<h2 id="使用"><a class="markdownIt-Anchor" href="#使用"></a> 使用</h2>
-<ul>
-<li><code>spp</code> 启用代理</li>
-<li><code>upp</code> 取消代理</li>
-</ul>
-<h1 id="cmd下使用代理"><a class="markdownIt-Anchor" href="#cmd下使用代理"></a> CMD下使用代理</h1>
-<p>打开<code>cmd</code>，输入以下命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> HTTP_PROXY=http://127.0.0.1:1080</span><br><span class="line"><span class="built_in">set</span> HTTPS_PROXY=http://127.0.0.1:1080</span><br></pre></td></tr></table></figure>
-<p>不过要注意的都是，上面设置的命令行代码作用的范围是一次性的，也就是关闭cmd窗口后，就失效了，如果需要永久生效的话，是需要配置系统的环境变量的</p>
-<h1 id="git设置代理"><a class="markdownIt-Anchor" href="#git设置代理"></a> Git设置代理</h1>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#有些朋友好像为什么设置http和socket5其实设置哪种都是可以的，具体看你们自己代理软件都支持的协议有哪些，就可以了</span></span><br><span class="line"><span class="comment">#记得修改端口号，比如我的是1080，记得改成自己代理软件的所配置的端口号</span></span><br><span class="line"><span class="comment">#下面配置的都是全局，如果需要设置局部的把【--global】删除即可。</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#http代理</span></span><br><span class="line">git config --global http.proxy <span class="string">&#x27;http://127.0.0.1:1080&#x27;</span></span><br><span class="line"><span class="comment">#https代理</span></span><br><span class="line">git config --global https.proxy <span class="string">&#x27;http://127.0.0.1:1080&#x27;</span></span><br><span class="line"><span class="comment">#http代理</span></span><br><span class="line">git config --global http.proxy <span class="string">&#x27;socks5://127.0.0.1:1080&#x27;</span></span><br><span class="line"><span class="comment">#https代理</span></span><br><span class="line">git config --global https.proxy <span class="string">&#x27;socks5://127.0.0.1:1080&#x27;</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#取消http代理</span></span><br><span class="line">git config --global --<span class="built_in">unset</span> http.proxy</span><br><span class="line"><span class="comment">#取消https代理</span></span><br><span class="line">git config --global --<span class="built_in">unset</span> https.proxy</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -1415,7 +1429,7 @@ $5: Protocol (TCP/UDP)<br />
   </div>
   <div class="copyright">
     &copy; 
-    <span itemprop="copyrightYear">2023</span>
+    <span itemprop="copyrightYear">2024</span>
     <span class="with-love">
       <i class="fa fa-heart"></i>
     </span>
