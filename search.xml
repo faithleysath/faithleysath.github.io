@@ -381,6 +381,64 @@ $5: Protocol (TCP/UDP)<br />
       </tags>
   </entry>
   <entry>
+    <title>个人培养计划</title>
+    <url>/2024/03/17/personal-plan/</url>
+    <content><![CDATA[<blockquote class="blockquote-center">
+<p>本文采用类似changelog的方式记录个人培养计划。</p>
+
+</blockquote>
+<h1 id="current-plan20243"><a class="markdownIt-Anchor" href="#current-plan20243"></a> Current Plan（2024.3）</h1>
+<h2 id="技术栈"><a class="markdownIt-Anchor" href="#技术栈"></a> 技术栈</h2>
+<ul>
+<li>李沐的《动手学深度学习》（24/73）</li>
+<li>学长的论文与代码：<code>2024-3-24前</code></li>
+<li>英语学习</li>
+</ul>
+<h2 id="课程与培训"><a class="markdownIt-Anchor" href="#课程与培训"></a> 课程与培训</h2>
+<ul>
+<li>数学建模
+<ul>
+<li>课程内容：<img data-src="/images/%E8%AF%BE%E7%A8%8B%E5%86%85%E5%AE%B9.png" alt="数学建模课程内容" /></li>
+<li>时间表： <img data-src="/images/%E6%97%B6%E9%97%B4%E8%A1%A8.png" alt="数学建模课程时间表" /></li>
+</ul>
+</li>
+<li>国际化科研课程：复杂决策系统中的随机最优控制及优化理论</li>
+<li>统计建模主题解读</li>
+</ul>
+<h2 id="比赛"><a class="markdownIt-Anchor" href="#比赛"></a> 比赛</h2>
+<ul>
+<li>2024年4月：Raicom报名</li>
+<li>2024年5月：
+<ul>
+<li>五一数模：<code>2024-05-01</code></li>
+<li>校赛数模：<code>5月11日16时—5月16日16时</code></li>
+<li>统计建模校赛：<code>5月15日18:00前</code></li>
+</ul>
+</li>
+<li>2024年7月：
+<ul>
+<li>百度之星·程序设计竞赛</li>
+</ul>
+</li>
+<li>2024年8月：
+<ul>
+<li>Raicom比赛：<code>08月08日</code></li>
+</ul>
+</li>
+<li>2024年9月：数模国赛、<a href="https://www.bagevent.com/event/8700464">人工智能大赛</a></li>
+<li>2024年11月：
+<ul>
+<li>全国大学生数学竞赛(预赛)：高等数学、线性代数</li>
+</ul>
+</li>
+</ul>
+<h2 id="考试"><a class="markdownIt-Anchor" href="#考试"></a> 考试</h2>
+<ul>
+<li>CET6</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
     <title>【Proxy】网络代理设置解决方案合集</title>
     <url>/2023/10/01/proxySolution/</url>
     <content><![CDATA[<h1 id="引言"><a class="markdownIt-Anchor" href="#引言"></a> 引言</h1>
