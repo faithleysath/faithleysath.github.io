@@ -24,21 +24,21 @@ categories:
 我从1990年代开始编程，那时我住在我父母的医疗诊所的上方。我们有15台商用计算机，有一台是给我的。它们都安装了MS-DOS操作系统。最初的网络是通过同轴电缆使用IPX连接到Novell Netware服务器，这是我们拥有过的最先进的软件。比起TCP/IP协议，IPX是如此地容易配置。没有DHCP，没有地址分配，但它就是能用。
 > I started programming in the 1990s living above my parent’s **medical practice**. We had 15 PCs for the business, and one for me. The standard OS was MS-DOS. The network **started off** using IPX over **coax** to a Novell Netware server, the **fanciest** software we ever owned. IPX was so much easier than TCP/IP. No DHCP and address allocation, it just worked.
 
-最终，这些电脑都运行了Windows系统，并且一台Windows NT服务器接管了原先通过TCP/IP进行的文件共享。这套商用系统在这些变化后依然可用，只不过需要我们手动分配IP地址，这增加了一些操作开销。
+最终，这些电脑都运行了Windows系统，并且有一台Windows NT服务器接管了原先通过TCP/IP进行的文件共享。这套商用系统在这些变化后依旧可用，只不过需要我们手动分配IP地址，这增加了一些操作开销。
 >Eventually the PCs would run Windows, and a Windows NT server took over file sharing over TCP/IP. The business software survived this **transition** unchanged, though there was more operational **overhead**. We assigned IPs manually.
 
 我家是在澳大利亚北部的一个小镇，那时互联网对我来说还很遥远，甚至比其他地方都要远。最终，我们可以打2000英里远的长途电话。而美国人已经有了AOL。
 > Home was a small town in Northern Australia. The internet was far off for me at this point, and would remain so longer than it did elsewhere. Eventually we would be able to make long-distance phone calls 2000 miles to try it out for a few minutes here and there. (At this point Americans had AOL.)
 
-在我们有互联网之前，只有一些平庸的本地论坛，还有我父亲某个时间获得的一个当地大学的账号（不知怎么搞的，我们当中没有一个是大学生或大学员工），我们可以拨号进去，尝试我的第一个Unix系统（运行在Sun服务器上）。尽管技术上是通过互联网链接的，这仍是一个有限的体验。我与大学文化的距离意味着直到90年代中期才接触到Linux，当时我们在去香港的旅行中拿到了一份Slackware。我真正理解Unix是在用了OpenBSD之后，它为我凑齐了最后一块拼图，让我最终理解了Unix。
+在我们有互联网之前，只有一些平庸的本地论坛，还有我父亲某个时间获得的一个当地大学的账号（不知怎么搞的，我们当中没有一个是学生或学校员工），我们可以拨号进去，尝试我的第一个Unix系统（运行在Sun服务器上）。尽管技术上是通过互联网链接的，这仍是一个有限的体验。我与大学文化的距离意味着直到90年代中期才接触到Linux，当时我们在去香港的旅行中拿到了一份Slackware。我真正理解Unix是在用了OpenBSD之后，它为我凑齐了最后一块拼图，让我最终理解了Unix。
 >Before we had internet there were some **lackluster** local BBSs, and at one point a local university account my father acquired (**somehow or other**, none of us were students or university employees) that we could dial into and try out my first Unix on a Sun box. It was a limited experience even though technically it was on an internet link. My distance from university culture meant I wouldn’t see Linux until the mid-90s, when we picked up a copy of Slackware on a trip to Hong Kong. I didn’t really **get** Unix until I used OpenBSD, which put enough of the pieces together for me for Unix to finally make sense.
 
-直到21世纪初，我十多年都没有在Sun公司的服务器上看到过root，那时我在伯克利二手市场上买了六台UltraSPARC服务器，大约花了100美元，这对当时的我来说是一大笔钱。我从这些旧机器中组装了一台可用的机器，并用它编写了一个sparc64 C编译器后端。尽管从那以后又过去了很多时间，但是对我来说，同时在脑海中保持这两种生活是很难的。它们是完全不同的世界。
+直到21世纪初，我有十多年都没有在Sun公司的服务器上看到过root，那时我在伯克利二手市场上买了六台UltraSPARC服务器，大约花了100美元，这对当时的我来说是一大笔钱。我用这些旧机器组装了一台可用的机器，并用它编写了一个sparc64 C编译器后端。尽管从那以后又过去了很多时间，但是对我来说，同时在脑海中保持这两种生活是很难的。它们是完全不同的世界。
 > I wouldn’t see root on a Sun box for more than a decade, now the early 2000s, when I bought half a dozen UltraSPARC servers as **a lot(一批)** second hand in Berkeley (for around $100, a lot of money for me at the time). I assembled a working machine from the carcasses and used it to write a sparc64 C compiler backend. Even though more time has passed since then between these times, it is hard for me to hold both lives in my head **simultaneously**. They were different worlds.
 
 # 童年的魔法(The childhood magic)
 
-局域网是一个学习计算机的神奇地方。除了在物理层面上组装和拆卸机器，我可以安全地做一些在现代互联网上难以想象的事情：无需许可的文件共享，没有安全性的实验服务器，共享软件，任何一台机器都可以通过输入一个无害的命令轻松地将网络搞崩。即使我真的搞崩了网络，影响也永远不会超出我家的范围——我知道需要向谁道歉了。
+局域网是一个学习计算机的神奇地方。除了在物理层面上组装和拆卸机器，我可以安全地做一些在现代互联网上难以想象的事情：无需许可的文件共享，没有安全性的实验服务器，共享软件，任何一台机器都可以通过输入一个无害的命令轻松地将网络搞崩。即使我真的搞崩了网络，影响也永远不会超出我家的范围——我知道我需要向谁道歉了。
 > The LAN was a magical place to learn about computers. Besides the physical aspect of **assembling** and disassembling machines, I could safely do things unthinkable on the modern internet: permission-less file sharing, experimental servers with no security, shared software where any one machine could easily bring down the network by typing in an **innocuous** command. Even when I did bring down the network the impact never left the building. I knew who I had to apologize to.
 
 （20年后，当我在谷歌担任工程师时，我用一个配置错误的MapReduce搞垮了一个borgmaster，我都不知道要向谁发送道歉邮件。）
@@ -50,21 +50,21 @@ categories:
 一个200MHz的奔腾Pro处理器感觉速度**非常快**，而32MB的内存似乎能做任何事。到了我用OpenBSD的时候，只要加入一些不太成熟的想法，我就能在几分钟内重新编译Apache httpd。如今，只要我**坚持使用**GCC 2.95，我的手表都能更快地编译它。
 > A 200MHz Pentium Pro felt **blazing** fast and 32MB of RAM could do anything. By the time I had OpenBSD I could recompile Apache httpd in a few minutes with my own bad ideas. My **wrist(手腕)** watch could compile it faster today, as long as I **stuck** to GCC 2.95.
 
-后来，我会把一台PC带到朋友家里，我们会组建**暂时的**局域网，玩星际争霸之类的游戏。 (阴极射线显示器很重)。LAN是一种教育，也是一种生活方式。
+后来，我会把一台PC带到朋友家里，我们会组建**临时的**局域网，玩星际争霸之类的游戏。 (阴极射线显示器很重)。LAN是一种教育，也是一种生活方式。
 > Later I would carry a PC to houses of my friends where we would build **ephemeral** LANs and play games like Starcraft. (Cathode-ray monitors were heavy.) The LAN was an education and a lifestyle.
 
 # 小型企业的魔力(The small business magic)
 
-我父亲是一名全科医生，他用这套廉价的286、386和486（配有三台昂贵的激光打印机）来为公司编写医疗记录软件。这套软件被十几名医生、一名护士和一名接待员使用。可以用基于文件的数据库软件（在这种情况下是Clipper）和一个无鼠标的curses界面做很多事情。
+我父亲是一名全科医生，他用这套廉价的286、386和486（配有三台昂贵的激光打印机）来为公司编写医疗记录软件。这套软件被十几名医生、一名护士和一名接待员使用。可以用这套基于文件的数据库软件（在这种情况下是Clipper）和一个无鼠标的curses界面做很多事情。
 > My father, a general **practitioner**, used this infrastructure of cheap 286s, 386s, and 486s (with three expensive laser printers) to write the medical record software for the business. It was used by a dozen doctors, a nurse, and receptionist. You can do a lot with file-based database software (in this case, Clipper) and a mouse-less curses interface.
 
-关于这一点有几个令人惊讶的事实。作为一名工程师，令我惊讶的是Netware文件锁定和SMB文件锁定足以实现一个被大约15个并发用户使用的数据库。我怀疑大多数现在的职业程序员从未使用过文件锁定，更不用说看到它正确地工作了。
+关于这一点有几个令人惊讶的事实。作为一名工程师，令我惊讶的是，Netware文件锁定和SMB文件锁定就足以实现一个被大约15个并发用户使用的数据库。我怀疑现在大多数的职业程序员从未使用过文件锁定，更不用说看到它正确地工作了。
 > There are several **astonishing** facts about this. As an engineer, it is astonishing that Netware file locking, then SMB file locking, worked well enough to implement a database used by ~15 **concurrent** users. I suspect most career programmers today have never used file locking, **let alone** seen it work correctly.
 
 更令人惊讶的是，这是一个非程序员专业人士，他能够在白天的工作之余使用从书中学到的技能构建软件来运行他们的小型企业。这是一个非常令人鼓舞的故事。
 > The business story is even more astonishing. Here is a non-programming professional, who was able to build the software to run their small business in between **shifts** at their day job using skills learned from a book.
 
-在今天，专业人士当然可以学会构建一个CRUD应用程序，但他们会发现不懈地调整他们的软件来最大限度地减少接待员接待一个病人需要使用的按键次数，或支持磁卡阅读器、教激光打印机精确地在专用处方纸上打印（打印机使用Postscript，但MS-DOS编程语言有一个更简单的指令层，使这成为可能）是多么困难。
+如今，专业人士当然可以学会构建一个CRUD应用程序，但他们会发现不懈地调整他们的软件来最大限度地减少接待员接待一个病人需要使用的按键次数，或支持磁卡阅读器、教激光打印机精确地在专用处方纸上打印（打印机使用Postscript，但MS-DOS编程语言有一个更简单的指令层，使这成为可能）是多么困难。
 > Today a professional could surely **pick up** the skills to build a CRUD app, but they would **be hard pressed to** tune their software so **relentlessly** to minimize the keystrokes a receptionist needs to use to check-in a patient, or support a magnetic card reader, or teach laser printers to precisely print onto specialized **prescription** paper (the printers spoke postscript, but the MS-DOS programming language had an easier instruction layer over PS that made this possible).
 
 90年代的结果是，父亲的公司需要的员工数量比常人认为的都要少，医生的效率比使用任何其他软件的都要高，所以生产力提高了。
@@ -84,13 +84,13 @@ categories:
 和朋友联机将更加容易。我们不需要搬运沉重的电脑，也不需要学习调试TCP/IP配置，甚至不需要亲自见面就能玩。我猜有些人会认为这是一种进步：更多的糖果，更少的内容。
 > Games would be easier to play with friends. We wouldn’t have to **lug** heavy boxes or learn to debug our TCP/IP configuration or actually see each other in person to play. I guess some people would see that as an improvement: more candy, less content.
 
-所有的技术都变得更好了，学习资源也更多了。但对我来说，我不确定我今天是否还会编程。学习如何存储密码或为你的玩具网站添加OAuth2并不有趣。当今的编程工作很大一部分是繁琐的，或者就是在疯狂的互联网中玩攻防对战。你可以做更多的事情，但是你很难有动力开始编写有趣的协作软件，而最终你会使用一些半成品的SaaS。
+所有的技术都变得更好了，学习资源也更多了。但对我来说，我不确定我现在是否还会编程。学习如何存储密码或为你的玩具网站添加OAuth2并不有趣。当今的编程工作很大一部分是繁琐的，或者就是在疯狂的互联网中玩攻防对战。你可以做更多的事情，但是你很难有动力开始编写有趣的协作软件，而最终你会使用一些半成品的SaaS。
 > All the technology is better. The resources to learn are better. But it is not clear to me I would program at all today. Learning how to store passwords or add OAuth2 to your toy web site is not fun. So much of programming today is busywork, or playing defense against a **raging** internet. You can do so much more, but the activation energy required to start writing fun collaborative software is so much higher you **end up** using some half-baked SaaS instead.
 
 那么，我父亲呢？
 > What about my father?
 
-我父亲这样的兼职程序员今天能写小企业软件吗？他能让它像我们的局域网那样安全和高效吗？也许可以吧。只要他足够精明，坚持使用90年代老式的桌面电脑，并将机器物理隔离于互联网。但是，以我父亲投入项目的时间，没办法安全（甚至在HIPAA法规下合法）地将记录转移到现代手机上。
+如今，像我父亲这样的兼职程序员能写小企业软件吗？他能让它像我们的局域网那样安全和高效吗？也许可以吧。只要他足够精明，坚持使用90年代老式的桌面电脑，并将机器物理隔离于互联网。但是，以我父亲投入项目的时间，没办法安全（甚至在HIPAA法规下合法）地将记录转移到现代手机上。
 > Could a part-time programmer like my father write small-business software today? Could he make it as safe and productive as our LAN was? Maybe. If he was canny, and stuck to old-fashioned desktops of the 90s and physically isolated the machines from the internet. But there is no chance you could get the records onto a modern phone safely (or even legally under HIPAA) with the hours my father gave the project.
 
 如果今天面临构建还是购买的决策，我强烈怀疑他会选择购买。或者更有可能的是，订阅。诊所的生产力会因此降低。
