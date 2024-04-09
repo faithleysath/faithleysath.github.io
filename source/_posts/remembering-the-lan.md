@@ -55,7 +55,7 @@ categories:
 
 # 小型企业的魔力(The small business magic)
 
-我父亲是一名全科医生，他用这套廉价的286、386和486（配有三台昂贵的激光打印机）来为公司编写医疗记录软件。这套软件被十几名医生、一名护士和一名接待员使用。可以用这套基于文件的数据库软件（在这种情况下是Clipper）和一个无鼠标的curses界面做很多事情。
+我父亲是一名全科医生，他用这套廉价的286、386和486（配有三台昂贵的激光打印机）来为自己的小诊所编写医疗记录软件。这套软件被十几名医生、一名护士和一名接待员使用。可以用这套基于文件的数据库软件（在这种情况下是Clipper）和一个无鼠标的curses界面做很多事情。
 > My father, a general **practitioner**, used this infrastructure of cheap 286s, 386s, and 486s (with three expensive laser printers) to write the medical record software for the business. It was used by a dozen doctors, a nurse, and receptionist. You can do a lot with file-based database software (in this case, Clipper) and a mouse-less curses interface.
 
 关于这一点有几个令人惊讶的事实。作为一名工程师，令我惊讶的是，Netware文件锁定和SMB文件锁定就足以实现一个被大约15个并发用户使用的数据库。我怀疑现在大多数的职业程序员从未使用过文件锁定，更不用说看到它正确地工作了。
@@ -67,15 +67,15 @@ categories:
 如今，专业人士当然可以学会构建一个CRUD应用程序，但他们会发现不懈地调整他们的软件来最大限度地减少接待员接待一个病人需要使用的按键次数，或支持磁卡阅读器、教激光打印机精确地在专用处方纸上打印（打印机使用Postscript，但MS-DOS编程语言有一个更简单的指令层，使这成为可能）是多么困难。
 > Today a professional could surely **pick up** the skills to build a CRUD app, but they would **be hard pressed to** tune their software so **relentlessly** to minimize the keystrokes a receptionist needs to use to check-in a patient, or support a magnetic card reader, or teach laser printers to precisely print onto specialized **prescription** paper (the printers spoke postscript, but the MS-DOS programming language had an easier instruction layer over PS that made this possible).
 
-90年代的结果是，父亲的公司需要的员工数量比常人认为的都要少，医生的效率比使用任何其他软件的都要高，所以生产力提高了。
+90年代的结果是，父亲的诊所需要的员工数量比常人认为的都要少，医生的效率比使用任何其他软件的都要高，所以生产力提高了。
 > The result in the 90s was the business needed fewer staff than everyone thought a medical practice of that size required, doctor’s time was used more efficiently than any other software allowed, so productivity increased.
 
-我父亲作为一个兼职程序员优化他的小型企业，比他作为一个看病医生赚的钱还要多。
+我父亲作为一个兼职程序员优化他的小诊所，比他作为一个看病医生赚的钱还要多。
 > My father made more money as a part-time programmer optimizing his small business than he did as a doctor seeing patients.
 
 # 那么现在(How it is)
 
-如果我的童年发生在现在的话，那么很多新事物都将成为可能。我可以用JavaScript轻松绘制高质量的图形。虽然不清楚这是否会比我在BASIC中玩的像素化大猩猩和香蕉更有吸引力。我可以为手机开发应用程序。至少在理论上是这样。实际上，我小时候对慢编译器不太耐心，作为成年人，我仍然很难忍受应用程序的开发环境，所以这是不可能的。
+如果我的童年发生在现在的话，那么很多新事物都将成为可能。我可以用JavaScript轻松绘制高质量的图形。虽然不清楚这是否会比我在BASIC中玩的像素化大猩猩和香蕉更有吸引力。我可以为手机开发应用程序。至少在理论上是这样。实际上，我小时候对慢编译器不太耐心，成年后，我仍然很难忍受应用程序的开发环境，所以这是不可能的。
 > If my 90s childhood were transported to today, so many new things would be possible. I could draw high-quality graphics easily with JavaScript. It is not clear that would be more **compelling** than the pixelated gorillas and bananas I played with in BASIC. I could develop apps for my phone. In theory at least. In practice, I wasn’t particularly patient with slow compilers as a kid, and as an adult I still have trouble **stomaching** the development environment for apps, so that’s off the table.
 
 我不会建一个玩具网站来放学校的东西，因为我有facebook可以用。
@@ -93,7 +93,7 @@ categories:
 如今，像我父亲这样的兼职程序员能写小企业软件吗？他能让它像我们的局域网那样安全和高效吗？也许可以吧。只要他足够精明，坚持使用90年代老式的桌面电脑，并将机器物理隔离于互联网。但是，以我父亲投入项目的时间，没办法安全（甚至在HIPAA法规下合法）地将记录转移到现代手机上。
 > Could a part-time programmer like my father write small-business software today? Could he make it as safe and productive as our LAN was? Maybe. If he was canny, and stuck to old-fashioned desktops of the 90s and physically isolated the machines from the internet. But there is no chance you could get the records onto a modern phone safely (or even legally under HIPAA) with the hours my father gave the project.
 
-如果今天面临构建还是购买的决策，我强烈怀疑他会选择购买。或者更有可能的是，订阅。诊所的生产力会因此降低。
+如果今天面临亲自编程还是购买的决策，我强烈怀疑他会选择购买。或者更有可能的是，订阅。诊所的生产力会因此降低。
 > If **confronted** with the build v. buy decision today, I strongly suspect he would buy. Or even more likely, subscribe. The practice would be less productive for it.
 
 全世界的程序员们构建了这个奇妙的充满了魔法的互联网。免费的跨洲视频通话。从云服务提供商那里免费获得的“微型”虚拟机，其处理能力和内存比我开始编程时能买到的任何东西都要强大。
