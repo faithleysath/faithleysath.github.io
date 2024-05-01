@@ -722,27 +722,6 @@ $5: Protocol (TCP/UDP)<br />
       </tags>
   </entry>
   <entry>
-    <title>【修机】Windows电源管理Bug引起的CPU占用虚高100%、风扇狂转</title>
-    <url>/2023/10/14/taskmgr-full-cpu-bug/</url>
-    <content><![CDATA[<blockquote>
-<p><a href="https://www.andrewmunsell.com/blog/oculus-rift-bug-power-plan-configuration">https://www.andrewmunsell.com/blog/oculus-rift-bug-power-plan-configuration</a></p>
-</blockquote>
-<h1 id="tldr"><a class="markdownIt-Anchor" href="#tldr"></a> TLDR</h1>
-<p>管理员权限下运行以下命令即可解决问题：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">PowerCfg /SETACVALUEINDEX SCHEME_CURRENT SUB_PROCESSOR IDLEDISABLE 000</span><br><span class="line">PowerCfg /SETACTIVE SCHEME_CURRENT</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>修机</category>
-      </categories>
-      <tags>
-        <tag>PC</tag>
-        <tag>Fixing</tag>
-        <tag>Windows</tag>
-        <tag>翻译</tag>
-        <tag>转载</tag>
-        <tag>CPU</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>【Termux】关于Termux的配置与资源汇集</title>
     <url>/2023/10/01/termuxTips/</url>
     <content><![CDATA[<h1 id="引言"><a class="markdownIt-Anchor" href="#引言"></a> 引言</h1>
@@ -767,6 +746,27 @@ $5: Protocol (TCP/UDP)<br />
         <tag>Termux</tag>
         <tag>zsh</tag>
         <tag>Tutorial</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【修机】Windows电源管理Bug引起的CPU占用虚高100%、风扇狂转</title>
+    <url>/2023/10/14/taskmgr-full-cpu-bug/</url>
+    <content><![CDATA[<blockquote>
+<p><a href="https://www.andrewmunsell.com/blog/oculus-rift-bug-power-plan-configuration">https://www.andrewmunsell.com/blog/oculus-rift-bug-power-plan-configuration</a></p>
+</blockquote>
+<h1 id="tldr"><a class="markdownIt-Anchor" href="#tldr"></a> TLDR</h1>
+<p>管理员权限下运行以下命令即可解决问题：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">PowerCfg /SETACVALUEINDEX SCHEME_CURRENT SUB_PROCESSOR IDLEDISABLE 000</span><br><span class="line">PowerCfg /SETACTIVE SCHEME_CURRENT</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>修机</category>
+      </categories>
+      <tags>
+        <tag>PC</tag>
+        <tag>Fixing</tag>
+        <tag>Windows</tag>
+        <tag>翻译</tag>
+        <tag>转载</tag>
+        <tag>CPU</tag>
       </tags>
   </entry>
   <entry>
