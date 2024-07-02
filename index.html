@@ -152,18 +152,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-count">34</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -191,6 +191,1414 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://faithleysath.github.io/2024/07/02/dbs-note/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://github.com/faithleysath.png">
+      <meta itemprop="name" content="Faith Leysath">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Matrix's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Matrix's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/07/02/dbs-note/" class="post-title-link" itemprop="url">dbs-note</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-07-02 20:45:35 / 修改时间：20:47:47" itemprop="dateCreated datePublished" datetime="2024-07-02T20:45:35+08:00">2024-07-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="数据库概述"><a class="markdownIt-Anchor" href="#数据库概述"></a> 数据库概述</h1>
+<h2 id="基本概念"><a class="markdownIt-Anchor" href="#基本概念"></a> 基本概念</h2>
+<ul>
+<li>数据：描述事物的符号记录</li>
+<li>记录：计算机表示和存储数据的一种格式或方法。</li>
+<li>数据库（DB）：长期存储在计算机中的有组织、可共享的大量数据的集合。
+<ul>
+<li>数据库数据：永久存储、有组织和可共享</li>
+</ul>
+</li>
+<li>数据库管理系统（DBMS）：专门对数据进行管理和维护的<strong>系统软件</strong>。
+<ul>
+<li>数据库的建立与维护：实用工具实现的</li>
+<li>数据定义功能：DDL（数据定义语言）实现的</li>
+<li>数据组织、存储和管理功能</li>
+<li>数据操作功能：DML（数据操作语言）实现的</li>
+<li>事务的管理和运行功能</li>
+<li>其他功能</li>
+</ul>
+</li>
+<li>数据库系统（DBS）：由数据库、数据库管理系统（及其相关的实用工具）、应用程序、数据库管理员（DBA）组成。</li>
+</ul>
+<h2 id="数据管理技术"><a class="markdownIt-Anchor" href="#数据管理技术"></a> 数据管理技术</h2>
+<h3 id="文件管理"><a class="markdownIt-Anchor" href="#文件管理"></a> 文件管理</h3>
+<p>由开发人员定义存储数据的文件和文件结构，借助文件管理系统的功能编写访问这些文件的应用程序，以实现对用户数据的处理</p>
+<p>缺点：</p>
+<ol>
+<li>编写应用程序不方便</li>
+<li>数据冗余不可避免，数据不一致</li>
+<li>应用程序依赖性，数据独立性很差</li>
+<li>不支持对文件的并发访问</li>
+<li>数据间联系弱，难以反映现实世界事物间客观存在的联系</li>
+<li>难以满足不同用户对数据的需求</li>
+<li>无安全控制功能</li>
+</ol>
+<h3 id="数据库管理"><a class="markdownIt-Anchor" href="#数据库管理"></a> 数据库管理</h3>
+<p>特点：</p>
+<ol>
+<li>相互关联的数据集合</li>
+<li>较少的数据冗余</li>
+<li>程序与数据相互独立</li>
+<li>保证数据的安全可靠</li>
+<li>最大限度保证数据的正确性（数据的完整性）</li>
+<li>数据库中的数据可以被共享，能保证数据一致性</li>
+</ol>
+<p>数据库的特征：</p>
+<ul>
+<li>相互关联的数据集合</li>
+<li>综合方式组织数据</li>
+<li>具有较小的数据冗余</li>
+<li>可供多个用户共享</li>
+<li>具有较高的数据独立性</li>
+<li>具有安全控制机制，能保证数据的安全可靠</li>
+<li>允许并发使用数据库，能有效、及时地处理数据</li>
+<li>能保证数据的一致性和正确性</li>
+</ul>
+<h2 id="数据独立性"><a class="markdownIt-Anchor" href="#数据独立性"></a> 数据独立性</h2>
+<p>指应用程序不会因为数据的物理表示方式和访问技术的改变而改变，即应用程序不依赖于任何特定的物理表示方式和访问技术</p>
+<ul>
+<li>物理独立性：当数据的存储位置或存储结构发生变化时，不影响应用程序的特性</li>
+<li>逻辑独立性：当表达现实世界的信息内容发生变化时，也不影响应用程序的特性</li>
+</ul>
+<h1 id="数据库系统结构"><a class="markdownIt-Anchor" href="#数据库系统结构"></a> 数据库系统结构</h1>
+<h2 id="数据和数据模型"><a class="markdownIt-Anchor" href="#数据和数据模型"></a> 数据和数据模型</h2>
+<h3 id="数据与信息"><a class="markdownIt-Anchor" href="#数据与信息"></a> 数据与信息</h3>
+<ul>
+<li>
+<p>数据：描述事物的符号记录</p>
+</li>
+<li>
+<p>信息：从数据中获得的有意义的内容</p>
+</li>
+<li>
+<p>静态特征：数据的基本结构、数据的约束条件</p>
+</li>
+<li>
+<p>动态特征：定义在数据上的操作</p>
+</li>
+</ul>
+<h3 id="数据模型"><a class="markdownIt-Anchor" href="#数据模型"></a> 数据模型</h3>
+<p>对现实世界数据特征的抽象</p>
+<ol>
+<li>概念层数据模型（概念模型）</li>
+<li>组织层数据模型：就是用什么样的数据结构来组织数据。
+<ul>
+<li>层次模型（树状结构）</li>
+<li>网状模型（网状结构）</li>
+<li>关系模型（简单二维表）</li>
+<li>对象-关系模型</li>
+</ul>
+</li>
+</ol>
+<h2 id="数据完整性"><a class="markdownIt-Anchor" href="#数据完整性"></a> 数据完整性</h2>
+<ol>
+<li>实体完整性：所有表都有主键，且记录的主键值不相同、存在</li>
+<li>参照完整性</li>
+<li>语义完整性（域完整性）</li>
+</ol>
+<h2 id="三级模式结构"><a class="markdownIt-Anchor" href="#三级模式结构"></a> 三级模式结构</h2>
+<ol>
+<li>内模式：底层物理结构</li>
+<li>外模式：模式的子集</li>
+<li>模式：表示数据库中的全部信息，用DDL定义模式</li>
+</ol>
+<h2 id="两级映像"><a class="markdownIt-Anchor" href="#两级映像"></a> 两级映像</h2>
+<ul>
+<li>外模式/模式映像：逻辑独立性</li>
+<li>模式/内模式映像：物理独立性</li>
+</ul>
+<h1 id="数据定义功能"><a class="markdownIt-Anchor" href="#数据定义功能"></a> 数据定义功能</h1>
+<h2 id="创建表"><a class="markdownIt-Anchor" href="#创建表"></a> 创建表</h2>
+<ul>
+<li>NOT NULL</li>
+<li>DEFAULT</li>
+<li>UNIQUE</li>
+<li>CHECK</li>
+<li>PRIMARY KEY</li>
+<li>FOREIGN KEY</li>
+</ul>
+<h3 id="主键约束primary-key-constraint"><a class="markdownIt-Anchor" href="#主键约束primary-key-constraint"></a> 主键约束（Primary Key Constraint）</h3>
+<p><strong>列级（Column Level）语法：</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> table_name (</span><br><span class="line">    column_name data_type <span class="keyword">PRIMARY</span> KEY,</span><br><span class="line">    <span class="comment">-- 其他列定义</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p><strong>表级（Table Level）语法：</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> table_name (</span><br><span class="line">    column_name data_type,</span><br><span class="line">    <span class="comment">-- 其他列定义</span></span><br><span class="line">    <span class="keyword">PRIMARY</span> KEY (column_name)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h3 id="外键约束foreign-key-constraint"><a class="markdownIt-Anchor" href="#外键约束foreign-key-constraint"></a> 外键约束（Foreign Key Constraint）</h3>
+<p><strong>列级（Column Level）语法：</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> table_name (</span><br><span class="line">    column_name data_type <span class="keyword">REFERENCES</span> other_table (other_column),</span><br><span class="line">    <span class="comment">-- 其他列定义</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p><strong>表级（Table Level）语法：</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> table_name (</span><br><span class="line">    column_name data_type,</span><br><span class="line">    <span class="comment">-- 其他列定义</span></span><br><span class="line">    <span class="keyword">CONSTRAINT</span> constraint_name <span class="keyword">FOREIGN</span> KEY (column_name) <span class="keyword">REFERENCES</span> other_table (other_column)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h2 id="修改表结构"><a class="markdownIt-Anchor" href="#修改表结构"></a> 修改表结构</h2>
+<h3 id="添加列add-column"><a class="markdownIt-Anchor" href="#添加列add-column"></a> 添加列（Add Column）</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name</span><br><span class="line"><span class="keyword">ADD</span> column_name data_type;</span><br></pre></td></tr></table></figure>
+<h3 id="删除列drop-column"><a class="markdownIt-Anchor" href="#删除列drop-column"></a> 删除列（Drop Column）</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">COLUMN</span> column_name;</span><br></pre></td></tr></table></figure>
+<h3 id="修改列定义modify-column"><a class="markdownIt-Anchor" href="#修改列定义modify-column"></a> 修改列定义（Modify Column）</h3>
+<p>修改列定义可以包括改变列的数据类型、修改默认值等。不同的数据库系统对于修改列定义的支持会有所不同。</p>
+<p><strong>修改数据类型：</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name</span><br><span class="line">MODIFY <span class="keyword">COLUMN</span> column_name new_data_type;</span><br></pre></td></tr></table></figure>
+<p><strong>修改列名称和数据类型（某些数据库系统如 PostgreSQL）：</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name</span><br><span class="line">RENAME <span class="keyword">COLUMN</span> old_column_name <span class="keyword">TO</span> new_column_name;</span><br></pre></td></tr></table></figure>
+<h3 id="添加约束add-constraint"><a class="markdownIt-Anchor" href="#添加约束add-constraint"></a> 添加约束（Add Constraint）</h3>
+<p><strong>添加主键约束：</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name</span><br><span class="line"><span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> constraint_name <span class="keyword">PRIMARY</span> KEY (column_name);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**添加外键约束：**</span><br><span class="line">```sql</span><br><span class="line">ALTER TABLE table_name</span><br><span class="line">ADD CONSTRAINT constraint_name FOREIGN KEY (column_name) REFERENCES other_table (other_column);</span><br></pre></td></tr></table></figure>
+<h3 id="删除约束drop-constraint"><a class="markdownIt-Anchor" href="#删除约束drop-constraint"></a> 删除约束（Drop Constraint）</h3>
+<p><strong>删除主键约束：</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">PRIMARY</span> KEY;</span><br></pre></td></tr></table></figure>
+<p><strong>删除外键约束：</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">CONSTRAINT</span> constraint_name;</span><br></pre></td></tr></table></figure>
+<h1 id="数据操作语句"><a class="markdownIt-Anchor" href="#数据操作语句"></a> 数据操作语句</h1>
+<h2 id="查询"><a class="markdownIt-Anchor" href="#查询"></a> 查询</h2>
+<h3 id="单表查询"><a class="markdownIt-Anchor" href="#单表查询"></a> 单表查询</h3>
+<h4 id="选择列"><a class="markdownIt-Anchor" href="#选择列"></a> 选择列</h4>
+<h5 id="选择指定列"><a class="markdownIt-Anchor" href="#选择指定列"></a> 选择指定列</h5>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> Sno, Sname <span class="keyword">FROM</span> Student</span><br></pre></td></tr></table></figure>
+<h5 id="选择全部列"><a class="markdownIt-Anchor" href="#选择全部列"></a> 选择全部列</h5>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> Student</span><br></pre></td></tr></table></figure>
+<h5 id="计算列"><a class="markdownIt-Anchor" href="#计算列"></a> 计算列</h5>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> Sname, <span class="number">2015</span><span class="operator">-</span>Sage <span class="keyword">AS</span> 年份 <span class="keyword">FROM</span> Student</span><br></pre></td></tr></table></figure>
+<h4 id="选择元组"><a class="markdownIt-Anchor" href="#选择元组"></a> 选择元组</h4>
+<h5 id="去重"><a class="markdownIt-Anchor" href="#去重"></a> 去重</h5>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> Sno <span class="keyword">FROM</span> SC</span><br></pre></td></tr></table></figure>
+<h5 id="满足条件"><a class="markdownIt-Anchor" href="#满足条件"></a> 满足条件</h5>
+<table>
+<thead>
+<tr>
+<th>查询条件</th>
+<th>谓词</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>等于</td>
+<td><code>=</code></td>
+<td><code>WHERE age = 30</code></td>
+</tr>
+<tr>
+<td>不等于</td>
+<td><code>!=</code> 或 <code>&lt;&gt;</code></td>
+<td><code>WHERE age != 30</code></td>
+</tr>
+<tr>
+<td>比较运算符</td>
+<td><code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code></td>
+<td><code>WHERE age &gt; 30</code></td>
+</tr>
+<tr>
+<td>模糊匹配</td>
+<td><code>LIKE</code> / <code>NOT LIKE</code></td>
+<td><code>WHERE name LIKE 'A%'</code></td>
+</tr>
+<tr>
+<td>范围查询</td>
+<td><code>BETWEEN ... AND ...</code> / <code>NOT BETWEEN ... AND ...</code></td>
+<td><code>WHERE age BETWEEN 20 AND 30</code></td>
+</tr>
+<tr>
+<td>集合包含</td>
+<td><code>IN</code> / <code>NOT IN</code></td>
+<td><code>WHERE age IN (20, 30, 40)</code></td>
+</tr>
+<tr>
+<td>空值判断</td>
+<td><code>IS NULL</code></td>
+<td><code>WHERE address IS NULL</code></td>
+</tr>
+<tr>
+<td>非空值判断</td>
+<td><code>IS NOT NULL</code></td>
+<td><code>WHERE address IS NOT NULL</code></td>
+</tr>
+<tr>
+<td>子查询存在</td>
+<td><code>EXISTS</code> / <code>NOT EXISTS</code></td>
+<td><code>WHERE EXISTS (SELECT 1 FROM orders WHERE customer_id = customers.id)</code></td>
+</tr>
+<tr>
+<td>逻辑谓词</td>
+<td><code>AND</code>, <code>OR</code>, <code>NOT</code></td>
+<td><code>WHERE age &gt; 30 AND city = 'New York'</code></td>
+</tr>
+</tbody>
+</table>
+<h6 id="模糊查询"><a class="markdownIt-Anchor" href="#模糊查询"></a> 模糊查询</h6>
+<ol>
+<li>
+<p><strong>百分号 (<code>%</code>)</strong>：</p>
+<ul>
+<li><strong>作用</strong>：匹配零个或多个字符。</li>
+<li><strong>示例</strong>：
+<ul>
+<li><code>LIKE 'A%'</code>：匹配以“A”开头的任意字符串，例如“Alice”、“Andrew”。</li>
+<li><code>LIKE '%test'</code>：匹配以“test”结尾的任意字符串，例如“unittest”、“mytest”。</li>
+<li><code>LIKE '%abc%'</code>：匹配包含“abc”的任意字符串，例如“123abc456”、“abc”。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>下划线 (<code>_</code>)</strong>：</p>
+<ul>
+<li><strong>作用</strong>：匹配一个任意字符。</li>
+<li><strong>示例</strong>：
+<ul>
+<li><code>LIKE 'A_'</code>：匹配以“A”开头的两个字符的字符串，例如“Am”、“Ax”。</li>
+<li><code>LIKE 't_st'</code>：匹配以“t”开头，中间任意一个字符，最后是“st”的字符串，例如“test”、“tost”。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>方括号 (<code>[]</code>)</strong>：</p>
+<ul>
+<li><strong>作用</strong>：匹配方括号内的任意一个字符。方括号内可以列出多个字符或使用字符范围。</li>
+<li><strong>示例</strong>：
+<ul>
+<li><code>LIKE 't[aeiou]t'</code>：匹配以“t”开头，中间是元音字母，最后是“t”的字符串，例如“tat”、“tet”、“tit”。</li>
+<li><code>LIKE '[A-C]%'</code>：匹配以“A”、“B”或“C”开头的字符串，例如“Alice”、“Bob”、“Carol”。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>脱字符（<code>^</code> 或 <code>!</code>）</strong>：</p>
+<ul>
+<li><strong>作用</strong>：在方括号内使用时，表示不匹配方括号内的字符。注意，不同的数据库使用符号可能有所不同（例如，SQL Server 使用 <code>!</code>，而其他数据库则使用 <code>^</code>）。</li>
+<li><strong>示例</strong>：
+<ul>
+<li>在 SQL Server 中：<code>LIKE 't[!aeiou]t'</code>：匹配以“t”开头，中间不是元音字母，最后是“t”的字符串，例如“tbt”、“tpt”。</li>
+<li>在其他数据库中：<code>LIKE 't[^aeiou]t'</code>：同样匹配以“t”开头，中间不是元音字母，最后是“t”的字符串。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>去除尾随空格：RTRIM</p>
+<h4 id="排序"><a class="markdownIt-Anchor" href="#排序"></a> 排序</h4>
+<p>语法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> column_name [<span class="keyword">ASC</span><span class="operator">/</span><span class="keyword">DESC</span>]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>升序：ASC</li>
+<li>降序：DESC</li>
+</ul>
+<h4 id="聚合函数"><a class="markdownIt-Anchor" href="#聚合函数"></a> 聚合函数</h4>
+<blockquote>
+<p>聚合函数不能出现在WHERE子句中</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>函数名称</th>
+<th>作用</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>COUNT()</code></td>
+<td>计算表中行的数量或列中非空值的数量</td>
+<td><code>SELECT COUNT(*) FROM employees;</code> 计算员工表中的总行数（包括NULL）</td>
+</tr>
+<tr>
+<td><code>SUM()</code></td>
+<td>对数值列求和</td>
+<td><code>SELECT SUM(salary) FROM employees;</code> 计算员工表中所有员工的薪水总和</td>
+</tr>
+<tr>
+<td><code>AVG()</code></td>
+<td>计算数值列的平均值</td>
+<td><code>SELECT AVG(salary) FROM employees;</code> 计算员工表中所有员工的平均薪水</td>
+</tr>
+<tr>
+<td><code>MAX()</code></td>
+<td>查找列中的最大值</td>
+<td><code>SELECT MAX(salary) FROM employees;</code> 查找员工表中最高的薪水</td>
+</tr>
+<tr>
+<td><code>MIN()</code></td>
+<td>查找列中的最小值</td>
+<td><code>SELECT MIN(salary) FROM employees;</code> 查找员工表中最低的薪水</td>
+</tr>
+</tbody>
+</table>
+<h4 id="分组"><a class="markdownIt-Anchor" href="#分组"></a> 分组</h4>
+<h5 id="基本语法"><a class="markdownIt-Anchor" href="#基本语法"></a> 基本语法</h5>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> column_name, AGGREGATE_FUNCTION(column_name)</span><br><span class="line"><span class="keyword">FROM</span> table_name</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> column_name;</span><br></pre></td></tr></table></figure>
+<h5 id="示例讲解"><a class="markdownIt-Anchor" href="#示例讲解"></a> 示例讲解</h5>
+<p>假设我们有一个名为<code>employees</code>的表，结构如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> employees (</span><br><span class="line">    id <span class="type">INT</span>,</span><br><span class="line">    name <span class="type">VARCHAR</span>(<span class="number">100</span>),</span><br><span class="line">    department <span class="type">VARCHAR</span>(<span class="number">50</span>),</span><br><span class="line">    salary <span class="type">DECIMAL</span>(<span class="number">10</span>, <span class="number">2</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h6 id="示例1按部门统计员工数量"><a class="markdownIt-Anchor" href="#示例1按部门统计员工数量"></a> 示例1：按部门统计员工数量</h6>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> department, <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">AS</span> NumEmployees</span><br><span class="line"><span class="keyword">FROM</span> employees</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> department;</span><br></pre></td></tr></table></figure>
+<p>这段SQL代码将按照部门对员工进行分组，并计算每个部门的员工数量。输出结果可能如下：</p>
+<table>
+<thead>
+<tr>
+<th>department</th>
+<th>NumEmployees</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HR</td>
+<td>5</td>
+</tr>
+<tr>
+<td>IT</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Sales</td>
+<td>8</td>
+</tr>
+</tbody>
+</table>
+<h6 id="示例2按部门计算平均薪水"><a class="markdownIt-Anchor" href="#示例2按部门计算平均薪水"></a> 示例2：按部门计算平均薪水</h6>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> department, <span class="built_in">AVG</span>(salary) <span class="keyword">AS</span> AvgSalary</span><br><span class="line"><span class="keyword">FROM</span> employees</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> department;</span><br></pre></td></tr></table></figure>
+<p>这段SQL代码将按照部门对员工进行分组，并计算每个部门的平均薪水。输出结果可能如下：</p>
+<table>
+<thead>
+<tr>
+<th>department</th>
+<th>AvgSalary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HR</td>
+<td>50000.00</td>
+</tr>
+<tr>
+<td>IT</td>
+<td>75000.00</td>
+</tr>
+<tr>
+<td>Sales</td>
+<td>60000.00</td>
+</tr>
+</tbody>
+</table>
+<h6 id="示例3按部门计算最高和最低薪水"><a class="markdownIt-Anchor" href="#示例3按部门计算最高和最低薪水"></a> 示例3：按部门计算最高和最低薪水</h6>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> department, <span class="built_in">MAX</span>(salary) <span class="keyword">AS</span> MaxSalary, <span class="built_in">MIN</span>(salary) <span class="keyword">AS</span> MinSalary</span><br><span class="line"><span class="keyword">FROM</span> employees</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> department;</span><br></pre></td></tr></table></figure>
+<p>这段SQL代码将按照部门对员工进行分组，并计算每个部门的最高和最低薪水。输出结果可能如下：</p>
+<table>
+<thead>
+<tr>
+<th>department</th>
+<th>MaxSalary</th>
+<th>MinSalary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HR</td>
+<td>70000.00</td>
+<td>40000.00</td>
+</tr>
+<tr>
+<td>IT</td>
+<td>100000.00</td>
+<td>50000.00</td>
+</tr>
+<tr>
+<td>Sales</td>
+<td>85000.00</td>
+<td>45000.00</td>
+</tr>
+</tbody>
+</table>
+<h5 id="使用-having-过滤分组结果"><a class="markdownIt-Anchor" href="#使用-having-过滤分组结果"></a> 使用 HAVING 过滤分组结果</h5>
+<p><code>HAVING</code> 子句用于过滤分组后的结果，它类似于 <code>WHERE</code> 子句，但 <code>WHERE</code> 是用来过滤行，而 <code>HAVING</code> 是用来过滤分组。</p>
+<h6 id="示例4筛选平均薪水大于60000的部门"><a class="markdownIt-Anchor" href="#示例4筛选平均薪水大于60000的部门"></a> 示例4：筛选平均薪水大于60000的部门</h6>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> department, <span class="built_in">AVG</span>(salary) <span class="keyword">AS</span> AvgSalary</span><br><span class="line"><span class="keyword">FROM</span> employees</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> department</span><br><span class="line"><span class="keyword">HAVING</span> <span class="built_in">AVG</span>(salary) <span class="operator">&gt;</span> <span class="number">60000</span>;</span><br></pre></td></tr></table></figure>
+<p>这段SQL代码将返回平均薪水大于60000的部门。输出结果可能如下：</p>
+<table>
+<thead>
+<tr>
+<th>department</th>
+<th>AvgSalary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IT</td>
+<td>75000.00</td>
+</tr>
+<tr>
+<td>Sales</td>
+<td>65000.00</td>
+</tr>
+</tbody>
+</table>
+<h5 id="注意事项"><a class="markdownIt-Anchor" href="#注意事项"></a> 注意事项</h5>
+<ol>
+<li><strong>必须在<code>GROUP BY</code>子句中列出非聚合列</strong>：在<code>SELECT</code>语句中出现的非聚合列必须在<code>GROUP BY</code>子句中列出。</li>
+<li><strong><code>HAVING</code>子句的位置</strong>：<code>HAVING</code>子句应该放在<code>GROUP BY</code>子句之后，<code>ORDER BY</code>子句之前。</li>
+</ol>
+<h3 id="多表连接查询"><a class="markdownIt-Anchor" href="#多表连接查询"></a> 多表连接查询</h3>
+<h4 id="数据准备"><a class="markdownIt-Anchor" href="#数据准备"></a> 数据准备</h4>
+<p>假设我们有两个表 <code>employees</code> 和 <code>departments</code>，记录如下：</p>
+<h5 id="employees-表"><a class="markdownIt-Anchor" href="#employees-表"></a> <code>employees</code> 表</h5>
+<table>
+<thead>
+<tr>
+<th>employee_id</th>
+<th>name</th>
+<th>department_id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Alice</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Bob</td>
+<td>2</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Charlie</td>
+<td>2</td>
+</tr>
+<tr>
+<td>4</td>
+<td>David</td>
+<td>NULL</td>
+</tr>
+</tbody>
+</table>
+<h5 id="departments-表"><a class="markdownIt-Anchor" href="#departments-表"></a> <code>departments</code> 表</h5>
+<table>
+<thead>
+<tr>
+<th>department_id</th>
+<th>department_name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>HR</td>
+</tr>
+<tr>
+<td>2</td>
+<td>IT</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Finance</td>
+</tr>
+</tbody>
+</table>
+<h4 id="内连接-inner-join"><a class="markdownIt-Anchor" href="#内连接-inner-join"></a> 内连接 (INNER JOIN)</h4>
+<p><strong>内连接</strong>只返回两个表中匹配的记录。</p>
+<h5 id="sql-示例"><a class="markdownIt-Anchor" href="#sql-示例"></a> SQL 示例</h5>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> employees.name, departments.department_name</span><br><span class="line"><span class="keyword">FROM</span> employees</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> departments</span><br><span class="line"><span class="keyword">ON</span> employees.department_id <span class="operator">=</span> departments.department_id;</span><br></pre></td></tr></table></figure>
+<h5 id="查询结果"><a class="markdownIt-Anchor" href="#查询结果"></a> 查询结果</h5>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>department_name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alice</td>
+<td>HR</td>
+</tr>
+<tr>
+<td>Bob</td>
+<td>IT</td>
+</tr>
+<tr>
+<td>Charlie</td>
+<td>IT</td>
+</tr>
+</tbody>
+</table>
+<h4 id="左连接-left-outer-join"><a class="markdownIt-Anchor" href="#左连接-left-outer-join"></a> 左连接 (LEFT OUTER JOIN)</h4>
+<p><strong>左连接</strong>返回左表中的所有记录，以及右表中匹配的记录。如果右表中没有匹配记录，则结果中包含 <code>NULL</code>。</p>
+<h5 id="sql-示例-2"><a class="markdownIt-Anchor" href="#sql-示例-2"></a> SQL 示例</h5>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> employees.name, departments.department_name</span><br><span class="line"><span class="keyword">FROM</span> employees</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> departments</span><br><span class="line"><span class="keyword">ON</span> employees.department_id <span class="operator">=</span> departments.department_id;</span><br></pre></td></tr></table></figure>
+<h5 id="查询结果-2"><a class="markdownIt-Anchor" href="#查询结果-2"></a> 查询结果</h5>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>department_name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alice</td>
+<td>HR</td>
+</tr>
+<tr>
+<td>Bob</td>
+<td>IT</td>
+</tr>
+<tr>
+<td>Charlie</td>
+<td>IT</td>
+</tr>
+<tr>
+<td>David</td>
+<td>NULL</td>
+</tr>
+</tbody>
+</table>
+<h4 id="右连接-right-outer-join"><a class="markdownIt-Anchor" href="#右连接-right-outer-join"></a> 右连接 (RIGHT OUTER JOIN)</h4>
+<p><strong>右连接</strong>返回右表中的所有记录，以及左表中匹配的记录。如果左表中没有匹配记录，则结果中包含 <code>NULL</code>。</p>
+<h5 id="sql-示例-3"><a class="markdownIt-Anchor" href="#sql-示例-3"></a> SQL 示例</h5>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> employees.name, departments.department_name</span><br><span class="line"><span class="keyword">FROM</span> employees</span><br><span class="line"><span class="keyword">RIGHT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> departments</span><br><span class="line"><span class="keyword">ON</span> employees.department_id <span class="operator">=</span> departments.department_id;</span><br></pre></td></tr></table></figure>
+<h5 id="查询结果-3"><a class="markdownIt-Anchor" href="#查询结果-3"></a> 查询结果</h5>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>department_name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alice</td>
+<td>HR</td>
+</tr>
+<tr>
+<td>Bob</td>
+<td>IT</td>
+</tr>
+<tr>
+<td>Charlie</td>
+<td>IT</td>
+</tr>
+<tr>
+<td>NULL</td>
+<td>Finance</td>
+</tr>
+</tbody>
+</table>
+<h4 id="全连接-full-outer-join"><a class="markdownIt-Anchor" href="#全连接-full-outer-join"></a> 全连接 (FULL OUTER JOIN)</h4>
+<p><strong>全连接</strong>返回两个表中的所有记录。如果没有匹配的记录，则结果中包含 <code>NULL</code>。</p>
+<h5 id="sql-示例-4"><a class="markdownIt-Anchor" href="#sql-示例-4"></a> SQL 示例</h5>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> employees.name, departments.department_name</span><br><span class="line"><span class="keyword">FROM</span> employees</span><br><span class="line"><span class="keyword">FULL</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> departments</span><br><span class="line"><span class="keyword">ON</span> employees.department_id <span class="operator">=</span> departments.department_id;</span><br></pre></td></tr></table></figure>
+<h5 id="查询结果-4"><a class="markdownIt-Anchor" href="#查询结果-4"></a> 查询结果</h5>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>department_name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alice</td>
+<td>HR</td>
+</tr>
+<tr>
+<td>Bob</td>
+<td>IT</td>
+</tr>
+<tr>
+<td>Charlie</td>
+<td>IT</td>
+</tr>
+<tr>
+<td>David</td>
+<td>NULL</td>
+</tr>
+<tr>
+<td>NULL</td>
+<td>Finance</td>
+</tr>
+</tbody>
+</table>
+<h4 id="自连接self-join"><a class="markdownIt-Anchor" href="#自连接self-join"></a> 自连接（SELF JOIN）</h4>
+<p><strong>自连接</strong>是一种特殊的连接，它是同一个表之间的连接。自连接通常用于需要在同一个表中进行自身比较的场景。</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> a.columns, b.columns</span><br><span class="line"><span class="keyword">FROM</span> <span class="keyword">table</span> a, <span class="keyword">table</span> b</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">condition</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>示例：</strong><br />
+假设有一个<code>employees</code>表，其中包括员工的ID和他们的上级ID（manager_id）。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> e1.name <span class="keyword">AS</span> Employee, e2.name <span class="keyword">AS</span> Manager</span><br><span class="line"><span class="keyword">FROM</span> employees e1</span><br><span class="line"><span class="keyword">JOIN</span> employees e2</span><br><span class="line"><span class="keyword">ON</span> e1.manager_id <span class="operator">=</span> e2.employee_id;</span><br></pre></td></tr></table></figure>
+<p>这条查询会返回每个员工及其对应的经理的名字。</p>
+<h3 id="top查询"><a class="markdownIt-Anchor" href="#top查询"></a> TOP查询</h3>
+<h4 id="基本语法-2"><a class="markdownIt-Anchor" href="#基本语法-2"></a> 基本语法</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> TOP (number) column1, column2, ...</span><br><span class="line"><span class="keyword">FROM</span> table_name;</span><br></pre></td></tr></table></figure>
+<p>或者：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> TOP number column1, column2, ...</span><br><span class="line"><span class="keyword">FROM</span> table_name;</span><br></pre></td></tr></table></figure>
+<p>TOP写在SELECT后，DISTINCT后，查询列表前</p>
+<h4 id="示例"><a class="markdownIt-Anchor" href="#示例"></a> 示例</h4>
+<h5 id="获取前5条记录"><a class="markdownIt-Anchor" href="#获取前5条记录"></a> 获取前5条记录</h5>
+<p>假设我们有一个名为<code>Employees</code>的表，我们想获取前5条记录：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> TOP <span class="number">5</span> <span class="operator">*</span> </span><br><span class="line"><span class="keyword">FROM</span> Employees;</span><br></pre></td></tr></table></figure>
+<p>加上WITH TIES即可并列</p>
+<h5 id="获取百分比的记录"><a class="markdownIt-Anchor" href="#获取百分比的记录"></a> 获取百分比的记录</h5>
+<p>有时候我们可能想要获取结果集的前若干百分比的记录，而不是固定的行数。可以使用<code>PERCENT</code>关键字：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> TOP <span class="number">10</span> <span class="keyword">PERCENT</span> <span class="operator">*</span> </span><br><span class="line"><span class="keyword">FROM</span> Employees;</span><br></pre></td></tr></table></figure>
+<p>上面的查询将返回结果集的前10%的记录。</p>
+<h5 id="使用top与order-by"><a class="markdownIt-Anchor" href="#使用top与order-by"></a> 使用<code>TOP</code>与<code>ORDER BY</code></h5>
+<p>为了确保返回的记录是有序的，通常会结合<code>ORDER BY</code>子句使用。例如，获取薪水（Salary）最高的前5名员工：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> TOP <span class="number">5</span> <span class="operator">*</span> </span><br><span class="line"><span class="keyword">FROM</span> Employees</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> Salary <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="子查询"><a class="markdownIt-Anchor" href="#子查询"></a> 子查询</h3>
+<p>子查询可以分为以下几种类型：</p>
+<ol>
+<li>
+<p><strong>标量子查询（Scalar Subquery）</strong>：返回单个值的子查询。可以在SELECT列表、WHERE子句、HAVING子句等地方使用。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">    (<span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">FROM</span> employees) <span class="keyword">AS</span> total_employees</span><br><span class="line"><span class="keyword">FROM</span> dual;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>行子查询（Row Subquery）</strong>：返回一行数据的子查询。可以在WHERE子句中使用。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> </span><br><span class="line"><span class="keyword">FROM</span> employees </span><br><span class="line"><span class="keyword">WHERE</span> (first_name, last_name) <span class="operator">=</span> (<span class="keyword">SELECT</span> manager_first_name, manager_last_name <span class="keyword">FROM</span> departments <span class="keyword">WHERE</span> department_id <span class="operator">=</span> <span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>表子查询（Table Subquery）</strong>：返回一个表的数据，可以在FROM子句中使用，作为临时表。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> </span><br><span class="line"><span class="keyword">FROM</span> (<span class="keyword">SELECT</span> employee_id, first_name, last_name <span class="keyword">FROM</span> employees) <span class="keyword">AS</span> temp_table</span><br><span class="line"><span class="keyword">WHERE</span> temp_table.employee_id <span class="operator">&lt;</span> <span class="number">100</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>相关子查询（Correlated Subquery）</strong>：子查询依赖于外部查询中的列。每次外部查询处理一行时，子查询都会重新执行。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> e1.first_name, e1.last_name</span><br><span class="line"><span class="keyword">FROM</span> employees e1</span><br><span class="line"><span class="keyword">WHERE</span> salary <span class="operator">&gt;</span> (<span class="keyword">SELECT</span> <span class="built_in">AVG</span>(salary) <span class="keyword">FROM</span> employees e2 <span class="keyword">WHERE</span> e1.department_id <span class="operator">=</span> e2.department_id);</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>非相关子查询（Non-correlated Subquery）</strong>：子查询独立于外部查询，可以独立执行。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> first_name, last_name</span><br><span class="line"><span class="keyword">FROM</span> employees</span><br><span class="line"><span class="keyword">WHERE</span> department_id <span class="operator">=</span> (<span class="keyword">SELECT</span> department_id <span class="keyword">FROM</span> departments <span class="keyword">WHERE</span> department_name <span class="operator">=</span> <span class="string">&#x27;Sales&#x27;</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="操作"><a class="markdownIt-Anchor" href="#操作"></a> 操作</h2>
+<h3 id="数据插入insert"><a class="markdownIt-Anchor" href="#数据插入insert"></a> 数据插入（INSERT）</h3>
+<p><code>INSERT</code> 语句用于向表中插入新的行。</p>
+<h4 id="基本语法-3"><a class="markdownIt-Anchor" href="#基本语法-3"></a> 基本语法</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> table_name (column1, column2, column3, ...)</span><br><span class="line"><span class="keyword">VALUES</span> (value1, value2, value3, ...);</span><br></pre></td></tr></table></figure>
+<h4 id="示例-2"><a class="markdownIt-Anchor" href="#示例-2"></a> 示例</h4>
+<p>假设有一个名为 <code>employees</code> 的表，包含以下列：<code>id</code>、<code>name</code> 和 <code>position</code>。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> employees (id, name, position)</span><br><span class="line"><span class="keyword">VALUES</span> (<span class="number">1</span>, <span class="string">&#x27;John Doe&#x27;</span>, <span class="string">&#x27;Software Engineer&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="数据更新update"><a class="markdownIt-Anchor" href="#数据更新update"></a> 数据更新（UPDATE）</h3>
+<p><code>UPDATE</code> 语句用于修改表中已存在的记录。</p>
+<h4 id="基本语法-4"><a class="markdownIt-Anchor" href="#基本语法-4"></a> 基本语法</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> table_name</span><br><span class="line"><span class="keyword">SET</span> column1 <span class="operator">=</span> value1, column2 <span class="operator">=</span> value2, ...</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">condition</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="示例-3"><a class="markdownIt-Anchor" href="#示例-3"></a> 示例</h4>
+<p>将 <code>employees</code> 表中 <code>id</code> 为 1 的员工的职位更新为 <code>Senior Software Engineer</code>。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> employees</span><br><span class="line"><span class="keyword">SET</span> position <span class="operator">=</span> <span class="string">&#x27;Senior Software Engineer&#x27;</span></span><br><span class="line"><span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="注意"><a class="markdownIt-Anchor" href="#注意"></a> 注意</h4>
+<ul>
+<li><code>WHERE</code> 子句用于指定要更新的行。如果省略 <code>WHERE</code> 子句，将会更新表中的所有行。</li>
+</ul>
+<h3 id="数据删除delete"><a class="markdownIt-Anchor" href="#数据删除delete"></a> 数据删除（DELETE）</h3>
+<p><code>DELETE</code> 语句用于从表中删除记录。</p>
+<h4 id="基本语法-5"><a class="markdownIt-Anchor" href="#基本语法-5"></a> 基本语法</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> table_name</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">condition</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="示例-4"><a class="markdownIt-Anchor" href="#示例-4"></a> 示例</h4>
+<p>删除 <code>employees</code> 表中 <code>id</code> 为 1 的员工记录。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> employees</span><br><span class="line"><span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="注意-2"><a class="markdownIt-Anchor" href="#注意-2"></a> 注意</h4>
+<ul>
+<li><code>WHERE</code> 子句用于指定要删除的行。如果省略 <code>WHERE</code> 子句，将会删除表中的所有行。</li>
+<li>使用 <code>DELETE</code> 时要小心，因为删除操作是不可逆的。</li>
+</ul>
+<h2 id="拓展"><a class="markdownIt-Anchor" href="#拓展"></a> 拓展</h2>
+<h3 id="简单-case-表达式"><a class="markdownIt-Anchor" href="#简单-case-表达式"></a> 简单 CASE 表达式</h3>
+<p>简单 <code>CASE</code> 表达式用于将一个表达式与一组简单的值进行比较。</p>
+<h4 id="基本语法-6"><a class="markdownIt-Anchor" href="#基本语法-6"></a> 基本语法</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CASE</span> expression</span><br><span class="line">    <span class="keyword">WHEN</span> value1 <span class="keyword">THEN</span> result1</span><br><span class="line">    <span class="keyword">WHEN</span> value2 <span class="keyword">THEN</span> result2</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">ELSE</span> resultN</span><br><span class="line"><span class="keyword">END</span></span><br></pre></td></tr></table></figure>
+<h4 id="示例-5"><a class="markdownIt-Anchor" href="#示例-5"></a> 示例</h4>
+<p>假设有一个 <code>orders</code> 表，包含 <code>order_id</code> 和 <code>status</code> 列。我们想要根据 <code>status</code> 的值显示订单状态的描述。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> order_id,</span><br><span class="line">    <span class="keyword">CASE</span> status</span><br><span class="line">        <span class="keyword">WHEN</span> <span class="string">&#x27;P&#x27;</span> <span class="keyword">THEN</span> <span class="string">&#x27;Pending&#x27;</span></span><br><span class="line">        <span class="keyword">WHEN</span> <span class="string">&#x27;S&#x27;</span> <span class="keyword">THEN</span> <span class="string">&#x27;Shipped&#x27;</span></span><br><span class="line">        <span class="keyword">WHEN</span> <span class="string">&#x27;C&#x27;</span> <span class="keyword">THEN</span> <span class="string">&#x27;Cancelled&#x27;</span></span><br><span class="line">        <span class="keyword">ELSE</span> <span class="string">&#x27;Unknown Status&#x27;</span></span><br><span class="line">    <span class="keyword">END</span> <span class="keyword">AS</span> status_description</span><br><span class="line"><span class="keyword">FROM</span> orders;</span><br></pre></td></tr></table></figure>
+<h3 id="搜索-case-表达式"><a class="markdownIt-Anchor" href="#搜索-case-表达式"></a> 搜索 CASE 表达式</h3>
+<p>搜索 <code>CASE</code> 表达式用于根据一组布尔条件计算结果。</p>
+<h4 id="基本语法-7"><a class="markdownIt-Anchor" href="#基本语法-7"></a> 基本语法</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CASE</span></span><br><span class="line">    <span class="keyword">WHEN</span> condition1 <span class="keyword">THEN</span> result1</span><br><span class="line">    <span class="keyword">WHEN</span> condition2 <span class="keyword">THEN</span> result2</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">ELSE</span> resultN</span><br><span class="line"><span class="keyword">END</span></span><br></pre></td></tr></table></figure>
+<h4 id="示例-6"><a class="markdownIt-Anchor" href="#示例-6"></a> 示例</h4>
+<p>假设有一个 <code>employees</code> 表，包含 <code>employee_id</code> 和 <code>salary</code> 列。我们想要根据薪水范围给员工分等级。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> employee_id, salary,</span><br><span class="line">    <span class="keyword">CASE</span></span><br><span class="line">        <span class="keyword">WHEN</span> salary <span class="operator">&lt;</span> <span class="number">30000</span> <span class="keyword">THEN</span> <span class="string">&#x27;Low&#x27;</span></span><br><span class="line">        <span class="keyword">WHEN</span> salary <span class="keyword">BETWEEN</span> <span class="number">30000</span> <span class="keyword">AND</span> <span class="number">70000</span> <span class="keyword">THEN</span> <span class="string">&#x27;Medium&#x27;</span></span><br><span class="line">        <span class="keyword">WHEN</span> salary <span class="operator">&gt;</span> <span class="number">70000</span> <span class="keyword">THEN</span> <span class="string">&#x27;High&#x27;</span></span><br><span class="line">        <span class="keyword">ELSE</span> <span class="string">&#x27;Unknown&#x27;</span></span><br><span class="line">    <span class="keyword">END</span> <span class="keyword">AS</span> salary_grade</span><br><span class="line"><span class="keyword">FROM</span> employees;</span><br></pre></td></tr></table></figure>
+<h3 id="结合-insert-update-和-delete-使用-case"><a class="markdownIt-Anchor" href="#结合-insert-update-和-delete-使用-case"></a> 结合 INSERT、UPDATE 和 DELETE 使用 CASE</h3>
+<p><code>CASE</code> 表达式也可以在 <code>INSERT</code>、<code>UPDATE</code> 和 <code>DELETE</code> 语句中使用。</p>
+<h4 id="update-语句中的-case"><a class="markdownIt-Anchor" href="#update-语句中的-case"></a> UPDATE 语句中的 CASE</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> employees</span><br><span class="line"><span class="keyword">SET</span> salary_grade <span class="operator">=</span> </span><br><span class="line">    <span class="keyword">CASE</span></span><br><span class="line">        <span class="keyword">WHEN</span> salary <span class="operator">&lt;</span> <span class="number">30000</span> <span class="keyword">THEN</span> <span class="string">&#x27;Low&#x27;</span></span><br><span class="line">        <span class="keyword">WHEN</span> salary <span class="keyword">BETWEEN</span> <span class="number">30000</span> <span class="keyword">AND</span> <span class="number">70000</span> <span class="keyword">THEN</span> <span class="string">&#x27;Medium&#x27;</span></span><br><span class="line">        <span class="keyword">WHEN</span> salary <span class="operator">&gt;</span> <span class="number">70000</span> <span class="keyword">THEN</span> <span class="string">&#x27;High&#x27;</span></span><br><span class="line">        <span class="keyword">ELSE</span> <span class="string">&#x27;Unknown&#x27;</span></span><br><span class="line">    <span class="keyword">END</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="delete-语句中的-case"><a class="markdownIt-Anchor" href="#delete-语句中的-case"></a> DELETE 语句中的 CASE</h4>
+<p>在删除操作中，<code>CASE</code> 表达式可以用于确定删除的条件。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> orders</span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">    <span class="keyword">CASE</span></span><br><span class="line">        <span class="keyword">WHEN</span> status <span class="operator">=</span> <span class="string">&#x27;C&#x27;</span> <span class="keyword">THEN</span> <span class="literal">TRUE</span></span><br><span class="line">        <span class="keyword">ELSE</span> <span class="literal">FALSE</span></span><br><span class="line">    <span class="keyword">END</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="1-并集-union"><a class="markdownIt-Anchor" href="#1-并集-union"></a> 1. 并集 (UNION)</h3>
+<p><strong>并集</strong>操作用于合并两个或多个<code>SELECT</code>语句的结果集，并删除重复的记录。</p>
+<ul>
+<li>语法：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> column1, column2, ...</span><br><span class="line"><span class="keyword">FROM</span> table1</span><br><span class="line"><span class="keyword">UNION</span></span><br><span class="line"><span class="keyword">SELECT</span> column1, column2, ...</span><br><span class="line"><span class="keyword">FROM</span> table2;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>注意：</p>
+<ul>
+<li><code>UNION</code>默认会自动去除重复的记录。如果要保留重复记录，可以使用<code>UNION ALL</code>。</li>
+<li>列数和列的数据类型必须相同。</li>
+</ul>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> name <span class="keyword">FROM</span> students</span><br><span class="line"><span class="keyword">UNION</span></span><br><span class="line"><span class="keyword">SELECT</span> name <span class="keyword">FROM</span> teachers;</span><br></pre></td></tr></table></figure>
+<p>这个查询返回<code>students</code>和<code>teachers</code>表中所有不同的名字。</p>
+<h3 id="2-交集-intersect"><a class="markdownIt-Anchor" href="#2-交集-intersect"></a> 2. 交集 (INTERSECT)</h3>
+<p><strong>交集</strong>操作用于获取两个<code>SELECT</code>语句结果集的共同部分，即两者都存在的记录。</p>
+<ul>
+<li>语法：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> column1, column2, ...</span><br><span class="line"><span class="keyword">FROM</span> table1</span><br><span class="line"><span class="keyword">INTERSECT</span></span><br><span class="line"><span class="keyword">SELECT</span> column1, column2, ...</span><br><span class="line"><span class="keyword">FROM</span> table2;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>注意：</p>
+<ul>
+<li><code>INTERSECT</code>操作并不是所有的数据库系统都支持，例如MySQL就不支持这个操作。</li>
+<li>列数和列的数据类型必须相同。</li>
+</ul>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> name <span class="keyword">FROM</span> students</span><br><span class="line"><span class="keyword">INTERSECT</span></span><br><span class="line"><span class="keyword">SELECT</span> name <span class="keyword">FROM</span> teachers;</span><br></pre></td></tr></table></figure>
+<p>这个查询返回<code>students</code>和<code>teachers</code>表中共同存在的名字。</p>
+<h3 id="3-差集-except-或-minus"><a class="markdownIt-Anchor" href="#3-差集-except-或-minus"></a> 3. 差集 (EXCEPT 或 MINUS)</h3>
+<p><strong>差集</strong>操作用于返回第一个<code>SELECT</code>语句的结果集中有但第二个<code>SELECT</code>语句的结果集中没有的记录。</p>
+<ul>
+<li>语法：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> column1, column2, ...</span><br><span class="line"><span class="keyword">FROM</span> table1</span><br><span class="line"><span class="keyword">EXCEPT</span></span><br><span class="line"><span class="keyword">SELECT</span> column1, column2, ...</span><br><span class="line"><span class="keyword">FROM</span> table2;</span><br></pre></td></tr></table></figure>
+<p>或者在某些数据库系统（如Oracle）中：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> column1, column2, ...</span><br><span class="line"><span class="keyword">FROM</span> table1</span><br><span class="line">MINUS</span><br><span class="line"><span class="keyword">SELECT</span> column1, column2, ...</span><br><span class="line"><span class="keyword">FROM</span> table2;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>注意：</p>
+<ul>
+<li>并不是所有的数据库系统都支持<code>EXCEPT</code>或<code>MINUS</code>，具体取决于所使用的数据库。</li>
+<li>列数和列的数据类型必须相同。</li>
+</ul>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> name <span class="keyword">FROM</span> students</span><br><span class="line"><span class="keyword">EXCEPT</span></span><br><span class="line"><span class="keyword">SELECT</span> name <span class="keyword">FROM</span> teachers;</span><br></pre></td></tr></table></figure>
+<p>这个查询返回<code>students</code>表中有但<code>teachers</code>表中没有的名字。</p>
+<h3 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h3>
+<ul>
+<li><strong>UNION</strong>：合并并去重。</li>
+<li><strong>UNION ALL</strong>：合并但不去重。</li>
+<li><strong>INTERSECT</strong>：取交集。</li>
+<li><strong>EXCEPT/MINUS</strong>：取差集。</li>
+</ul>
+<h1 id="视图和索引"><a class="markdownIt-Anchor" href="#视图和索引"></a> 视图和索引</h1>
+<h2 id="视图"><a class="markdownIt-Anchor" href="#视图"></a> 视图</h2>
+<p>视图是由从数据库的基本表中选取出来的数据组成的逻辑窗口。</p>
+<ol>
+<li>简化数据查询语句</li>
+<li>使用户能从多角度看待统一数据</li>
+<li>提高了数据的安全性</li>
+<li>提供一定程度的逻辑独立性</li>
+</ol>
+<h3 id="1-定义视图create-view"><a class="markdownIt-Anchor" href="#1-定义视图create-view"></a> 1. 定义视图（Create View）</h3>
+<p>定义视图的基本语法如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> 视图名称 <span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> 列<span class="number">1</span>, 列<span class="number">2</span>, ...</span><br><span class="line"><span class="keyword">FROM</span> 表名称</span><br><span class="line"><span class="keyword">WHERE</span> 条件;</span><br></pre></td></tr></table></figure>
+<p>示例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 创建一个包含员工信息的视图</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> EmployeeView <span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> EmployeeID, FirstName, LastName, Department</span><br><span class="line"><span class="keyword">FROM</span> Employees</span><br><span class="line"><span class="keyword">WHERE</span> Department <span class="operator">=</span> <span class="string">&#x27;Sales&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>在创建或修改视图时，明确指定列名并不是总是必须的，但在某些情况下，写明列名是必要的或推荐的。以下是一些必须或推荐写明列名的情况：</p>
+<h4 id="1-列别名冲突或复杂查询"><a class="markdownIt-Anchor" href="#1-列别名冲突或复杂查询"></a> 1. 列别名冲突或复杂查询</h4>
+<p>如果视图的查询包含复杂的表达式、聚合或连接，可能会有重复的列名或需要更清晰的列名。在这种情况下，指定列名可以避免混淆。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> SalesSummary (TotalSales, SalesYear) <span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">SUM</span>(SalesAmount), <span class="keyword">YEAR</span>(SalesDate)</span><br><span class="line"><span class="keyword">FROM</span> Sales</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="keyword">YEAR</span>(SalesDate);</span><br></pre></td></tr></table></figure>
+<h4 id="2-列名含有特殊字符或空格"><a class="markdownIt-Anchor" href="#2-列名含有特殊字符或空格"></a> 2. 列名含有特殊字符或空格</h4>
+<p>如果查询中的列名包含空格或特殊字符，明确列名可以避免语法错误和数据访问问题。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> EmployeeDetails (Employee_ID, Full_Name) <span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> EmployeeID, [<span class="keyword">Full</span> Name]</span><br><span class="line"><span class="keyword">FROM</span> Employees;</span><br></pre></td></tr></table></figure>
+<h4 id="3-视图创建时使用的sql包含函数或计算列"><a class="markdownIt-Anchor" href="#3-视图创建时使用的sql包含函数或计算列"></a> 3. 视图创建时使用的SQL包含函数或计算列</h4>
+<p>当视图中的列包含函数调用或计算列时，指定列名可以使视图更加清晰易读。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> ProductDiscounts (ProductID, DiscountPrice) <span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> ProductID, Price <span class="operator">*</span> <span class="number">0.9</span></span><br><span class="line"><span class="keyword">FROM</span> Products;</span><br></pre></td></tr></table></figure>
+<h4 id="4-避免数据库系统的列名推断错误"><a class="markdownIt-Anchor" href="#4-避免数据库系统的列名推断错误"></a> 4. 避免数据库系统的列名推断错误</h4>
+<p>有些数据库系统可能无法正确推断列名，特别是当视图基于复杂查询时。明确列名可以确保视图创建时不会出现推断错误。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> DepartmentStats (DeptID, EmployeeCount) <span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> DepartmentID, <span class="built_in">COUNT</span>(<span class="operator">*</span>)</span><br><span class="line"><span class="keyword">FROM</span> Employees</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> DepartmentID;</span><br></pre></td></tr></table></figure>
+<h4 id="5-多表连接时避免列名冲突"><a class="markdownIt-Anchor" href="#5-多表连接时避免列名冲突"></a> 5. 多表连接时避免列名冲突</h4>
+<p>在多表连接的查询中，可能会有相同的列名。明确列名可以避免冲突。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> EmployeeDepartment (EmployeeID, DeptName) <span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> e.EmployeeID, d.DepartmentName</span><br><span class="line"><span class="keyword">FROM</span> Employees e</span><br><span class="line"><span class="keyword">JOIN</span> Departments d <span class="keyword">ON</span> e.DepartmentID <span class="operator">=</span> d.DepartmentID;</span><br></pre></td></tr></table></figure>
+<h4 id="6-提高代码的可读性和可维护性"><a class="markdownIt-Anchor" href="#6-提高代码的可读性和可维护性"></a> 6. 提高代码的可读性和可维护性</h4>
+<p>即使在不强制要求的情况下，明确列名也可以提高代码的可读性和可维护性，特别是在团队开发或长时间维护的项目中。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> CustomerOrders (CustomerID, OrderID, OrderDate) <span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> c.CustomerID, o.OrderID, o.OrderDate</span><br><span class="line"><span class="keyword">FROM</span> Customers c</span><br><span class="line"><span class="keyword">JOIN</span> Orders o <span class="keyword">ON</span> c.CustomerID <span class="operator">=</span> o.CustomerID;</span><br></pre></td></tr></table></figure>
+<h3 id="2-修改视图alter-view"><a class="markdownIt-Anchor" href="#2-修改视图alter-view"></a> 2. 修改视图（Alter View）</h3>
+<p>修改视图的基本语法如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">VIEW</span> 视图名称 <span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> 列<span class="number">1</span>, 列<span class="number">2</span>, ...</span><br><span class="line"><span class="keyword">FROM</span> 表名称</span><br><span class="line"><span class="keyword">WHERE</span> 条件;</span><br></pre></td></tr></table></figure>
+<p>示例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 修改视图，使其包含更多列</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">VIEW</span> EmployeeView <span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> EmployeeID, FirstName, LastName, Department, HireDate</span><br><span class="line"><span class="keyword">FROM</span> Employees</span><br><span class="line"><span class="keyword">WHERE</span> Department <span class="operator">=</span> <span class="string">&#x27;Sales&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>注意：并不是所有的数据库系统都支持 <code>ALTER VIEW</code> 语句。一些数据库系统可能需要删除旧视图然后重新创建新视图。</p>
+<h3 id="3-删除视图drop-view"><a class="markdownIt-Anchor" href="#3-删除视图drop-view"></a> 3. 删除视图（Drop View）</h3>
+<p>删除视图的基本语法如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">VIEW</span> 视图名称;</span><br></pre></td></tr></table></figure>
+<p>示例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 删除视图</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">VIEW</span> EmployeeView;</span><br></pre></td></tr></table></figure>
+<h2 id="索引"><a class="markdownIt-Anchor" href="#索引"></a> 索引</h2>
+<h3 id="索引的分类"><a class="markdownIt-Anchor" href="#索引的分类"></a> 索引的分类</h3>
+<ol>
+<li>
+<p><strong>聚集索引（Clustered Index）</strong>：</p>
+<ul>
+<li>在聚集索引中，数据行的物理顺序与索引的逻辑顺序相同。</li>
+<li>一张表只能有一个聚集索引，因为数据行只能有一个物理顺序。</li>
+<li>通常聚集索引会建立在主键上，因为主键是唯一标识数据行的字段。</li>
+</ul>
+</li>
+<li>
+<p><strong>非聚集索引（Non-Clustered Index）</strong>：</p>
+<ul>
+<li>非聚集索引有一个独立的索引结构，数据行的物理顺序不一定与索引的顺序一致。</li>
+<li>可以为表创建多个非聚集索引。</li>
+<li>非聚集索引通常用于频繁查询但不修改的数据列。</li>
+</ul>
+</li>
+<li>
+<p><strong>唯一索引（Unique Index）</strong>：</p>
+<ul>
+<li>唯一索引确保索引列中的所有值都是唯一的。</li>
+<li>唯一索引可以是聚集索引也可以是非聚集索引。</li>
+<li>当某列需要确保没有重复值时，可以使用唯一索引。</li>
+</ul>
+</li>
+</ol>
+<h3 id="创建索引"><a class="markdownIt-Anchor" href="#创建索引"></a> 创建索引</h3>
+<p>在 SQL Server 中，创建索引的语法如下：</p>
+<p><strong>创建聚集索引</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> CLUSTERED INDEX index_name</span><br><span class="line"><span class="keyword">ON</span> table_name (column1 [<span class="keyword">ASC</span><span class="operator">|</span><span class="keyword">DESC</span>], column2 [<span class="keyword">ASC</span><span class="operator">|</span><span class="keyword">DESC</span>], ...);</span><br></pre></td></tr></table></figure>
+<p><strong>创建非聚集索引</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> NONCLUSTERED INDEX index_name</span><br><span class="line"><span class="keyword">ON</span> table_name (column1 [<span class="keyword">ASC</span><span class="operator">|</span><span class="keyword">DESC</span>], column2 [<span class="keyword">ASC</span><span class="operator">|</span><span class="keyword">DESC</span>], ...);</span><br></pre></td></tr></table></figure>
+<p><strong>创建唯一索引</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">UNIQUE</span> INDEX index_name</span><br><span class="line"><span class="keyword">ON</span> table_name (column1 [<span class="keyword">ASC</span><span class="operator">|</span><span class="keyword">DESC</span>], column2 [<span class="keyword">ASC</span><span class="operator">|</span><span class="keyword">DESC</span>], ...);</span><br></pre></td></tr></table></figure>
+<h3 id="示例-7"><a class="markdownIt-Anchor" href="#示例-7"></a> 示例</h3>
+<p>假设有一个名为 <code>Employees</code> 的表，其中包含 <code>EmployeeID</code>、<code>LastName</code> 和 <code>FirstName</code> 列。</p>
+<p><strong>创建聚集索引</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> CLUSTERED INDEX IX_Employees_EmployeeID</span><br><span class="line"><span class="keyword">ON</span> Employees (EmployeeID);</span><br></pre></td></tr></table></figure>
+<p><strong>创建非聚集索引</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> NONCLUSTERED INDEX IX_Employees_LastName</span><br><span class="line"><span class="keyword">ON</span> Employees (LastName);</span><br></pre></td></tr></table></figure>
+<p><strong>创建唯一索引</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">UNIQUE</span> INDEX IX_Employees_Email</span><br><span class="line"><span class="keyword">ON</span> Employees (Email);</span><br></pre></td></tr></table></figure>
+<h3 id="删除索引"><a class="markdownIt-Anchor" href="#删除索引"></a> 删除索引</h3>
+<p>在 SQL Server 中，删除索引的语法如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> INDEX table_name.index_name;</span><br></pre></td></tr></table></figure>
+<h1 id="关系数据库规范化理论"><a class="markdownIt-Anchor" href="#关系数据库规范化理论"></a> 关系数据库规范化理论</h1>
+<p>函数依赖和数据库的三大范式是关系数据库设计中的重要概念。它们有助于确保数据的完整性和减少冗余。</p>
+<h2 id="基本术语"><a class="markdownIt-Anchor" href="#基本术语"></a> 基本术语</h2>
+<h3 id="主码primary-key"><a class="markdownIt-Anchor" href="#主码primary-key"></a> 主码（Primary Key）</h3>
+<p>主码是表中的一个字段或字段组合，它能够唯一地标识表中的每一行。主码有几个重要的特性：</p>
+<ul>
+<li><strong>唯一性</strong>：主码的值必须是唯一的。在同一个表中，任何两行的主码值不能相同。</li>
+<li><strong>非空性</strong>：主码不能包含空值（NULL）。</li>
+<li><strong>稳定性</strong>：主码的值应当尽量保持不变。</li>
+<li><strong>单一性</strong>：一个表通常只有一个主码。</li>
+</ul>
+<p>主码的主要作用是确保数据的唯一性，并且提供一种快速访问数据的方法。</p>
+<h3 id="外码foreign-key"><a class="markdownIt-Anchor" href="#外码foreign-key"></a> 外码（Foreign Key）</h3>
+<p>外码是一个表中的字段或字段组合，它用于建立和表中另一表（通常是主表）之间的连接。外码的作用是维持数据库中的参照完整性。</p>
+<ul>
+<li><strong>参照完整性</strong>：外码的值必须是另一表中主码的值，或者是空值（在允许空值的情况下）。</li>
+<li><strong>关联性</strong>：外码用于定义两个表之间的关系，比如一对多关系。</li>
+</ul>
+<p>通过外码，可以实现数据库表之间的关联和数据一致性。</p>
+<h3 id="候选码candidate-key"><a class="markdownIt-Anchor" href="#候选码candidate-key"></a> 候选码（Candidate Key）</h3>
+<p>候选码是表中一组字段（或者单个字段），它能够唯一地标识表中的每一行，并且满足主码的所有要求。</p>
+<ul>
+<li><strong>唯一性</strong>：候选码的值必须是唯一的。</li>
+<li><strong>非空性</strong>：候选码不能包含空值。</li>
+<li><strong>最小性</strong>：是最小属性组</li>
+</ul>
+<p>一个表可以有多个候选码，但是只有一个候选码会被选为主码。其他没有被选为主码的候选码也在逻辑上可以作为唯一标识符。</p>
+<h3 id="总结-2"><a class="markdownIt-Anchor" href="#总结-2"></a> 总结</h3>
+<ul>
+<li><strong>主码</strong>：唯一标识表中每一行，只有一个，不能为NULL。</li>
+<li><strong>外码</strong>：用于建立表之间的链接，确保参照完整性。</li>
+<li><strong>候选码</strong>：可以唯一标识表中每一行的字段集合，表中可以有多个候选码，其中一个被选为主码。</li>
+</ul>
+<h2 id="函数依赖"><a class="markdownIt-Anchor" href="#函数依赖"></a> 函数依赖</h2>
+<p>函数依赖（Functional Dependency, FD）描述了关系表中的一种约束关系，其中一个属性的值依赖于另一个属性的值。常见的三种函数依赖是完全函数依赖、部分函数依赖和传递函数依赖。</p>
+<ol>
+<li>
+<p><strong>完全函数依赖（Full Functional Dependency）</strong>：</p>
+<ul>
+<li>指某个属性完全依赖于候选键（Candidate Key）。</li>
+<li>假设有一个关系 $ R $ 和候选键 $ {A, B} $，属性 $ C $ 完全依赖于 $ {A, B} $，即 $ {A, B} \rightarrow C <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>。这里，</mtext></mrow><annotation encoding="application/x-tex">。这里，</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord cjk_fallback">。</span><span class="mord cjk_fallback">这</span><span class="mord cjk_fallback">里</span><span class="mord cjk_fallback">，</span></span></span></span> C $ 依赖于整个 $ {A, B} $ 而不是其中一部分。</li>
+</ul>
+</li>
+<li>
+<p><strong>部分函数依赖（Partial Functional Dependency）</strong>：</p>
+<ul>
+<li>指某个属性依赖于候选键的一部分，而不是整个候选键。</li>
+<li>假设有一个关系 $ R $ 和候选键 $ {A, B} $，属性 $ C $ 依赖于 $ A $ 而不是整个 $ {A, B} $，即 $ A \rightarrow C $。</li>
+</ul>
+</li>
+<li>
+<p><strong>传递函数依赖（Transitive Functional Dependency）</strong>：</p>
+<ul>
+<li>指如果属性 $ A $ 依赖于属性 $ B $，属性 $ B $ 依赖于属性 $ C $，则属性 $ A $ 传递依赖于属性 $ C $。</li>
+<li>即 $ A \rightarrow B $ 和 $ B \rightarrow C $ 导致 $ A \rightarrow C $。</li>
+</ul>
+</li>
+</ol>
+<h2 id="三大范式"><a class="markdownIt-Anchor" href="#三大范式"></a> 三大范式</h2>
+<p>范式（Normal Form, NF）是数据库设计中的规则，用于组织数据库以减少冗余和避免数据异常。关系数据库理论中最常用的三大范式是第一范式、第二范式和第三范式。</p>
+<ol>
+<li>
+<p><strong>第一范式（1NF）</strong>：</p>
+<ul>
+<li>确保每个字段的值是原子的（不可再分）。</li>
+<li>表中的每个字段都包含单一值，没有重复的列，也没有重复的行。</li>
+</ul>
+</li>
+<li>
+<p><strong>第二范式（2NF）</strong>：</p>
+<ul>
+<li>满足第一范式。</li>
+<li>消除表中的部分依赖，仅适用于有复合键的表。</li>
+<li>表中的每个非主键属性完全依赖于主键，而不是部分依赖于主键。</li>
+</ul>
+</li>
+<li>
+<p><strong>第三范式（3NF）</strong>：</p>
+<ul>
+<li>满足第二范式。</li>
+<li>消除表中的传递依赖。</li>
+<li>表中的每个非主键属性直接依赖于主键，而不是通过其他非主键属性间接依赖于主键。</li>
+</ul>
+</li>
+</ol>
+<h3 id="例子"><a class="markdownIt-Anchor" href="#例子"></a> 例子</h3>
+<p>假设有一个表 <code>Student</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">StudentID | CourseID | Instructor | CourseName</span><br><span class="line">-------------------------------------------------</span><br><span class="line">1         | CS101    | Dr. Smith  | Computer Science</span><br><span class="line">2         | CS101    | Dr. Smith  | Computer Science</span><br><span class="line">3         | MA101    | Dr. Jones  | Mathematics</span><br></pre></td></tr></table></figure>
+<ol>
+<li>
+<p><strong>第一范式</strong>：</p>
+<ul>
+<li>表中所有字段值都是原子的，没有重复的列和行。</li>
+</ul>
+</li>
+<li>
+<p><strong>第二范式</strong>：</p>
+<ul>
+<li>主要键是复合键 $ {StudentID, CourseID} $。</li>
+<li>属性 <code>Instructor</code> 和 <code>CourseName</code> 部分依赖于 <code>CourseID</code>，因此需要分解表。</li>
+<li>分解后：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Student:</span><br><span class="line">StudentID | CourseID</span><br><span class="line">-----------</span><br><span class="line">1         | CS101</span><br><span class="line">2         | CS101</span><br><span class="line">3         | MA101</span><br><span class="line"></span><br><span class="line">Course:</span><br><span class="line">CourseID | Instructor | CourseName</span><br><span class="line">-----------</span><br><span class="line">CS101    | Dr. Smith  | Computer Science</span><br><span class="line">MA101    | Dr. Jones  | Mathematics</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>第三范式</strong>：</p>
+<ul>
+<li>在 <code>Course</code> 表中，<code>Instructor</code> 和 <code>CourseName</code> 直接依赖于 <code>CourseID</code>，没有传递依赖。</li>
+</ul>
+</li>
+</ol>
+<p>在数据库设计中，分解方法用于将一个不满足某个范式的表分解成多个满足该范式的表，从而消除冗余和异常。以下是每个范式的分解方法及其步骤：</p>
+<h3 id="第一范式1nf"><a class="markdownIt-Anchor" href="#第一范式1nf"></a> 第一范式（1NF）</h3>
+<p><strong>目标</strong>：消除重复组，使每个字段的值都是原子值。</p>
+<p><strong>分解方法</strong>：</p>
+<ol>
+<li><strong>识别重复组</strong>：找到表中包含集合或多个值的字段。</li>
+<li><strong>创建新表</strong>：为每个重复组创建一个新表。</li>
+<li><strong>定义主键和外键</strong>：在新表中定义与原表的关系，通常使用外键。</li>
+</ol>
+<p><strong>示例</strong>：<br />
+假设有一个表 <code>Students</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">StudentID | CourseIDs</span><br><span class="line">---------------------</span><br><span class="line">1         | CS101, MA101</span><br><span class="line">2         | CS101</span><br></pre></td></tr></table></figure>
+<p><strong>分解</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Students:</span><br><span class="line">StudentID</span><br><span class="line">---------</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line"></span><br><span class="line">StudentCourses:</span><br><span class="line">StudentID | CourseID</span><br><span class="line">---------------------</span><br><span class="line">1         | CS101</span><br><span class="line">1         | MA101</span><br><span class="line">2         | CS101</span><br></pre></td></tr></table></figure>
+<h3 id="第二范式2nf"><a class="markdownIt-Anchor" href="#第二范式2nf"></a> 第二范式（2NF）</h3>
+<p><strong>目标</strong>：消除部分依赖，使每个非主键属性完全依赖于主键。</p>
+<p><strong>分解方法</strong>：</p>
+<ol>
+<li><strong>识别部分依赖</strong>：找到那些非主键属性依赖于候选键的一部分。</li>
+<li><strong>创建新表</strong>：将部分依赖的属性移到一个新表中，并保留关联的键。</li>
+<li><strong>定义主键和外键</strong>：确保新表中的主键和外表中的外键完整。</li>
+</ol>
+<p><strong>示例</strong>：<br />
+假设有一个表 <code>StudentCourses</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">StudentID | CourseID | Instructor</span><br><span class="line">---------------------------------</span><br><span class="line">1         | CS101    | Dr. Smith</span><br><span class="line">2         | CS101    | Dr. Smith</span><br><span class="line">1         | MA101    | Dr. Jones</span><br></pre></td></tr></table></figure>
+<p><strong>分解</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Students:</span><br><span class="line">StudentID</span><br><span class="line"></span><br><span class="line">Courses:</span><br><span class="line">CourseID | Instructor</span><br><span class="line">---------------------</span><br><span class="line">CS101    | Dr. Smith</span><br><span class="line">MA101    | Dr. Jones</span><br><span class="line"></span><br><span class="line">StudentCourses:</span><br><span class="line">StudentID | CourseID</span><br><span class="line">---------------------</span><br><span class="line">1         | CS101</span><br><span class="line">2         | CS101</span><br><span class="line">1         | MA101</span><br></pre></td></tr></table></figure>
+<h3 id="第三范式3nf"><a class="markdownIt-Anchor" href="#第三范式3nf"></a> 第三范式（3NF）</h3>
+<p><strong>目标</strong>：消除传递依赖，使每个非主键属性直接依赖于主键。</p>
+<p><strong>分解方法</strong>：</p>
+<ol>
+<li><strong>识别传递依赖</strong>：找到那些非主键属性依赖于其他非主键属性。</li>
+<li><strong>创建新表</strong>：将传递依赖的属性移到一个新表中，并保留关联的键。</li>
+<li><strong>定义主键和外键</strong>：确保新表中的主键和外表中的外键完整。</li>
+</ol>
+<p><strong>示例</strong>：<br />
+假设有一个表 <code>CourseDetails</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CourseID | Instructor | Department</span><br><span class="line">-----------------------------------</span><br><span class="line">CS101    | Dr. Smith  | Computer Science</span><br><span class="line">MA101    | Dr. Jones  | Mathematics</span><br></pre></td></tr></table></figure>
+<p><strong>分解</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Courses:</span><br><span class="line">CourseID | Instructor</span><br><span class="line">---------------------</span><br><span class="line">CS101    | Dr. Smith</span><br><span class="line">MA101    | Dr. Jones</span><br><span class="line"></span><br><span class="line">Departments:</span><br><span class="line">Instructor | Department</span><br><span class="line">-----------------------</span><br><span class="line">Dr. Smith  | Computer Science</span><br><span class="line">Dr. Jones  | Mathematics</span><br></pre></td></tr></table></figure>
+<p>通过以上三个步骤，将数据库表逐步分解，使其满足第一范式、第二范式和第三范式的要求。这样可以消除冗余，提高数据的完整性和一致性。</p>
+<h1 id="数据库保护"><a class="markdownIt-Anchor" href="#数据库保护"></a> 数据库保护</h1>
+<h2 id="事务transaction"><a class="markdownIt-Anchor" href="#事务transaction"></a> 事务（Transaction）</h2>
+<p>事务（Transaction）是数据库管理系统（DBMS）中的一个基本概念，它指的是一组操作，这些操作要么全部成功，要么全部失败，是一个不可分割的工作单元。事务的主要目的是保证数据的一致性和完整性。</p>
+<p>事务具有以下四个基本特征，通常称为ACID特性：</p>
+<ol>
+<li>
+<p><strong>原子性（Atomicity）</strong>:</p>
+<ul>
+<li>原子性指的是事务中的所有操作要么全部完成，要么全部不完成，即事务是一个不可分割的工作单元。如果事务中的某个操作失败，系统会回滚（Undo）事务中已经执行的所有操作，使数据库恢复到事务开始之前的状态。</li>
+</ul>
+</li>
+<li>
+<p><strong>一致性（Consistency）</strong>:</p>
+<ul>
+<li>一致性指的是事务执行前后，数据库的状态必须是合法的。事务执行前后，数据库必须从一个一致状态转换到另一个一致状态。数据库的一致性规则不会被破坏，确保事务的执行不会破坏数据库的完整性约束。</li>
+</ul>
+</li>
+<li>
+<p><strong>隔离性（Isolation）</strong>:</p>
+<ul>
+<li>隔离性指的是同时执行的事务之间互不干扰，一个事务的操作对其他事务是不可见的。事务的隔离性可以通过锁机制或多版本控制来实现，以保证并发事务的执行不会互相影响，从而避免“脏读”、“不可重复读”和“幻读”等问题。</li>
+</ul>
+</li>
+<li>
+<p><strong>持久性（Durability）</strong>:</p>
+<ul>
+<li>持久性指的是事务一旦提交，其对数据库的改变是永久的，即使系统发生故障也不会丢失。事务提交后的结果会被永久地保存在数据库中，通常通过将数据写入磁盘或其他永久存储介质来保证这一点。</li>
+</ul>
+</li>
+</ol>
+<p>这些特性共同保证了数据库操作的可靠性和数据的完整性，使得数据库系统能够在并发环境中稳定、正确地处理数据。</p>
+<h2 id="并发控制"><a class="markdownIt-Anchor" href="#并发控制"></a> 并发控制</h2>
+<h3 id="并发控制概述"><a class="markdownIt-Anchor" href="#并发控制概述"></a> 并发控制概述</h3>
+<ol>
+<li>丢失数据修改</li>
+<li>读脏数据</li>
+<li>不可重复读</li>
+<li>产生幽灵数据</li>
+</ol>
+<h3 id="并发控制措施"><a class="markdownIt-Anchor" href="#并发控制措施"></a> 并发控制措施</h3>
+<h4 id="锁的类型"><a class="markdownIt-Anchor" href="#锁的类型"></a> 锁的类型</h4>
+<p>在数据库并发控制中，锁是一种机制，用于管理多个事务对数据库资源（如行、表）的访问。主要有两种锁：</p>
+<ol>
+<li><strong>S锁（共享锁，Shared Lock）</strong>：当一个事务对数据项加S锁后，其他事务可以继续加S锁，但不能加X锁。S锁用于只读操作，不改变数据。</li>
+<li><strong>X锁（排他锁，Exclusive Lock）</strong>：当一个事务对数据项加X锁后，其他事务既不能加S锁，也不能加X锁。X锁用于读写操作，会改变数据。</li>
+</ol>
+<h4 id="锁的相容矩阵"><a class="markdownIt-Anchor" href="#锁的相容矩阵"></a> 锁的相容矩阵</h4>
+<p>锁的相容矩阵（Compatibility Matrix）如下所示：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>S锁</th>
+<th>X锁</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>S锁</strong></td>
+<td>√</td>
+<td>×</td>
+</tr>
+<tr>
+<td><strong>X锁</strong></td>
+<td>×</td>
+<td>×</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>√ 表示相容（可以同时存在）</li>
+<li>× 表示不相容（不能同时存在）</li>
+</ul>
+<p>从矩阵中可以看出：</p>
+<ul>
+<li>两个事务可以同时持有S锁。</li>
+<li>如果一个事务持有X锁，其他任何事务不能持有S锁或X锁。</li>
+<li>如果一个事务持有S锁，其他事务不能持有X锁。</li>
+</ul>
+<h4 id="三级封锁协议"><a class="markdownIt-Anchor" href="#三级封锁协议"></a> 三级封锁协议</h4>
+<p>三级封锁协议（Three Levels of Locking Protocols）是数据库系统中用来控制并发访问的技术，确保数据的一致性和完整性。三级封锁协议具体如下：</p>
+<h5 id="一级封锁协议level-1-locking-protocol"><a class="markdownIt-Anchor" href="#一级封锁协议level-1-locking-protocol"></a> 一级封锁协议（Level 1 Locking Protocol）</h5>
+<ul>
+<li><strong>要求</strong>：事务在执行写操作之前必须获得排他锁（X锁），并且在事务结束之前保持这个锁。</li>
+<li><strong>特点</strong>：防止脏写（Dirty Write），即一个事务正在写某数据时，另一个事务不能对该数据进行写操作。</li>
+</ul>
+<h5 id="二级封锁协议level-2-locking-protocol"><a class="markdownIt-Anchor" href="#二级封锁协议level-2-locking-protocol"></a> 二级封锁协议（Level 2 Locking Protocol）</h5>
+<ul>
+<li><strong>要求</strong>：满足一级封锁协议，同时事务在读数据之前必须获得共享锁（S锁），并且在读操作结束后可以释放S锁。</li>
+<li><strong>特点</strong>：防止脏读（Dirty Read），即一个事务读取到另一个事务未提交的数据。</li>
+</ul>
+<h5 id="三级封锁协议level-3-locking-protocol"><a class="markdownIt-Anchor" href="#三级封锁协议level-3-locking-protocol"></a> 三级封锁协议（Level 3 Locking Protocol）</h5>
+<ul>
+<li><strong>要求</strong>：满足二级封锁协议，同时事务在读数据之前必须获得共享锁（S锁），并且在事务结束之前保持这个锁。</li>
+<li><strong>特点</strong>：防止不可重复读（Non-repeatable Read），即一个事务在多次读取同一数据时，其他事务不能修改该数据。</li>
+</ul>
+<h4 id="总结-3"><a class="markdownIt-Anchor" href="#总结-3"></a> 总结</h4>
+<p>锁及其相容性和三级封锁协议是保证数据库并发访问一致性和完整性的重要手段：</p>
+<ul>
+<li>S锁（共享锁）和X锁（排他锁）用于控制事务对数据项的操作权限。</li>
+<li>锁的相容矩阵展示了不同类型锁之间的兼容性。</li>
+<li>三级封锁协议提供了不同级别的并发控制，防止脏写、脏读和不可重复读等问题。</li>
+</ul>
+<h4 id="死锁"><a class="markdownIt-Anchor" href="#死锁"></a> 死锁</h4>
+<p>死锁（Deadlock）是指在并发系统中，两个或多个事务在等待对方持有的资源，从而导致这几个事务都无法继续执行的状态。简单来说，就是事务之间相互等待对方释放资源，形成了一个闭环，导致所有相关事务都无法继续。</p>
+<p>解决方法：预防、允许</p>
+<p>预防方法：一次封锁法（降低并发性）、顺序封锁法</p>
+<h3 id="可串行性serializability"><a class="markdownIt-Anchor" href="#可串行性serializability"></a> 可串行性（Serializability）</h3>
+<p>可串行性是指一个并发调度（schedule）与某个串行调度（serial schedule）等价，即该并发调度的执行结果与某个串行执行的结果相同。</p>
+<ul>
+<li><strong>串行调度</strong>：事务按顺序一个接一个地执行，不存在交错操作。</li>
+<li><strong>并发调度</strong>：多个事务交错执行，提高系统的并发性和资源利用率。</li>
+</ul>
+<p>可串行性确保并发操作不会导致数据的不一致性，是事务调度的正确性标准。</p>
+<h3 id="两段锁协议two-phase-locking-2pl"><a class="markdownIt-Anchor" href="#两段锁协议two-phase-locking-2pl"></a> 两段锁协议（Two-Phase Locking, 2PL）</h3>
+<p>两段锁协议是一种确保调度可串行性的方法。它规定了事务在锁的获取和释放上的行为。两段锁协议分为两个阶段：</p>
+<ol>
+<li><strong>扩展阶段（Growing phase）</strong>：事务只可以获取锁，不可以释放锁。</li>
+<li><strong>收缩阶段（Shrinking phase）</strong>：事务只可以释放锁，不可以获取锁。</li>
+</ol>
+<p>事务在扩展阶段获取所需的所有锁后，进入收缩阶段，释放已获得的锁。这种方式保证了没有事务会获取到其他事务已释放的锁，从而避免了数据的冲突。</p>
+<h2 id="数据库备份与恢复"><a class="markdownIt-Anchor" href="#数据库备份与恢复"></a> 数据库备份与恢复</h2>
+<h3 id="数据库故障的种类"><a class="markdownIt-Anchor" href="#数据库故障的种类"></a> 数据库故障的种类</h3>
+<ol>
+<li>事务内部的故障</li>
+<li>系统故障</li>
+<li>其他故障</li>
+</ol>
+<h3 id="数据库备份"><a class="markdownIt-Anchor" href="#数据库备份"></a> 数据库备份</h3>
+<h4 id="备份的内容"><a class="markdownIt-Anchor" href="#备份的内容"></a> 备份的内容</h4>
+<ul>
+<li>表</li>
+<li>数据库用户</li>
+<li>日志等</li>
+</ul>
+<h3 id="数据库恢复"><a class="markdownIt-Anchor" href="#数据库恢复"></a> 数据库恢复</h3>
+<h1 id="数据库设计"><a class="markdownIt-Anchor" href="#数据库设计"></a> 数据库设计</h1>
+<h2 id="数据库设计的基本步骤"><a class="markdownIt-Anchor" href="#数据库设计的基本步骤"></a> 数据库设计的基本步骤</h2>
+<ol>
+<li><strong>需求分析</strong>：
+<ul>
+<li>信息需求</li>
+<li>处理需求</li>
+<li>安全性与完整性要求</li>
+</ul>
+</li>
+<li><strong>结构设计</strong>：
+<ul>
+<li>概念结构设计</li>
+<li>逻辑结构设计</li>
+<li>物理结构设计</li>
+</ul>
+</li>
+<li><strong>行为设计</strong>：
+<ul>
+<li>功能设计</li>
+<li>事务设计</li>
+<li>程序设计</li>
+</ul>
+</li>
+<li><strong>数据库实施</strong>：
+<ul>
+<li>加载数据库数据</li>
+<li>调试运行应用程序</li>
+</ul>
+</li>
+<li><strong>数据库运行和维护阶段</strong></li>
+</ol>
+<h2 id="概念结构设计"><a class="markdownIt-Anchor" href="#概念结构设计"></a> 概念结构设计</h2>
+<h3 id="概念结构的特点"><a class="markdownIt-Anchor" href="#概念结构的特点"></a> 概念结构的特点</h3>
+<ul>
+<li>具有丰富的语义表达能力</li>
+<li>易于交流和理解</li>
+<li>易于更改</li>
+<li>易于向各种数据模型转换</li>
+</ul>
+<h3 id="概念结构设计的策略"><a class="markdownIt-Anchor" href="#概念结构设计的策略"></a> 概念结构设计的策略</h3>
+<ul>
+<li><strong>自底向上</strong>：从具体的细节设计开始，逐渐上升到更高层次的抽象。</li>
+<li><strong>自顶向下</strong>：从总体概念开始，逐步细化到具体的细节。</li>
+<li><strong>由里向外</strong>：从核心部分设计开始，逐渐扩展到外围。</li>
+<li><strong>混合策略</strong>：结合以上多种策略进行设计。</li>
+</ul>
+<h3 id="采用e-r模型的概念结构设计"><a class="markdownIt-Anchor" href="#采用e-r模型的概念结构设计"></a> 采用E-R模型的概念结构设计</h3>
+<ol>
+<li><strong>数据抽象与局部E-R模型设计</strong></li>
+<li><strong>全局E-R图设计</strong></li>
+<li><strong>优化全局E-R模型</strong></li>
+</ol>
+<h4 id="数据抽象与局部e-r模型设计"><a class="markdownIt-Anchor" href="#数据抽象与局部e-r模型设计"></a> 数据抽象与局部E-R模型设计</h4>
+<ul>
+<li>数据抽象技术：分类和聚集</li>
+<li>局部E-R图设计</li>
+</ul>
+<h4 id="全局e-r图设计"><a class="markdownIt-Anchor" href="#全局e-r图设计"></a> 全局E-R图设计</h4>
+<ul>
+<li>各局部E-R图之间的冲突主要有三类：
+<ul>
+<li>属性冲突：域冲突、单位冲突</li>
+<li>命名冲突：命名不一致</li>
+<li>结构冲突：属性和实体不一致</li>
+</ul>
+</li>
+</ul>
+<h4 id="优化全局e-r模型"><a class="markdownIt-Anchor" href="#优化全局e-r模型"></a> 优化全局E-R模型</h4>
+<ul>
+<li>实体个数尽可能少</li>
+<li>实体所包含的属性尽可能少</li>
+<li>实体间联系无冗余</li>
+</ul>
+<h3 id="示例采用e-r模型的概念结构设计"><a class="markdownIt-Anchor" href="#示例采用e-r模型的概念结构设计"></a> 示例：采用E-R模型的概念结构设计</h3>
+<p>以下是一个简单的E-R模型示例，用于表示一个学生管理系统，其中包括学生、课程和注册信息。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">erDiagram</span><br><span class="line">    STUDENT &#123;</span><br><span class="line">        int studentID PK</span><br><span class="line">        string name</span><br><span class="line">        date birthdate</span><br><span class="line">    &#125;</span><br><span class="line">    COURSE &#123;</span><br><span class="line">        int courseID PK</span><br><span class="line">        string courseName</span><br><span class="line">        int credits</span><br><span class="line">    &#125;</span><br><span class="line">    ENROLLMENT &#123;</span><br><span class="line">        int enrollmentID PK</span><br><span class="line">        int studentID FK</span><br><span class="line">        int courseID FK</span><br><span class="line">        date enrollmentDate</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    STUDENT ||--o&#123; ENROLLMENT : enrolls</span><br><span class="line">    COURSE ||--o&#123; ENROLLMENT : has</span><br></pre></td></tr></table></figure>
+<h2 id="逻辑结构设计"><a class="markdownIt-Anchor" href="#逻辑结构设计"></a> 逻辑结构设计</h2>
+<h3 id="逻辑设计的基本步骤"><a class="markdownIt-Anchor" href="#逻辑设计的基本步骤"></a> 逻辑设计的基本步骤</h3>
+<ol>
+<li><strong>选择目标数据库管理系统 (DBMS)</strong>：
+<ul>
+<li>根据需求选择适合的DBMS。</li>
+</ul>
+</li>
+<li><strong>将概念结构转换为逻辑结构</strong>：
+<ul>
+<li>将E-R模型转换成关系模型。</li>
+</ul>
+</li>
+<li><strong>规范化处理</strong>：
+<ul>
+<li>通过规范化消除冗余，确保数据依赖性。</li>
+</ul>
+</li>
+<li><strong>定义完整性约束</strong>：
+<ul>
+<li>主键约束、外键约束、唯一性约束、非空约束等。</li>
+</ul>
+</li>
+<li><strong>设计存储结构和访问方法</strong>：
+<ul>
+<li>索引设计、视图设计等。</li>
+</ul>
+</li>
+<li><strong>安全性设计</strong>：
+<ul>
+<li>用户权限管理、数据加密等。</li>
+</ul>
+</li>
+</ol>
+<h3 id="关系模型的转换"><a class="markdownIt-Anchor" href="#关系模型的转换"></a> 关系模型的转换</h3>
+<p>将E-R模型转换为关系模型的步骤：</p>
+<ol>
+<li><strong>实体转换为表</strong>：
+<ul>
+<li>每个实体类型转换为一个表，实体的属性成为表的字段，主键成为表的主键。</li>
+</ul>
+</li>
+<li><strong>关系转换为外键</strong>：
+<ul>
+<li>实体间的一对多关系，通过在“多”端添加外键来实现。</li>
+<li>实体间的多对多关系，创建一个中间表包含双方主键作为外键。</li>
+</ul>
+</li>
+<li><strong>属性处理</strong>：
+<ul>
+<li>处理复杂属性，如多值属性和组合属性。</li>
+</ul>
+</li>
+</ol>
+<h3 id="示例关系模型的转换"><a class="markdownIt-Anchor" href="#示例关系模型的转换"></a> 示例：关系模型的转换</h3>
+<p>根据上面的E-R模型示例，转换为关系模型如下：</p>
+<ol>
+<li>
+<p><strong>STUDENT 表</strong>:</p>
+<ul>
+<li>studentID (主键)</li>
+<li>name</li>
+<li>birthdate</li>
+</ul>
+</li>
+<li>
+<p><strong>COURSE 表</strong>:</p>
+<ul>
+<li>courseID (主键)</li>
+<li>courseName</li>
+<li>credits</li>
+</ul>
+</li>
+<li>
+<p><strong>ENROLLMENT 表</strong>:</p>
+<ul>
+<li>enrollmentID (主键)</li>
+<li>studentID (外键，引用 STUDENT)</li>
+<li>courseID (外键，引用 COURSE)</li>
+<li>enrollmentDate</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -236,7 +1644,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-01 22:55:40" itemprop="dateModified" datetime="2024-05-01T22:55:40+08:00">2024-05-01</time>
+      <time title="修改时间：2024-07-02 20:47:47" itemprop="dateModified" datetime="2024-07-02T20:47:47+08:00">2024-07-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -494,7 +1902,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-01 22:55:40" itemprop="dateModified" datetime="2024-05-01T22:55:40+08:00">2024-05-01</time>
+      <time title="修改时间：2024-07-02 20:47:47" itemprop="dateModified" datetime="2024-07-02T20:47:47+08:00">2024-07-02</time>
     </span>
 
   
@@ -578,7 +1986,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-01 22:55:40" itemprop="dateModified" datetime="2024-05-01T22:55:40+08:00">2024-05-01</time>
+      <time title="修改时间：2024-07-02 20:47:47" itemprop="dateModified" datetime="2024-07-02T20:47:47+08:00">2024-07-02</time>
     </span>
 
   
@@ -706,7 +2114,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-01 22:55:40" itemprop="dateModified" datetime="2024-05-01T22:55:40+08:00">2024-05-01</time>
+      <time title="修改时间：2024-07-02 20:47:47" itemprop="dateModified" datetime="2024-07-02T20:47:47+08:00">2024-07-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -880,7 +2288,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-01 22:55:40" itemprop="dateModified" datetime="2024-05-01T22:55:40+08:00">2024-05-01</time>
+      <time title="修改时间：2024-07-02 20:47:47" itemprop="dateModified" datetime="2024-07-02T20:47:47+08:00">2024-07-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1084,7 +2492,7 @@ $5: Protocol (TCP/UDP)<br />
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-01 22:55:40" itemprop="dateModified" datetime="2024-05-01T22:55:40+08:00">2024-05-01</time>
+      <time title="修改时间：2024-07-02 20:47:47" itemprop="dateModified" datetime="2024-07-02T20:47:47+08:00">2024-07-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1182,7 +2590,7 @@ $5: Protocol (TCP/UDP)<br />
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-01 22:55:40" itemprop="dateModified" datetime="2024-05-01T22:55:40+08:00">2024-05-01</time>
+      <time title="修改时间：2024-07-02 20:47:47" itemprop="dateModified" datetime="2024-07-02T20:47:47+08:00">2024-07-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1271,7 +2679,7 @@ $5: Protocol (TCP/UDP)<br />
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-01 22:55:40" itemprop="dateModified" datetime="2024-05-01T22:55:40+08:00">2024-05-01</time>
+      <time title="修改时间：2024-07-02 20:47:47" itemprop="dateModified" datetime="2024-07-02T20:47:47+08:00">2024-07-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1396,7 +2804,7 @@ $5: Protocol (TCP/UDP)<br />
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-01 22:55:40" itemprop="dateModified" datetime="2024-05-01T22:55:40+08:00">2024-05-01</time>
+      <time title="修改时间：2024-07-02 20:47:47" itemprop="dateModified" datetime="2024-07-02T20:47:47+08:00">2024-07-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1460,95 +2868,6 @@ $5: Protocol (TCP/UDP)<br />
 <p>对，没错，这和<strong>百度文库</strong>简直如出一辙。</p>
 <p>百度文库蕴含着丰富的资料，涵盖各行各业，所以，对于百度文库的需求也是源源不断。无论是在校大学生，还是已经走入到工作岗位的同学。百度文库，典型的资本吃相，先利用占据国内最大份额的搜索引擎吸引巨大的用户量使用百度文库并上传文档，免费只是资本扩张的手段，当这张网足够大了，就该收网了。几乎一夜之间百度文库所有文档全部只有vip才能预览完整版，下载就更不用说了，各种vip还收费。只想说，互联网寡头就是这样吸血，压迫剥削的，最终用户无力反抗，百度文库依旧顶着让所有人平等提升的幌子继续收割。这也是我们社会主义国家为何一直极力遏制资本寡头的原因，他们不比国家掌控的资源，一旦资本主义成为市场寡头，就会无情的压榨底层人民。如今的CSDN和百度文库有什么区别呢？</p>
 <p>这样的案例还有很多，比如百度网盘…</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://faithleysath.github.io/2023/10/03/PCFixing-PE-CANNOT-FOUND-DISK/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://github.com/faithleysath.png">
-      <meta itemprop="name" content="Faith Leysath">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Matrix's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Matrix's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/10/03/PCFixing-PE-CANNOT-FOUND-DISK/" class="post-title-link" itemprop="url">【修机】进PE后读不到盘</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-10-03 08:34:21" itemprop="dateCreated datePublished" datetime="2023-10-03T08:34:21+08:00">2023-10-03</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-01 22:55:40" itemprop="dateModified" datetime="2024-05-01T22:55:40+08:00">2024-05-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E4%BF%AE%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">修机</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>参考这两个链接</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://www.dell.com/support/kbdoc/zh-cn/000149444/">【DELL】安装系统时看不到固态硬盘的解决方案</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.intel.cn/content/www/cn/zh/support/articles/000057787/memory-and-storage/intel-optane-memory.html">如何使用 英特尔® RST 驱动程序启用英特尔® VMD兼容 RAID 或英特尔® 傲腾™内存配置的平台</a></li>
-</ul>
 
       
     </div>
