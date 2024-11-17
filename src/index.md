@@ -20,9 +20,11 @@ Welcome to **Laysath's Blog** ! It's a pleasure to have you here.
 
 ### 折腾日记 Tinkering Log
 
+- [全锥型 NAT 的实用技巧](/posts/tinkering-log/2024-01-11-Full-Cone-NAT) — 本文介绍了全锥型 NAT 的原理和实用技巧
+
 - [NAS 折腾记](/posts/tinkering-log/2023-12-14-NAS) — 本文记录了笔者折腾 NAS 的完整细节
 
-- [全锥型 NAT 的实用技巧](/posts/tinkering-log/2024-01-11-Full-Cone-NAT) — 本文介绍了全锥型 NAT 的原理和实用技巧
+- [【软路由】基于 openwrt 的校园网多拨教程](/posts/tinkering-log/2023-10-18-openwrt-multiwan) — 本文介绍了基于 OpenWrt 的软路由多拨教程
 
 ---
 
@@ -39,5 +41,7 @@ Welcome to **Laysath's Blog** ! It's a pleasure to have you here.
 - [NAS 折腾记](/posts/tinkering-log/2023-12-14-NAS) — 本文记录了笔者折腾 NAS 的完整细节
 
 ### 2023年10月 Oct
+
+- [【软路由】基于 openwrt 的校园网多拨教程](/posts/tinkering-log/2023-10-18-openwrt-multiwan) — 本文介绍了基于 OpenWrt 的软路由多拨教程
 
 - [网络代理设置解决方案合集](/posts/useful-tips/2023-10-01-proxy-settings) — 命令行工具、UWP应用、WSL2 的代理设置
