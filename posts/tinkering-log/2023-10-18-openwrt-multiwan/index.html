@@ -42,54 +42,27 @@
         </header>
         <main>
             <article>
-                <h1>博客主页 Blog Home</h1>
-<hr />
-<p>欢迎来到 <strong>laysath的博客</strong> ! 远来是客，不妨先看看这里的<a href="/about">关于我</a>。</p>
-<p>Welcome to <strong>Laysath's Blog</strong> ! It's a pleasure to have you here.</p>
-<p>以下是本站目录。</p>
-<hr />
-<h3>实用技巧 Useful Tips</h3>
-<ul>
-<li><a href="/posts/useful-tips/2023-10-01-proxy-settings">网络代理设置解决方案合集</a> — 命令行工具、UWP应用、WSL2 的代理设置</li>
-</ul>
-<h3>转载 &amp; 翻译 Repost And Translate</h3>
-<ul>
-<li><a href="/posts/repost-and-translate/2024-04-08-Remembering-the-LAN">【双语】怀念以前的局域网</a> — 怀念过去开放的局域网环境，源自<a href="https://tailscale.com/blog/remembering-the-lan/">Tailscale博客</a></li>
-</ul>
-<h3>折腾日记 Tinkering Log</h3>
-<ul>
-<li>
-<p><a href="/posts/tinkering-log/2024-01-11-Full-Cone-NAT">全锥型 NAT 的实用技巧</a> — 本文介绍了全锥型 NAT 的原理和实用技巧</p>
-</li>
-<li>
-<p><a href="/posts/tinkering-log/2023-12-14-NAS">NAS 折腾记</a> — 本文记录了笔者折腾 NAS 的完整细节</p>
-</li>
-<li>
-<p><a href="/posts/tinkering-log/2023-10-18-openwrt-multiwan">【软路由】基于 openwrt 的校园网多拨教程</a> — 本文介绍了基于 OpenWrt 的软路由多拨教程</p>
-</li>
-</ul>
-<hr />
-<h3>2024年4月 Apr</h3>
-<ul>
-<li><a href="/posts/repost-and-translate/2024-04-08-Remembering-the-LAN">【双语】怀念以前的局域网</a> — 怀念过去开放的局域网环境，源自<a href="https://tailscale.com/blog/remembering-the-lan/">Tailscale博客</a></li>
-</ul>
-<h3>2024年1月 Jan</h3>
-<ul>
-<li><a href="/posts/tinkering-log/2024-01-11-Full-Cone-NAT">全锥型 NAT 的实用技巧</a> — 本文介绍了全锥型 NAT 的原理和实用技巧</li>
-</ul>
-<h3>2023年12月 Dec</h3>
-<ul>
-<li><a href="/posts/tinkering-log/2023-12-14-NAS">NAS 折腾记</a> — 本文记录了笔者折腾 NAS 的完整细节</li>
-</ul>
-<h3>2023年10月 Oct</h3>
-<ul>
-<li>
-<p><a href="/posts/tinkering-log/2023-10-18-openwrt-multiwan">【软路由】基于 openwrt 的校园网多拨教程</a> — 本文介绍了基于 OpenWrt 的软路由多拨教程</p>
-</li>
-<li>
-<p><a href="/posts/useful-tips/2023-10-01-proxy-settings">网络代理设置解决方案合集</a> — 命令行工具、UWP应用、WSL2 的代理设置</p>
-</li>
-</ul>
+                <h1>【软路由】基于 openwrt 的校园网多拨教程</h1>
+<h2>0x00 前言</h2>
+<p>高中曾在网上冲浪时听说过<code>多拨</code>，但因为光猫后台不好进，改不了<code>桥接</code>，故作罢。</p>
+<p>如今步入大学，从信技学长那得知校园网也能<code>多拨</code>，躁动的心便蠢蠢欲动起来。奈何本人脸皮薄，学长也守口如瓶，故并没有第一时间实现。</p>
+<p>后来给宿舍买了<code>软路由</code>，就想着把<code>多拨</code>实现了。一通上网查询后，终于找到几篇细节较为详细的教程。</p>
+<blockquote>
+<p><a href="https://blog.csdn.net/m0_59496782/article/details/121862378">拿什么拯救你，我的校园网 —— 校园网优化之单线多拨</a></p>
+<p><a href="https://blog.csdn.net/m0_59496782/article/details/128275861">讲讲多拨的额外骚操作（多拨附加教程）</a></p>
+<p><a href="https://www.cfanz.cn/resource/detail/ygPBPyXqEYGLO">南信大校园网稳定 | 多拨 | 软路由 | 硬路由 | 保姆级教学 | 一步到位 | openwrt|pandavan</a></p>
+</blockquote>
+<p>理论上来说，参考这三篇就已经能解决 90% 大学的校园网多拨了。</p>
+<h2>1x00 准备工作</h2>
+<p>本人使用 ASUS-ACRH17 路由器作为软路由，接下来讲解刷入 openwrt 的过程。其他型号请自行搜索刷入方法。</p>
+<h2>0xFF 附录</h2>
+<p>校园网自动登录脚本</p>
+<div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nv">ip</span><span class="o">=</span><span class="k">$(</span>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span>http://10.255.255.46/api/v1/ip<span class="k">)</span>
+<span class="nv">ip2</span><span class="o">=</span>$<span class="sb">`</span><span class="o">(</span><span class="nb">echo</span><span class="w"> </span><span class="sb">`</span><span class="nv">$ip</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d<span class="w"> </span><span class="se">\&quot;</span><span class="w"> </span>-f<span class="w"> </span><span class="m">6</span><span class="o">)</span>
+curl<span class="w"> </span>-s<span class="w"> </span>-d<span class="w">  </span><span class="s2">&quot;{\&quot;username\&quot;:\&quot;手机号\&quot;,\&quot;password\&quot;:\&quot;密码\&quot;,\&quot;channel\&quot;:\&quot;运营商\&quot;,\&quot;ifautologin\&quot;:\&quot;0\&quot;,\&quot;pagesign\&quot;:\&quot;secondauth\&quot;,\&quot;usripadd\&quot;:\&quot;</span><span class="nv">$ip2</span><span class="s2">\&quot;}&quot;</span><span class="w"> </span>http://10.255.255.46/api/v1/login
+</code></pre></div></td></tr></table></div>
             </article>
             <aside class="sidebar">
                 <h2>Shortcuts</h2>
