@@ -2,7 +2,7 @@
 - [Home](/)
 - [Project](/project)
 - [About Me](/about)
-- [Note](/note)
+- [Note](/posts/notes)
 ## Friends
 - [Jerry](https://jerryhome.i2phides.me/)
 - [Dustella](https://www.dustella.net/)
