@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>laysath的博客</title>
+    <!-- icon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    
+    <!-- 导入字体 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&family=Noto+Sans+SC:wght@100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=ZCOOL+XiaoWei&display=swap"
+        rel="stylesheet">
+    <!-- 自定义样式 -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/pygments.css">
+    <!-- 导入自定义js脚本 -->
+    <script src="/static/js/main.js"></script>
+    <!-- 导入 KaTeX -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/katex.min.css" rel="stylesheet">
+    <script src="/static/js/copy-tex.min.js"></script>
+    <!-- 导入fa icon -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
+    <!-- 导入 clipboard.js -->
+    <script src="/static/js/clipboard.min.js"></script>
+    <!-- 导入Toastr -->
+    <link rel="stylesheet" href="/static/css/toastr.min.css">
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/toastr.min.js"></script>
+    <!-- 导入fancybox -->
+    <link href="/static/css/jquery.fancybox.min.css" rel="stylesheet">
+    <script src="/static/js/jquery.fancybox.min.js"></script>
+</head>
+
+<body>
+    <div id="container">
+        <header>
+            
+        </header>
+        <main>
+            <article>
+                <h1>网络代理设置解决方案合集</h1>
+<h2>引言</h2>
+<p>本文用于记录一些<code>命令行</code>工具的代理设置方法，<code>UWP</code>应用的代理设置，<code>WSL2</code>的代理设置等等</p>
+<h2>UWP 应用走代理</h2>
+<blockquote>
+<p>引用自：<a href="https://www.duohuohub.cn/threads/49/#post-101">https://www.duohuohub.cn/threads/49/#post-101</a></p>
+</blockquote>
+<p>微软的 OneDrive 真好用… 但偶尔会出现怎么样都无法登陆的情况</p>
+<p>本质上是因为 微软 uwp 应用默认直连，所以开了代理就用不了</p>
+<h3>【最终解决方案】</h3>
+<p>无脑批量解除所有 UWP 应用限制（管理员）</p>
+<div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nb">Get-ChildItem</span> <span class="n">-Path</span> <span class="n">Registry</span><span class="p">::</span><span class="s2">&quot;HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Mappings\&quot;</span> <span class="n">-name</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span><span class="n">CheckNetIsolation</span><span class="p">.</span><span class="n">exe</span> <span class="n">LoopbackExempt</span> <span class="n">-a</span> <span class="n">-p</span><span class="p">=</span><span class="s2">&quot;$_&quot;</span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+
+<h3>【其他尝试（未生效）】</h3>
+<ul>
+<li>Clash 中开启 UWP 应用联网限制解除工具</li>
+<li>Clash 开启 Tun 模式</li>
+<li>重置 OneDrive</li>
+<li>出国（bushi</li>
+</ul>
+<h2>PowerShell 下使用代理</h2>
+<blockquote>
+<p>引用自：<a href="https://anuoua.github.io/2019/08/11/配置Powershell命令行代理/">https://anuoua.github.io/2019/08/11/配置Powershell命令行代理/</a></p>
+</blockquote>
+<p>在日常 windows 环境开发中，powershell 经常需要用到代理，但是每次去系统变量中配置环境变量还是显得过于麻烦了，所以我们可以定义两个命令：</p>
+<ul>
+<li>应用代理环境变量</li>
+<li>取消代理环境变量</li>
+</ul>
+<p>直接在 powershell 中调用这两命令就方便很多了。</p>
+<h3>编写脚本</h3>
+<ol>
+<li>
+<p>使用管理员权限打开<code>PowerShell</code>，并执行<code>Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser</code></p>
+</li>
+<li>
+<p>输入<code>code $PROFILE</code>使用 vscode 打开配置文件。</p>
+</li>
+<li>
+<p>在配置文件中输入以下代码：</p>
+</li>
+</ol>
+<div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">function</span> <span class="n">set_proxy_variable</span> <span class="p">{</span>
+    <span class="nb">Set-Item</span> <span class="n">Env</span><span class="p">:</span><span class="n">http_proxy</span> <span class="s2">&quot;http://127.0.0.1:33210&quot;</span>  <span class="c"># 代理地址</span>
+    <span class="nb">Set-Item</span> <span class="n">Env</span><span class="p">:</span><span class="n">https_proxy</span> <span class="s2">&quot;http://127.0.0.1:33210&quot;</span> <span class="c"># 代理地址</span>
+<span class="p">}</span>
+
+<span class="k">function</span> <span class="n">unset_proxy_variable</span> <span class="p">{</span>
+    <span class="nb">Remove-Item</span> <span class="n">Env</span><span class="p">:</span><span class="n">http_proxy</span>
+    <span class="nb">Remove-Item</span> <span class="n">Env</span><span class="p">:</span><span class="n">https_proxy</span>
+<span class="p">}</span>
+
+<span class="nb">New-Alias</span> <span class="n">-Name</span> <span class="n">spp</span> <span class="n">-Value</span> <span class="n">set_proxy_variable</span>
+<span class="nb">New-Alias</span> <span class="n">-Name</span> <span class="n">upp</span> <span class="n">-Value</span> <span class="n">unset_proxy_variable</span>
+</code></pre></div></td></tr></table></div>
+
+<h3>使用</h3>
+<ul>
+<li><code>spp</code>启用代理</li>
+<li><code>upp</code>取消代理</li>
+</ul>
+<h2>CMD 下使用代理</h2>
+<p>打开<code>cmd</code>，输入以下命令</p>
+<div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nb">set</span><span class="w"> </span><span class="nv">HTTP_PROXY</span><span class="o">=</span>http://127.0.0.1:1080
+<span class="nb">set</span><span class="w"> </span><span class="nv">HTTPS_PROXY</span><span class="o">=</span>http://127.0.0.1:1080
+</code></pre></div></td></tr></table></div>
+
+<p>不过要注意的都是，上面设置的命令行代码作用的范围是一次性的，也就是关闭 cmd 窗口后，就失效了，如果需要永久生效的话，是需要配置系统的环境变量的</p>
+<h2>Git 设置代理</h2>
+<div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">#有些朋友好像为什么设置http和socket5其实设置哪种都是可以的，具体看你们自己代理软件都支持的协议有哪些，就可以了</span>
+<span class="c1">#记得修改端口号，比如我的是1080，记得改成自己代理软件的所配置的端口号</span>
+<span class="c1">#下面配置的都是全局，如果需要设置局部的把【--global】删除即可。</span>
+
+<span class="c1">#http代理</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>http.proxy<span class="w"> </span><span class="s1">&#39;http://127.0.0.1:1080&#39;</span>
+<span class="c1">#https代理</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>https.proxy<span class="w"> </span><span class="s1">&#39;http://127.0.0.1:1080&#39;</span>
+<span class="c1">#http代理</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>http.proxy<span class="w"> </span><span class="s1">&#39;socks5://127.0.0.1:1080&#39;</span>
+<span class="c1">#https代理</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>https.proxy<span class="w"> </span><span class="s1">&#39;socks5://127.0.0.1:1080&#39;</span>
+
+<span class="c1">#取消http代理</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>--unset<span class="w"> </span>http.proxy
+<span class="c1">#取消https代理</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>--unset<span class="w"> </span>https.proxy
+</code></pre></div></td></tr></table></div>
+            </article>
+            <aside class="sidebar">
+                <h2>Shortcuts</h2>
+<ul>
+<li><a href="/">Home</a></li>
+<li><a href="/project">Project</a></li>
+<li><a href="/about">About Me</a></li>
+<li><a href="/note">Note</a></li>
+</ul>
+<h2>Friends</h2>
+<ul>
+<li><a href="https://jerryhome.i2phides.me/">Jerry</a></li>
+<li><a href="https://www.dustella.net/">Dustella</a></li>
+</ul>
+<iframe id="player" style="display: none;" frameborder="no" border="0" marginwidth="0" marginheight="0" width=100% height=110 src="//music.163.com/outchain/player?type=0&id=12875647653&auto=0&height=90"></iframe>
+<script>
+    var player = document.getElementById('player');
+    player.style.display = 'block';
+</script>
+            </aside>
+        </main>
+        <footer>
+            <p>laysath的博客</p>
+<p><a href="https://beian.miit.gov.cn/">苏ICP备2023015293号-1</a></p>
+        </footer>
+    </div>
+    <script> // 图片点击放大（fancybox）
+        $(document).ready(function () {
+            // Event delegation to handle click on dynamically loaded images
+            $(document).on('click', 'article img', function (e) {
+                e.preventDefault();
+                const clickedImg = $(this);
+                const gallery = $('article img').filter((i, img) => {
+                    // Filter out images smaller than 100x100
+                    const width = img.naturalWidth;
+                    const height = img.naturalHeight;
+                    return width >= 100 && height >= 100;
+                }).map((i, img) => {
+                    return { src: $(img).attr('src'), opts: { caption: $(img).attr('alt') } };
+                }).get();
+                const index = gallery.findIndex(image => image.src === clickedImg.attr('src'));
+                $.fancybox.open(gallery, {}, index);
+            });
+        });
+    </script>
+</body>
+
+</html>

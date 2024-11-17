@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>laysath的博客</title>
+    <!-- icon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    
+    <!-- 导入字体 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&family=Noto+Sans+SC:wght@100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=ZCOOL+XiaoWei&display=swap"
+        rel="stylesheet">
+    <!-- 自定义样式 -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/pygments.css">
+    <!-- 导入自定义js脚本 -->
+    <script src="/static/js/main.js"></script>
+    <!-- 导入 KaTeX -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/katex.min.css" rel="stylesheet">
+    <script src="/static/js/copy-tex.min.js"></script>
+    <!-- 导入fa icon -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
+    <!-- 导入 clipboard.js -->
+    <script src="/static/js/clipboard.min.js"></script>
+    <!-- 导入Toastr -->
+    <link rel="stylesheet" href="/static/css/toastr.min.css">
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/toastr.min.js"></script>
+    <!-- 导入fancybox -->
+    <link href="/static/css/jquery.fancybox.min.css" rel="stylesheet">
+    <script src="/static/js/jquery.fancybox.min.js"></script>
+</head>
+
+<body>
+    <div id="container">
+        <header>
+            
+        </header>
+        <main>
+            <article>
+                <h1>全锥型 NAT 的实用技巧</h1>
+<h2>前言</h2>
+<p>如今，随着 ipv6 的普及，越来越多的家庭宽带有了 v6 公网，可仍有部分使用场景不具备 v6 条件。本文介绍了一种基于 Full Cone NAT 的内网穿透解决方案，实现近乎原生的公网 ipv6 体验。</p>
+<h2>准备工作</h2>
+<ul>
+<li>运营商 NAT 级别为 NAT1（Full Cone NAT，全锥型）</li>
+<li>光猫打开桥接（路由器拨号）</li>
+</ul>
+<p>首先得确认家庭网络是否为全锥型 NAT。测试步骤如下：</p>
+<ol>
+<li>确保光猫开启桥接并使用路由器拨号（如果你不理解这段话的意思，自行上 tb 搜索 “光猫桥接”）</li>
+<li>路由器中开启 DMZ 主机并指向你需要穿透的电脑的局域网 ip</li>
+<li>下载 <a href="https://github.com/HMBSbige/NatTypeTester/releases">NatTypeTester</a> 进行测试，若结果都显示 Independent（即没有一个显示 Dependent），那么恭喜，你将享受 v4 公网的体验。</li>
+</ol>
+<h2>STUN</h2>
+<p>STUN，全称为 Session Traversal Utilities for NAT，是一种网络协议，它允许位于 NAT（网络地址转换）后的客户端找出自己的公网地址，查找当前 NAT 设备对其进行的 NAT 类型，并在需要时保持 NAT 设备上的端口开放。</p>
+<p>STUN 的主要作用是解决 NAT 穿透问题。NAT 穿透是指在 NAT 环境中，从公网访问 NAT 后的私网设备的问题。由于 NAT 设备的存在，私网设备对外的通信地址并非其真实的 IP 地址，这就导致了公网设备无法直接访问私网设备。STUN 通过发现设备的公网地址和 NAT 类型，帮助设备建立和公网的通信。</p>
+<p>目前有 3 种用于 STUN 的工具，分别为</p>
+<ul>
+<li><a href="https://lucky666.cn/">Lucky</a>：拥有友好的 Web 管理页面，强烈推荐</li>
+<li><a href="https://github.com/MikeWang000000/Natter">Natter</a>：基于 Python 实现的命令行工具</li>
+<li><a href="https://github.com/heiher/natmap">NatMap</a>：基于 C++ 实现的命令行工具</li>
+</ul>
+<p>本文就 Lucky 的部署进行讲解，实际上，<a href="https://lucky666.cn/docs/shareteach/">官方文档</a>也给出了很多网友提供的<code>经验分享</code>，可补充阅读！</p>
+<h3>安装 Lucky</h3>
+<p>本文在 <code>Windows</code> 环境下部署 Lucky，其余环境可自行参考<a href="https://lucky666.cn/docs/install">官方文档</a></p>
+<ol>
+<li>下载<a href="https://www.daji.it:6/release/">最新安装包</a>，其中分为适中版和大吉版，后者在前者的基础上增加了 <code>File Browser</code> 的功能，本文仅选择适中版即可。</li>
+<li>将安装包解压到一个固定的位置作为程序的运行环境，双击运行。</li>
+<li>检查右下角托盘区出现 lucky 的 logo，右键 “打开 Lucky 后台”，也可以顺便设置开机自启。</li>
+<li>具体使用方法请参见<a href="https://lucky666.cn/docs/category/基础使用说明">官方文档</a>，如需部署 <code>MC服务器</code>、<code>WEB服务</code>等，也可直接阅读本文剩余内容。</li>
+</ol>
+<h2>案例介绍</h2>
+<h3>MC 服务器</h3>
+<p>本文以 MCSM 面板为例，其余 mc 服务器开设方式同理。</p>
+<ol>
+<li>启动 MC 服务器，若您尚未开服，可使用 <a href="https://mcsmanager.com/">MCSM 面板</a>一键开服。<img referrerpolicy="no-referrer" alt="懒人开服" src="assets/mcsm_select_server.png" /></li>
+<li>确认服务器监听的端口，大多数情况下，<code>mc服务器</code>的默认端口号为 <code>25565</code>，即在客户端中输入 ip 而不指定端口时，默认就是连接 <code>25565</code>，除非特别指定端口。本文假定您的服务器开放在 25565 端口上，后续步骤请自行对照修改。</li>
+<li>进入 Lucky 添加 STUN 规则<img referrerpolicy="no-referrer" alt="stun规则" src="assets/lucky_stun_edit.png" /></li>
+<li>获得公网地址<img referrerpolicy="no-referrer" alt="stun结果" src="assets/stun_result.png" /></li>
+<li>若始终无法获得公网地址，说明你路由器的防火墙未开放，需要设置端口转发或 DMZ 主机，参见<strong>准备工作</strong>第 2 条。或若你的路由器支持并打开了 UPnP 功能，可将 stun 规则里的 UPnP 开关打开，则将自动设置路由器的端口转发。</li>
+<li>至此，你已经拥有一个外网可访问的地址了。但缺点是，这个地址随时可能更换（ip 与端口号都是动态的），并非固定的。想要固定下来，可以继续阅读接下来的步骤。</li>
+<li>(进阶) 首先把 ip 地址固定下来，可以使用 ddns，在 lucky 中直接设置。本文不再赘述。</li>
+<li>(进阶) 本文重点讲解端口号的固定。我们使用 srv 解析。</li>
+</ol>
+<p>先添加 srv 解析记录，如图<img referrerpolicy="no-referrer" alt="srv解析" src="assets/mc_srv.png" /></p>
+<p>红色部分为主机名，蓝色部分为主域名，紫色部分为第 4 个步骤中得到的公网地址的端口号。红色部分与蓝色部分拼起来就是第 7 个步骤中 ip 绑定的域名。</p>
+<p>这样设置后，mc 客户端里就只要输入域名，而不用输入端口号了，这是因为 java 版 mc 客户端会识别 srv 解析。</p>
+<ol>
+<li>(动态更改 srv) 刚刚我们是手动设置 srv 解析记录，那就一定有办法自动设置。很遗憾，Lucky 的 ddns 中并不支持 srv 记录。我们只能自己调用域名提供商的 sdk 来实现。笔者写了个简易的 srv 更新脚本，但只支持阿里云 dns。项目开源于 https://github.com/faithleysath/python-webhook ，欢迎给个 Star。脚本也同步构建了 docker 镜像。接下来将讲解 docker 镜像的使用。</li>
+<li>首先先把镜像 pull 下来，为方便起见，windows 下推荐使用 docker desktop，搜索 <code>laysath/lucky-mate</code>，然后拉取 latest 版本的镜像，点击运行，会自动创建容器。容器需要对外暴露 8848 端口，并设置如下环境变量<img referrerpolicy="no-referrer" alt="容器设置" src="assets/mc_lucky_mate.png" /></li>
+</ol>
+<p>其中，第一个红圈填写第 7 步中获得的 id 和 key，第二个红圈中，<code>SRV_RR</code> 填写第 8 步中的<code>主机记录</code>，<code>SRV_RR_VALUE</code> 填写你 ip 绑定的域名，<code>SRV_RR_ID</code> 请到 <a href="https://next.api.aliyun.com/api/Alidns/2015-01-09/DescribeDomainRecords">sdk 调试台</a>输入你的主域名（即第 8 步的蓝色部分），发起调用得到 id，如图<img referrerpolicy="no-referrer" alt="srvID" src="assets/get_srv_id.png" /></p>
+<ol>
+<li>到 lucky 的 stun 规则中启用 Webhook，并填写如下<img referrerpolicy="no-referrer" alt="Webhook" src="assets/edit_srv_hook.png" /></li>
+</ol>
+<p>其中，接口地址为 <code>http://127.0.0.1:8848/update_srv/#{port}</code>，请求方法为 <code>GET</code></p>
+            </article>
+            <aside class="sidebar">
+                <h2>Shortcuts</h2>
+<ul>
+<li><a href="/">Home</a></li>
+<li><a href="/project">Project</a></li>
+<li><a href="/about">About Me</a></li>
+<li><a href="/note">Note</a></li>
+</ul>
+<h2>Friends</h2>
+<ul>
+<li><a href="https://jerryhome.i2phides.me/">Jerry</a></li>
+<li><a href="https://www.dustella.net/">Dustella</a></li>
+</ul>
+<iframe id="player" style="display: none;" frameborder="no" border="0" marginwidth="0" marginheight="0" width=100% height=110 src="//music.163.com/outchain/player?type=0&id=12875647653&auto=0&height=90"></iframe>
+<script>
+    var player = document.getElementById('player');
+    player.style.display = 'block';
+</script>
+            </aside>
+        </main>
+        <footer>
+            <p>laysath的博客</p>
+<p><a href="https://beian.miit.gov.cn/">苏ICP备2023015293号-1</a></p>
+        </footer>
+    </div>
+    <script> // 图片点击放大（fancybox）
+        $(document).ready(function () {
+            // Event delegation to handle click on dynamically loaded images
+            $(document).on('click', 'article img', function (e) {
+                e.preventDefault();
+                const clickedImg = $(this);
+                const gallery = $('article img').filter((i, img) => {
+                    // Filter out images smaller than 100x100
+                    const width = img.naturalWidth;
+                    const height = img.naturalHeight;
+                    return width >= 100 && height >= 100;
+                }).map((i, img) => {
+                    return { src: $(img).attr('src'), opts: { caption: $(img).attr('alt') } };
+                }).get();
+                const index = gallery.findIndex(image => image.src === clickedImg.attr('src'));
+                $.fancybox.open(gallery, {}, index);
+            });
+        });
+    </script>
+</body>
+
+</html>
