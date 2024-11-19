@@ -3,6 +3,7 @@
 - [Project](/project)
 - [About Me](/about)
 - [Note](/posts/notes)
+- [Message Board](/message-board)
 ## Friends
 - [Jerry](https://jerryhome.i2phides.me/)
 - [Dustella](https://www.dustella.net/)
