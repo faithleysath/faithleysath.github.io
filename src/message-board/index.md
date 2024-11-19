@@ -1,8 +1,9 @@
 # 留言板 Message Board
 
-<script src="/static/js/utteranc-client.js"
+<script src="https://utteranc.es/client.js"
         repo="faithleysath/faithleysath.github.io"
-        issue-term="message-board"
+        issue-term="留言板 Message Board"
+        label="Utterances"
         theme="github-light"
         crossorigin="anonymous"
         async>

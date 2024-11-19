@@ -1,10 +1,10 @@
-## Shortcuts
-- [Home](/)
-- [Project](/project)
-- [About Me](/about)
-- [Note](/posts/notes)
-- [Message Board](/message-board)
-## Friends
+## 捷径 Shortcut
+- [首页 Home](/)
+- [项目 Project](/project)
+- [笔记 Note](/posts/notes)
+- [关于我 About Me](/about)
+- [留言板 Message Board](/message-board)
+## 友邻 Friends
 - [Jerry](https://jerryhome.i2phides.me/)
 - [Dustella](https://www.dustella.net/)
 
