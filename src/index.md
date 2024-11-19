@@ -34,7 +34,7 @@ Welcome to **Laysath's Blog** ! It's a pleasure to have you here.
 
 ### 2024年11月 Nov
 
--[基于动作网络的分布式MARL](/posts/paper-reading/optimization/2024-11-18-dynamic-distributed-reinforcement-learning) — 最近复现的一篇文章，有点细节没理解，故写点东西来理理顺
+- [基于动作网络的分布式MARL](/posts/paper-reading/optimization/2024-11-18-dynamic-distributed-reinforcement-learning) — 最近复现的一篇文章，有点细节没理解，故写点东西来理理顺
 
 ### 2024年4月 Apr
 
