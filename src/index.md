@@ -10,6 +10,10 @@ Welcome to **Laysath's Blog** ! It's a pleasure to have you here.
 
 ---
 
+### 研究问题 Research Problems
+
+- [基于动作网络的分布式MARL](/posts/paper-reading/optimization/2024-11-18-dynamic-distributed-reinforcement-learning) — 最近复现的一篇文章，有点细节没理解，故写点东西来理理顺
+
 ### 实用技巧 Useful Tips
 
 - [网络代理设置解决方案合集](/posts/useful-tips/2023-10-01-proxy-settings) — 命令行工具、UWP应用、WSL2 的代理设置
@@ -27,6 +31,10 @@ Welcome to **Laysath's Blog** ! It's a pleasure to have you here.
 - [【软路由】基于 openwrt 的校园网多拨教程](/posts/tinkering-log/2023-10-18-openwrt-multiwan) — 本文介绍了基于 OpenWrt 的软路由多拨教程
 
 ---
+
+### 2024年11月 Nov
+
+-[基于动作网络的分布式MARL](/posts/paper-reading/optimization/2024-11-18-dynamic-distributed-reinforcement-learning) — 最近复现的一篇文章，有点细节没理解，故写点东西来理理顺
 
 ### 2024年4月 Apr
 
