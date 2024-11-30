@@ -26,6 +26,10 @@ natpmp-stun 是一个基于 NAT-PMP 协议的端口映射和 STUN (Session Trave
 
 WIP Branch Watcher 是一个Python工具，它监控当前Git仓库的文件变动，并自动将更改提交到名为wip的分支中。此工具旨在帮助开发者在开发过程中快速存储工作进展，避免丢失未提交的更改。
 
+### [Helpdesk-Chatbot](https://github.com/nuist-engineer-lion/Helpdesk-Chatbot)
+
+工单客服机器人
+
 ## TypeScript项目
 
 ### [vscode-wip-manager](https://marketplace.visualstudio.com/items?itemName=faithleysath.wip-manager)
