@@ -18,4 +18,18 @@ natpmp-stun 是一个基于 NAT-PMP 协议的端口映射和 STUN (Session Trave
 
 该项目的实现还包括一个简单的 Web 界面，用于管理和查看当前的端口映射状态。
 
+### [ani-dl](https://github.com/faithleysath/ani-dl)
+
+一个专注于动漫平台的抓流工具
+
+### [wip-manager](https://github.com/faithleysath/wip-manager)
+
+WIP Branch Watcher 是一个Python工具，它监控当前Git仓库的文件变动，并自动将更改提交到名为wip的分支中。此工具旨在帮助开发者在开发过程中快速存储工作进展，避免丢失未提交的更改。
+
+## TypeScript项目
+
+### [vscode-wip-manager](https://marketplace.visualstudio.com/items?itemName=faithleysath.wip-manager)
+
+基于wip分支进行代码同步的git工具
+
 ### 
