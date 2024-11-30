@@ -32,4 +32,7 @@ WIP Branch Watcher 是一个Python工具，它监控当前Git仓库的文件变�
 
 基于wip分支进行代码同步的git工具
 
-### 
+### [url_shorter_server
+](https://github.com/faithleysath/url_shorter_server)
+
+基于Nest.js框架的短链接生成器
