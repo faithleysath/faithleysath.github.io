@@ -2,6 +2,7 @@
 - [首页 Home](/)
 - [项目 Project](/project)
 - [笔记 Note](/posts/notes)
+- [资源 Resource](/resource)
 - [关于我 About Me](/about)
 - [留言板 Message Board](/message-board)
 ## 友邻 Friends
