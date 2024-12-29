@@ -27,3 +27,5 @@ Since this course is conducted entirely in English, this document will be writte
 ### Multiple Linear Regression with Multiple Variables
 
 1. Hypothesis Function: $h_{\theta}(x) = \theta_0 + \theta_1x_1 + \theta_2x_2 + \cdots + \theta_nx_n$
+2. Cost Function: $J(\theta_0, \theta_1, \cdots, \theta_n) = \frac{1}{2m}\sum_{i=1}^{m}(h_{\theta}(x^{(i)}) - y^{(i)})^2$
+3. Gradient Descent: $\theta_j := \theta_j - \alpha\frac{\partial}{\partial\theta_j}J(\theta_0, \theta_1, \cdots, \theta_n)$
