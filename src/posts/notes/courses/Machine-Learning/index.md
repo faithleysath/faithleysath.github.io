@@ -25,3 +25,5 @@ Since this course is conducted entirely in English, this document will be writte
 3. Gradient Descent(梯度下降): $\theta_j := \theta_j - \alpha\frac{\partial}{\partial\theta_j}J(\theta_0, \theta_1)$
 
 ### Multiple Linear Regression with Multiple Variables
+
+1. Hypothesis Function: $h_{\theta}(x) = \theta_0 + \theta_1x_1 + \theta_2x_2 + \cdots + \theta_nx_n$
