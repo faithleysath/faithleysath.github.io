@@ -34,3 +34,7 @@ Since this course is conducted entirely in English, this document will be writte
 
 1. Feature Scaling: $x_i = \frac{x_i - \mu_i}{s_i}$
 2. Mean Normalization: $x_i = \frac{x_i - \mu_i}{\text{max}(x_i) - \text{min}(x_i)}$
+
+### Polynomial Regression
+
+Using one sentence to summarize: regard $x^2, x^3, \cdots, x^n$ as new features.
