@@ -99,3 +99,6 @@ Low bias, high variance.
 2. Hidden Layer: $z^{(2)} = \theta^{(1)}a^{(1)}$, $a^{(2)} = g(z^{(2)})$
 3. Output Layer: $z^{(3)} = \theta^{(2)}a^{(2)}$, $a^{(3)} = g(z^{(3)})$
 
+### Cost Function for Classification
+
+$J(\theta) = -\frac{1}{m}\sum_{i=1}^{m}\sum_{k=1}^{K}[y_k^{(i)}\log(h_{\theta}(x^{(i)})) + (1 - y_k^{(i)})\log(1 - h_{\theta}(x^{(i)}))]$
