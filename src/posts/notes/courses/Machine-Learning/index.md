@@ -70,3 +70,32 @@ after expand and simplify, we can get: $\theta_j := \theta_j - \alpha\frac{1}{m}
 ### Multiclass Classification
 
 One-vs-all: train $K$ logistic regression classifiers, each one against the rest. Than pick the class with the highest probability.
+
+## Overfitting
+
+### Underfitting
+
+High bias, low variance.
+
+### Overfitting
+
+Low bias, high variance.
+
+### How to Solve Overfitting
+
+1. Reduce the number of features.
+2. Regularization.
+
+### Regularization
+
+1. L1 Regularization: $J'(\theta) = J(\theta) + \lambda\sum_{j=1}^{n}|\theta_j|$
+2. L2 Regularization: $J'(\theta) = J(\theta) + \lambda\sum_{j=1}^{n}\theta_j^2$
+
+## Neural Networks
+
+### Forward Propagation
+
+1. Input Layer: $a^{(1)} = x$
+2. Hidden Layer: $z^{(2)} = \theta^{(1)}a^{(1)}$, $a^{(2)} = g(z^{(2)})$
+3. Output Layer: $z^{(3)} = \theta^{(2)}a^{(2)}$, $a^{(3)} = g(z^{(3)})$
+
