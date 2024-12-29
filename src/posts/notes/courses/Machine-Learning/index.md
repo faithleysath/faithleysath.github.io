@@ -66,3 +66,7 @@ The decision boundary is the line that separates the positive and negative examp
 $\theta := \theta - \alpha\frac{\partial}{\partial\theta}J(\theta)$
 
 after expand and simplify, we can get: $\theta_j := \theta_j - \alpha\frac{1}{m}\sum_{i=1}^{m}(h_{\theta}(x^{(i)}) - y^{(i)})x_j^{(i)}$
+
+### Multiclass Classification
+
+One-vs-all: train $K$ logistic regression classifiers, each one against the rest. Than pick the class with the highest probability.
