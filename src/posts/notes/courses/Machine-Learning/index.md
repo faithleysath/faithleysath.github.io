@@ -101,4 +101,4 @@ Low bias, high variance.
 
 ### Cost Function for Classification
 
-$J(\theta) = -\frac{1}{m}\sum_{i=1}^{m}\sum_{k=1}^{K}[y_k^{(i)}\log(h_{\theta}(x^{(i)})) + (1 - y_k^{(i)})\log(1 - h_{\theta}(x^{(i)}))]$
+$J(\theta) = -\frac{1}{m}\sum_{i=1}^{m}\sum_{k=1}^{K}[y_k^{(i)}\log(h_{\theta}(x^{(i)})) + (1 - y_k^{(i)})\log(1 - h_{\theta}(x^{(i)}))]$, where $K$ is the number of classes, $y_k^{(i)}$ is the $k$-th element of the output vector $y^{(i)}$.
