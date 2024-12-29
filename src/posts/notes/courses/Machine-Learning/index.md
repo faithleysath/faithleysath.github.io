@@ -22,3 +22,4 @@ Since this course is conducted entirely in English, this document will be writte
 
 1. Hypothesis Function(假设函数): $h_{\theta}(x) = \theta_0 + \theta_1x$
 2. Cost Function(代价函数): $J(\theta_0, \theta_1) = \frac{1}{2m}\sum_{i=1}^{m}(h_{\theta}(x^{(i)}) - y^{(i)})^2$
+3. Gradient Descent(梯度下降): $\theta_j := \theta_j - \alpha\frac{\partial}{\partial\theta_j}J(\theta_0, \theta_1)$
