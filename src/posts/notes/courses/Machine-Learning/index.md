@@ -15,3 +15,9 @@ Since this course is conducted entirely in English, this document will be writte
 
 - **Regression**: The output data is continuous.
 - **Classification**: The output data is discrete.
+
+## Linear Regression
+
+### Simple Linear Regression with One Variable
+
+1. hypothesis(假设函数): $h_{\theta}(x) = \theta_0 + \theta_1x$
