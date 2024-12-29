@@ -41,4 +41,4 @@ Using one sentence to summarize: regard $x^2, x^3, \cdots, x^n$ as new features.
 
 ### Normal Equation
 
-Let $\partial J(\theta) = 0$, then we can get the normal equation: $\theta = (X^TX)^{-1}X^Ty$.
+Let $\partial J(\theta) = 0$, then we can get the normal equation: $\theta = (X^TX)^{-1}X^Ty$, where $X$ is the matrix of size $m\times(n+1)$, $y$ is the vector of size $m\times1$, and $\theta$ is the vector of size $(n+1)\times1$.
