@@ -88,8 +88,8 @@ Low bias, high variance.
 
 ### Regularization
 
-1. L1 Regularization: $J'(\theta) = J(\theta) + \lambda\sum_{j=1}^{n}|\theta_j|$
-2. L2 Regularization: $J'(\theta) = J(\theta) + \lambda\sum_{j=1}^{n}\theta_j^2$
+1. L1 Regularization: $J'(\theta) = J(\theta) + \frac{\lambda}{2m}\sum_{j=1}^{n}|\theta_j|$
+2. L2 Regularization: $J'(\theta) = J(\theta) + \frac{\lambda}{2m}\sum_{j=1}^{n}\theta_j^2$
 
 ## Neural Networks
 
