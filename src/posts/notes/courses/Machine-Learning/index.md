@@ -38,3 +38,7 @@ Since this course is conducted entirely in English, this document will be writte
 ### Polynomial Regression
 
 Using one sentence to summarize: regard $x^2, x^3, \cdots, x^n$ as new features.
+
+### Normal Equation
+
+Let $\partial J(\theta) = 0$, then we can get the normal equation: $\theta = (X^TX)^{-1}X^Ty$.
