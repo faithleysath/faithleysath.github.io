@@ -30,6 +30,7 @@ Since this course is conducted entirely in English, this document will be writte
 2. Cost Function: $J(\theta_0, \theta_1, \cdots, \theta_n) = \frac{1}{2m}\sum_{i=1}^{m}(h_{\theta}(x^{(i)}) - y^{(i)})^2$
 3. The Matrix Form of Cost Function: $J(\theta) = \frac{1}{2m}(X\theta - y)^T(X\theta - y)$
 4. Gradient Descent: $\theta_j := \theta_j - \alpha\frac{\partial}{\partial\theta_j}J(\theta_0, \theta_1, \cdots, \theta_n)$
+5. The Matrix Form of Gradient Descent: $\theta := \theta - \alpha\frac{1}{m}X^T(X\theta - y)$
 
 ### Normalization
 
