@@ -59,3 +59,10 @@ The decision boundary is the line that separates the positive and negative examp
 ### Cost Function
 
 1. For one example: $J(\theta) = -y\log(h_{\theta}(x)) - (1 - y)\log(1 - h_{\theta}(x))$
+2. For all examples: $J(\theta) = -\frac{1}{m}\sum_{i=1}^{m}[y^{(i)}\log(h_{\theta}(x^{(i)})) + (1 - y^{(i)})\log(1 - h_{\theta}(x^{(i)}))]$
+
+### Gradient Descent
+
+$\theta := \theta - \alpha\frac{\partial}{\partial\theta}J(\theta)$
+
+after expand and simplify, we can get: $\theta_j := \theta_j - \alpha\frac{1}{m}\sum_{i=1}^{m}(h_{\theta}(x^{(i)}) - y^{(i)})x_j^{(i)}$
