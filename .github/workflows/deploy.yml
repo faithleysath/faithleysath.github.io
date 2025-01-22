@@ -32,7 +32,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install blogx==0.3.0  # 安装 blogx
+          pip install blogx==0.3.1  # 安装 blogx
 
       - name: Build the blog
         run: |
