@@ -73,17 +73,17 @@ $$
 
 使用这个定义可以证明出行列式的所有性质，但证明较为繁琐。下介绍行列式的另一种定义法。
 
-## 逆序数定义法
+## 逆序数定义
 
 ### 排列及其复合
 
 设$S_n$是所有$n$个元素的排列组成的集合，$\sigma \in S_n$表示一个排列，例如$\sigma=(3,1,2)$表示将自然顺序$(1,2,3)$变为$(3,1,2)$。如果$\sigma_1=(2,3,1), \sigma_2=(3,1,2)$，则$\sigma_1 \circ \sigma_2=(1,2,3)$。
 
-> 排列与函数：排列$\sigma$可以看作是一个从$\{1,2,\cdots,n\}$到$\{1,2,\cdots,n\}$的双射函数，$\sigma(i)$表示排列中第$i$个位置的元素。
+> **排列与函数**：排列$\sigma$可以看作是一个从$\{1,2,\cdots,n\}$到$\{1,2,\cdots,n\}$的双射函数，$\sigma(i)$表示排列中第$i$个位置的元素。
 
-> 复合：排列的复合$\sigma_1 \circ \sigma_2$表示先按$\sigma_2$排列，再按$\sigma_1$排列。
+> **复合**：排列的复合$\sigma_1 \circ \sigma_2$表示先按$\sigma_2$排列，再按$\sigma_1$排列。
 
-> 自然顺序是排列中的恒等元，记为$e$，即$e=(1,2,\cdots,n)$，其类似于函数中的恒等映射。
+> **自然顺序**是排列中的恒等元，记为$e$，即$e=(1,2,\cdots,n)$，其类似于函数中的恒等映射。
 
 ### 逆序数
 
@@ -112,6 +112,7 @@ $$
 > **定理**：任意排列都可以表示为若干个对换的复合。
 
 **证明**：使用数学归纳法。
+
 1. 当$n=2$时，只有$(1,2)$和$(2,1)$两种排列，$(2,1)$可以表示为$(1,2)$的一个对换。
 2. 假设当$n=k$时，结论成立。考虑$n=k+1$的情况，设$\sigma \in S_{k+1}$，如果$\sigma(k+1)=k+1$，则$\sigma$可以看作是$S_k$中的一个排列，结论成立。如果$\sigma(k+1)=i \neq k+1$，则交换$i$和$k+1$，得到一个新的排列$\sigma'$，使得$\sigma'(k+1)=k+1$，根据假设，$\sigma'$可以表示为若干个对换的复合，因此$\sigma$也可以表示为若干个对换的复合。
 
@@ -123,6 +124,7 @@ $$
 形式化地，即证明对于任意由$m$个对换$\tau_{i_1 j_1}, \tau_{i_2 j_2}, \cdots, \tau_{i_m j_m}$复合而成的排列$\sigma=\tau_{i_1 j_1} \circ \tau_{i_2 j_2} \circ \cdots \circ \tau_{i_m j_m}$，有$\tau(\sigma) \equiv m(\bmod 2)$。
 
 使用数学归纳法：
+
 1. 当$m=1$时，$\sigma=\tau_{i_1 j_1}$，其逆序数为1，结论成立。
 2. 假设当$m=k$时，结论成立。考虑$m=k+1$的情况，设$\sigma'=\tau_{i_1 j_1} \circ \tau_{i_2 j_2} \circ \cdots \circ \tau_{i_k j_k}$，则$\sigma=\sigma' \circ \tau_{i_{k+1} j_{k+1}}$。根据定理，$\tau(\sigma)$与$\tau(\sigma')$的奇偶性不同，因此$\tau(\sigma) \equiv k+1(\bmod 2)$，结论成立。
 
@@ -131,11 +133,11 @@ $$
 ### 逆排列
 > **定义**：设$\sigma \in S_n$，如果$\sigma \circ \sigma^{-1} = \sigma^{-1} \circ \sigma = e$，则称$\sigma$的逆排列为$\sigma^{-1}$。
 
-> **定理**：设$\sigma \in S_n$，则$\tau(\sigma)=\tau\left(\sigma^{-1}\right)$。
+> **定理**：设$\sigma \in S_n$，则$\tau(\sigma)\equiv\tau\left(\sigma^{-1}\right)\ (\bmod 2)$。
 
 **证明**：设$\sigma$由$m$个对换复合而成，则$\sigma^{-1}$也由$m$个对换复合而成，因此$\tau(\sigma) \equiv m(\bmod 2)$，$\tau\left(\sigma^{-1}\right) \equiv m(\bmod 2)$，所以$\tau(\sigma) \equiv \tau\left(\sigma^{-1}\right)\ (\bmod 2)$。
 
-### 行列式的定义
+## 行列式的逆序数定义法
 **定义**：设$A=\left(a_{i j}\right)_{n \times n}$是一个$n$阶方阵，$a_{i j}$是它的第$i$行第$j$列元素。定义$A$的行列式为：
 $$
 D=\begin{vmatrix} a_{11} & a_{12} & \cdots & a_{1 n} \\ a_{21} & a_{22} & \cdots & a_{2 n} \\ \vdots & \vdots & & \vdots \\ a_{n 1} & a_{n 2} & \cdots & a_{n n} \end{vmatrix}=\sum_{\sigma \in S_{n}}(-1)^{\tau(\sigma)} a_{1 \sigma(1)} a_{2 \sigma(2)} \cdots a_{n \sigma(n)}
@@ -148,14 +150,24 @@ $$
 
 > 现在，我们考虑一个更一般化的问题。如果我们不按行指标的自然顺序排列，而是任意打乱这些因子的顺序，会发生什么？
 
-**证明**：从行列式中任取一项$(-1)^{\tau(\sigma_2)} a_{1 \sigma_2(1)} a_{2 \sigma_2(2)} \cdots a_{n \sigma_2(n)}$，将$a_{i \sigma_2(i)}$进行重新排序，变为$a_{\sigma_1(i)\sigma_2(\sigma_1(i))}$，显然$\prod_{i=1}^{n} a_{i \sigma_2(i)} = \prod_{i=1}^{n} a_{\sigma_1(i)\sigma_2(\sigma_1(i))}$，记$\sigma_3=\sigma_2 \circ \sigma_1$，则$\prod_{i=1}^{n} a_{i \sigma_2(i)} = \prod_{i=1}^{n} a_{\sigma_1(i)\sigma_3(i)}$，则$D$可以写成：
+**证明**：从行列式中任取一项$(-1)^{\tau(\sigma_2)} a_{1 \sigma_2(1)} a_{2 \sigma_2(2)} \cdots a_{n \sigma_2(n)}$，将$a_{i \sigma_2(i)}$进行重新排序，变为$a_{\sigma_1(i)\sigma_2(\sigma_1(i))}$
+
+显然
 $$
-D=\sum_{\sigma_3 \in S_{n}}(-1)^{\tau(\sigma_2)} a_{\sigma_1(1) \sigma_3(1)} a_{\sigma_1(2) \sigma_3(2)} \cdots a_{\sigma_1(n) \sigma_3(n)}
+\prod_{i=1}^{n} a_{i \sigma_2(i)} = \prod_{i=1}^{n} a_{\sigma_1(i)\sigma_2(\sigma_1(i))}
+$$
+记$\sigma_3=\sigma_2 \circ \sigma_1$，则
+$$
+\prod_{i=1}^{n} a_{i \sigma_2(i)} = \prod_{i=1}^{n} a_{\sigma_1(i)\sigma_3(i)}
+$$
+则 $D$ 可以写成：
+$$
+D=\sum_{\sigma_3 \in S_{n}}(-1)^{\tau(\sigma_2)} \prod_{k=1}^{n} a_{\sigma_1(k) \sigma_3(k)}
 $$
 
-由于$\sigma_2=\sigma_3 \circ \sigma_1^{-1}$，根据前面的定理，有$\tau(\sigma_2) \equiv \tau(\sigma_3)+\tau\left(\sigma_1^{-1}\right)\ (\bmod 2)$，因此$D$可以写成：
+由于$\sigma_2=\sigma_3 \circ \sigma_1^{-1}$，有$\tau(\sigma_2) \equiv \tau(\sigma_3)+\tau\left(\sigma_1^{-1}\right)\ (\bmod 2)$，因此 $D$ 可以写成：
 $$
-D=\sum_{\sigma_3 \in S_{n}}(-1)^{\tau(\sigma_3)+\tau\left(\sigma_1\right)} a_{\sigma_1(1) \sigma_3(1)} a_{\sigma_1(2) \sigma_3(2)} \cdots a_{\sigma_1(n) \sigma_3(n)}
+D=\sum_{\sigma_3 \in S_{n}}(-1)^{\tau(\sigma_3)+\tau\left(\sigma_1\right)} \prod_{k=1}^{n} a_{\sigma_1(k) \sigma_3(k)}
 $$
 
 ## 两种定义法的等价性
@@ -209,7 +221,7 @@ $$
 
 第二步是将$j$移动到最前面，移动过程会发生$i-1$次对换，因此奇偶性改变了$i-1$次
 
-第三步是因为$j$在最前面，而后面的元素中有$j-1$个元素小于$j$，因此产生了$j-1$个逆序对。除了$j$以外的元素的逆序数不变，因此总的逆序数为$(j-1)+\tau(\pi')$。
+第三步是因为$j$在最前面，而后面的元素中有$j-1$个元素小于$j$，因此产生了$j-1$个逆序对。除了$j$以外的元素的逆序数不变为$\tau(\pi')$，因此总的逆序数为$(j-1)+\tau(\pi')$。
 
 因此，$D$可以写成：
 $$
@@ -225,3 +237,7 @@ $$
 > 至于为何无遗漏无重复，是因为$\sum_{\pi'}\sigma_{j,\pi'}$保证了当固定第$i$个位置为$j$时，其他位置的排列不重复且无遗漏，而$\sum_{j=1}^{n}$保证了第$i$个位置的所有可能性。
 
 至此，证明完毕。
+
+### 思路二：从完全展开式出发，构造出递推式
+
+我们从完全展开式出发，证明其等价于行列式按第$i$行展开的递推式。
