@@ -344,5 +344,5 @@ $$
 # 附录
 ## 行列式的公理化定义
 
-[行列式的逆序数定义是怎么想出来的？](https://www.zhihu.com/question/52957345/answer/589376055)：[存档](./backup2.mhtml)
-[线性代数拾遗（1）—— 行列式的三种公理化构造](https://blog.csdn.net/wxc971231/article/details/119781607)：[存档](./backup1.mhtml)
+- [行列式的逆序数定义是怎么想出来的？](https://www.zhihu.com/question/52957345/answer/589376055)：[存档](./backup2.mhtml)
+- [线性代数拾遗（1）—— 行列式的三种公理化构造](https://blog.csdn.net/wxc971231/article/details/119781607)：[存档](./backup1.mhtml)
