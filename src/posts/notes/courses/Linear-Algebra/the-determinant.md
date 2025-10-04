@@ -1,6 +1,10 @@
 # 如何定义行列式？从逆序数到行列式的行展开！
 
-> 本文记录于考研期间，笔者先阅读了居余马的《线性代数（第二版）》，其采用的是行列式的行展开定义法，也就是递归法。因为这种定义法最为快速，只是当证明一些性质时会比较麻烦，比如行列交换相等。笔者依稀记得当初学习时有逆序的概念，遂查询了丘维声的《简明线性代数（第二版）》，其采用的是逆序数的定义法，比较容易理解行列式的本质，证明相关性质也比较容易。本文将两种定义法进行对比，帮助读者理解行列式的本质。
+本文记录于考研期间，笔者先阅读了居余马的《线性代数（第二版）》，其采用的是行列式的行展开定义法，也就是递归法。因为这种定义法最为快速，只是当证明一些性质时会比较麻烦，比如行列交换相等。
+
+笔者依稀记得当初学习时有逆序的概念，遂查询了丘维声的《简明线性代数（第二版）》，其采用的是逆序数的定义法，比较容易理解行列式的本质，证明相关性质也比较容易。
+
+本文将两种定义法进行对比，帮助读者理解行列式的本质。
 
 > 补充：此外，行列式还存在第三种定义法，叫公理化定义法，由于其一般出现在高阶教材中，本文不做介绍。
 
@@ -13,24 +17,24 @@ a_{11} x_{1}+a_{12} x_{2}=b_{1} \\
 a_{21} x_{1}+a_{22} x_{2}=b_{2}
 \end{cases}
 $$
-我们可以采用消元法来解这个方程组，先消去$x_2$，可以给第一个方程乘以$a_{22}$，给第二个方程乘以$a_{12}$，然后将两个方程相减，得到：
+我们采用消元法来解这个方程组，先消去$x_2$，给第一个方程乘以$a_{22}$，给第二个方程乘以$a_{12}$，然后将两个方程相减，得到：
 $$
 \left(a_{11} a_{22}-a_{21} a_{12}\right) x_{1}=b_{1} a_{22}-b_{2} a_{12}
 $$
-如果$a_{11} a_{22}-a_{21} a_{12} \neq 0$，则可以解出$x_1$：
+如果$a_{11} a_{22}-a_{21} a_{12} \neq 0$，则解出$x_1$：
 $$
 x_{1}=\frac{b_{1} a_{22}-b_{2} a_{12}}{a_{11} a_{22}-a_{21} a_{12}}
 $$
-观察方程组可以发现，$x_1$与$x_2$的地位一致，根据对称性，可以直接写出$x_2$的解：
+观察方程组发现，$x_1$与$x_2$的地位一致，根据对称性，直接写出$x_2$的解：
 $$
 x_{2}=\frac{a_{11} b_{2}-a_{21} b_{1}}{a_{11} a_{22}-a_{21} a_{12}}
 $$
 
-如果记$D=\begin{vmatrix} a & b \\ c & d \end{vmatrix}=a d-b c$，则上面的解可以写成：
+如果记$D=\begin{vmatrix} a & b \\ c & d \end{vmatrix}=a d-b c$，则上面的解写成：
 $$
 x_{1}=\frac{\begin{vmatrix} b_{1} & a_{12} \\ b_{2} & a_{22} \end{vmatrix}}{\begin{vmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{vmatrix}}, \quad x_{2}=\frac{\begin{vmatrix} a_{11} & b_{1} \\ a_{21} & b_{2} \end{vmatrix}}{\begin{vmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{vmatrix}}
 $$
-这里的$D$就是一个二阶行列式。我们猜想可以将上面的结果推广到$n$元一次方程组：
+这里的$D$就是一个二阶行列式。我们猜想将上面的结果推广到$n$元一次方程组：
 $$
 \left\{
 \begin{array}{c}  % "c" 表示列居中对齐，1列对应所有方程行
@@ -41,7 +45,7 @@ a_{n1} x_{1} + a_{n2} x_{2} + \cdots + a_{nn} x_{n} = b_{n}
 \end{array}
 \right.
 $$
-如果记$D=\begin{vmatrix} a_{11} & a_{12} & \cdots & a_{1n} \\ a_{21} & a_{22} & \cdots & a_{2n} \\ \vdots & \vdots & & \vdots \\ a_{n1} & a_{n2} & \cdots & a_{nn} \end{vmatrix}$，则上面的解可以写成：
+如果记$D=\begin{vmatrix} a_{11} & a_{12} & \cdots & a_{1n} \\ a_{21} & a_{22} & \cdots & a_{2n} \\ \vdots & \vdots & & \vdots \\ a_{n1} & a_{n2} & \cdots & a_{nn} \end{vmatrix}$，则上面的解写成：
 $$
 x_{j}=\frac{D_{j}}{D}, \quad j=1,2, \cdots, n
 $$
@@ -55,7 +59,7 @@ $$
 
 > **定义**：设$A=\left(a_{i j}\right)_{n \times n}$是一个$n$阶方阵，$a_{i j}$是它的第$i$行第$j$列元素。去掉$A$的第$i$行和第$j$列后，剩下的$(n-1) \times(n-1)$矩阵记为$M_{i j}$，称为$a_{i j}$的**余子式**。记$A_{i j}=(-1)^{i+j} M_{i j}$，称为$a_{i j}$的**代数余子式**。
 
-于是我们可以定义$n$阶行列式：
+于是我们定义$n$阶行列式：
 $$
 D=\begin{vmatrix} a_{11} & a_{12} & \cdots & a_{1 n} \\ a_{21} & a_{22} & \cdots & a_{2 n} \\ \vdots & \vdots & & \vdots \\ a_{n 1} & a_{n 2} & \cdots & a_{n n} \end{vmatrix}
 $$
@@ -63,13 +67,23 @@ $$
 $$
 D=a_{11} A_{11}+a_{12} A_{12}+\cdots+a_{1 n} A_{1 n}
 $$
-即按第一行展开。实际上，我们也可以按任意一行或一列展开，结果是一样的。
+即按第一行展开。实际上，我们也可以按任意一行或一列展开，结果是一样的（证明在下文）。
 
 由定义可见，$D$是一个关于$a_{i j}$的多项式，每一项都是$n$个$a_{i j}$的乘积，并且每一项中没有重复的行和列，一共有$n!$项。
 
 使用这个定义可以证明出行列式的所有性质，但证明较为繁琐。下介绍行列式的另一种定义法。
 
 ## 逆序数定义法
+
+### 排列及其复合
+
+设$S_n$是所有$n$个元素的排列组成的集合，$\sigma \in S_n$表示一个排列，例如$\sigma=(3,1,2)$表示将自然顺序$(1,2,3)$变为$(3,1,2)$。如果$\sigma_1=(2,3,1), \sigma_2=(3,1,2)$，则$\sigma_1 \circ \sigma_2=(1,2,3)$。
+
+> 排列与函数：排列$\sigma$可以看作是一个从$\{1,2,\cdots,n\}$到$\{1,2,\cdots,n\}$的双射函数，$\sigma(i)$表示排列中第$i$个位置的元素。
+
+> 复合：排列的复合$\sigma_1 \circ \sigma_2$表示先按$\sigma_2$排列，再按$\sigma_1$排列。
+
+> 自然顺序是排列中的恒等元，记为$e$，即$e=(1,2,\cdots,n)$，其类似于函数中的恒等映射。
 
 ### 逆序数
 
@@ -92,6 +106,35 @@ $$
 1. 假设交换相邻的两个位置$i$和$i+1$，则$\sigma(i)$与$\sigma(i+1)$的大小关系发生了变化，$\sigma(i)$与其他元素构成的逆序对数量不变，因此$\tau(\sigma)$与$\tau(\sigma')$的奇偶性不同。
 2. 假设交换不相邻的两个位置$i$和$j$，设$i$与$j$之间有$k$个位置，则可以通过交换相邻位置的方式将$i$和$j$交换位置，共需交换$2k+1$次，因此$\tau(\sigma)$与$\tau(\sigma')$的奇偶性不同。
 
+> **定义**：交换两个位置的排列称为一个**对换**，其本身也是一个奇排列，记为$\tau_{i j}$，表示交换位置$i$和$j$，其内容为$(1,2,\cdots,i-1,j,i+1,\cdots,j-1,i,j+1,\cdots,n)$。
+
+### 对换与排列
+> **定理**：任意排列都可以表示为若干个对换的复合。
+
+**证明**：使用数学归纳法。
+1. 当$n=2$时，只有$(1,2)$和$(2,1)$两种排列，$(2,1)$可以表示为$(1,2)$的一个对换。
+2. 假设当$n=k$时，结论成立。考虑$n=k+1$的情况，设$\sigma \in S_{k+1}$，如果$\sigma(k+1)=k+1$，则$\sigma$可以看作是$S_k$中的一个排列，结论成立。如果$\sigma(k+1)=i \neq k+1$，则交换$i$和$k+1$，得到一个新的排列$\sigma'$，使得$\sigma'(k+1)=k+1$，根据假设，$\sigma'$可以表示为若干个对换的复合，因此$\sigma$也可以表示为若干个对换的复合。
+
+**采用构造性证明**：设$\sigma \in S_n$，考虑将其变为自然顺序$(1,2,\cdots,n)$，对于该排列的每一项$\sigma(i)$，如果其不等于$i$，则交换$\sigma(i)$与$i$所在位置的元素，直到所有元素都在其自然位置上。这个过程中，每次交换都是一个对换，将这样的对换操作反过来，就是将自然顺序变为$\sigma$的过程，因此$\sigma$可以表示为若干个对换的复合。
+
+> **定理**：任意排列的逆序数的奇偶性与其表示为对换的复合中对换的个数的奇偶性相同。
+
+**证明**：
+形式化地，即证明对于任意由$m$个对换$\tau_{i_1 j_1}, \tau_{i_2 j_2}, \cdots, \tau_{i_m j_m}$复合而成的排列$\sigma=\tau_{i_1 j_1} \circ \tau_{i_2 j_2} \circ \cdots \circ \tau_{i_m j_m}$，有$\tau(\sigma) \equiv m(\bmod 2)$。
+
+使用数学归纳法：
+1. 当$m=1$时，$\sigma=\tau_{i_1 j_1}$，其逆序数为1，结论成立。
+2. 假设当$m=k$时，结论成立。考虑$m=k+1$的情况，设$\sigma'=\tau_{i_1 j_1} \circ \tau_{i_2 j_2} \circ \cdots \circ \tau_{i_k j_k}$，则$\sigma=\sigma' \circ \tau_{i_{k+1} j_{k+1}}$。根据定理，$\tau(\sigma)$与$\tau(\sigma')$的奇偶性不同，因此$\tau(\sigma) \equiv k+1(\bmod 2)$，结论成立。
+
+证毕。
+
+### 逆排列
+> **定义**：设$\sigma \in S_n$，如果$\sigma \circ \sigma^{-1} = \sigma^{-1} \circ \sigma = e$，则称$\sigma$的逆排列为$\sigma^{-1}$。
+
+> **定理**：设$\sigma \in S_n$，则$\tau(\sigma)=\tau\left(\sigma^{-1}\right)$。
+
+**证明**：设$\sigma$由$m$个对换复合而成，则$\sigma^{-1}$也由$m$个对换复合而成，因此$\tau(\sigma) \equiv m(\bmod 2)$，$\tau\left(\sigma^{-1}\right) \equiv m(\bmod 2)$，所以$\tau(\sigma) \equiv \tau\left(\sigma^{-1}\right)\ (\bmod 2)$。
+
 ### 行列式的定义
 **定义**：设$A=\left(a_{i j}\right)_{n \times n}$是一个$n$阶方阵，$a_{i j}$是它的第$i$行第$j$列元素。定义$A$的行列式为：
 $$
@@ -105,4 +148,80 @@ $$
 
 > 现在，我们考虑一个更一般化的问题。如果我们不按行指标的自然顺序排列，而是任意打乱这些因子的顺序，会发生什么？
 
-**证明**：从行列式中任取一项$(-1)^{\tau(\sigma_2)} a_{1 \sigma_2(1)} a_{2 \sigma_2(2)} \cdots a_{n \sigma_2(n)}$，将$a_{i \sigma_2(i)}$进行重新排序，变为$a_{\sigma_1(i)\sigma_2(\sigma_1(i))}$
+**证明**：从行列式中任取一项$(-1)^{\tau(\sigma_2)} a_{1 \sigma_2(1)} a_{2 \sigma_2(2)} \cdots a_{n \sigma_2(n)}$，将$a_{i \sigma_2(i)}$进行重新排序，变为$a_{\sigma_1(i)\sigma_2(\sigma_1(i))}$，显然$\prod_{i=1}^{n} a_{i \sigma_2(i)} = \prod_{i=1}^{n} a_{\sigma_1(i)\sigma_2(\sigma_1(i))}$，记$\sigma_3=\sigma_2 \circ \sigma_1$，则$\prod_{i=1}^{n} a_{i \sigma_2(i)} = \prod_{i=1}^{n} a_{\sigma_1(i)\sigma_3(i)}$，则$D$可以写成：
+$$
+D=\sum_{\sigma_3 \in S_{n}}(-1)^{\tau(\sigma_2)} a_{\sigma_1(1) \sigma_3(1)} a_{\sigma_1(2) \sigma_3(2)} \cdots a_{\sigma_1(n) \sigma_3(n)}
+$$
+
+由于$\sigma_2=\sigma_3 \circ \sigma_1^{-1}$，根据前面的定理，有$\tau(\sigma_2) \equiv \tau(\sigma_3)+\tau\left(\sigma_1^{-1}\right)\ (\bmod 2)$，因此$D$可以写成：
+$$
+D=\sum_{\sigma_3 \in S_{n}}(-1)^{\tau(\sigma_3)+\tau\left(\sigma_1\right)} a_{\sigma_1(1) \sigma_3(1)} a_{\sigma_1(2) \sigma_3(2)} \cdots a_{\sigma_1(n) \sigma_3(n)}
+$$
+
+## 两种定义法的等价性
+
+下面证明两种定义法是等价的。
+
+> 有两种思路证明，第一种**将完全展开式代入递推式**，第二种**从完全展开式出发，构造出递推式**。
+
+### 思路一：将完全展开式代入递推式
+
+我们从行列式按第$i$行展开的递推式出发，证明其等价于完全展开式。
+$$
+D=\sum_{j=1}^{n} a_{i j} A_{i j}=\sum_{j=1}^{n} a_{i j}(-1)^{i+j} |M_{i j}|
+$$
+其中$|M_{i j}|$是去掉第$i$行和第$j$列后得到的$(n-1)$阶行列式，也叫做余子式，其展开式是所有将行标集合$\{1,2,\cdots,n\} \backslash\{i\}$映射到列标集合$\{1,2,\cdots,n\} \backslash\{j\}$的排列$\pi'$的求和：
+$$
+|M_{i j}|=\sum_{\pi'}(-1)^{\tau\left(\pi'\right)} \prod_{\substack{1 \leq k \leq n \\ k \neq i}} a_{k \pi'(k)}
+$$
+
+将其代入$D$中，得到：
+$$
+\begin{aligned}
+D&=\sum_{j=1}^{n} a_{i j}(-1)^{i+j} \sum_{\pi'}(-1)^{\tau\left(\pi'\right)} \prod_{\substack{1 \leq k \leq n \\ k \neq i}} a_{k \pi'(k)}\\
+&=\sum_{j=1}^{n} \sum_{\pi'}(-1)^{i+j+\tau\left(\pi'\right)} a_{i j} \prod_{\substack{1 \leq k \leq n \\ k \neq i}} a_{k \pi'(k)}
+\end{aligned}
+$$
+
+注意到，$\pi'$是将行标集合$\{1,2,\cdots,n\} \backslash\{i\}$映射到列标集合$\{1,2,\cdots,n\} \backslash\{j\}$的排列，因此我们可以构造一个新的排列$\pi$，其将行标集合$\{1,2,\cdots,n\}$映射到列标集合$\{1,2,\cdots,n\}$，且满足$\pi(i)=j$，其他位置与$\pi'$相同，即
+$$  
+\sigma_{j,\pi'}(k)=\begin{cases}
+j, & k=i \\
+\pi'(k), & k \neq i
+\end{cases}
+$$
+
+这样，我们可以将求和改写为对$\sigma$的求和：
+$$
+D=\sum_{j=1}^{n} \sum_{\pi'}(-1)^{i+j+\tau\left(\pi'\right)} \prod_{k=1}^{n} a_{k \sigma_{j,\pi'}(k)}
+$$
+
+接下来，我们证明对于$1\leq j\leq n$，有$\tau\left(\sigma_{j,\pi'}\right)\equiv i+j+\tau\left(\pi'\right)(\bmod 2)$。
+
+$$
+\begin{aligned}
+\tau\left(\sigma_{j,\pi'}\right)&\equiv\tau\left(\{\pi'(\text{start}),\cdots,\pi'(i-1),j,\pi'(i+1),\cdots,\pi'(\text{end})\}\right)\quad(\bmod 2)\\
+&\equiv\tau\left(\{j,\pi'(\text{start}),\cdots,\pi'(i-1),\pi'(i+1),\cdots,\pi'(\text{end})\}\right)+(i-1)\quad(\bmod 2)\\
+&\equiv (j-1) + \tau(\pi') + (i-1) \quad(\bmod 2)\\
+&\equiv i+j+\tau(\pi') \quad(\bmod 2)
+\end{aligned}
+$$
+
+第二步是将$j$移动到最前面，移动过程会发生$i-1$次对换，因此奇偶性改变了$i-1$次
+
+第三步是因为$j$在最前面，而后面的元素中有$j-1$个元素小于$j$，因此产生了$j-1$个逆序对。除了$j$以外的元素的逆序数不变，因此总的逆序数为$(j-1)+\tau(\pi')$。
+
+因此，$D$可以写成：
+$$
+\begin{aligned}
+D&=\sum_{j=1}^{n} \sum_{\pi'}(-1)^{\tau\left(\sigma_{j,\pi'}\right)} \prod_{k=1}^{n} a_{k \sigma_{j,\pi'}(k)}\\
+&=\sum_{\sigma \in S_n}(-1)^{\tau(\sigma)} \prod_{k=1}^{n} a_{k \sigma(k)}\\
+&=D
+\end{aligned}
+$$
+
+> 这一个合并无法理解的话，可以先考虑全排列的方案数。$n$元排列的方案数为$n!$，而$\pi'$的方案数为$(n-1)!$，$j$有$n$种选择，因此$\sigma_{j,\pi'}$的方案数为$n \times (n-1)! = n!$，与$\sigma$的方案数相同，因此可以将求和改写为对$\sigma$的求和。
+>
+> 至于为何无遗漏无重复，是因为$\sum_{\pi'}\sigma_{j,\pi'}$保证了当固定第$i$个位置为$j$时，其他位置的排列不重复且无遗漏，而$\sum_{j=1}^{n}$保证了第$i$个位置的所有可能性。
+
+至此，证明完毕。
