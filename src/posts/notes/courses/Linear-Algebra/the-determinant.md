@@ -42,7 +42,9 @@ a_{n1} x_{1} + a_{n2} x_{2} + \cdots + a_{nn} x_{n} = b_{n}
 \right.
 $$
 如果记$D=\begin{vmatrix} a_{11} & a_{12} & \cdots & a_{1n} \\ a_{21} & a_{22} & \cdots & a_{2n} \\ \vdots & \vdots & & \vdots \\ a_{n1} & a_{n2} & \cdots & a_{nn} \end{vmatrix}$，则上面的解可以写成：
-$$x_{j}=\frac{D_{j}}{D}, \quad j=1,2, \cdots, n$$
+$$
+x_{j}=\frac{D_{j}}{D}, \quad j=1,2, \cdots, n
+$$
 其中$D_{j}$是将$D$的第$j$列换成$b_1, b_2, \cdots, b_n$后得到的行列式。
 
 为了验证这个猜想，我们需要定义高阶行列式，并且进一步证明这个猜想。
