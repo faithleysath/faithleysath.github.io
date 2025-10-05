@@ -511,6 +511,7 @@ $$
 
 我们来分析排列 $\sigma = (\sigma(1), \sigma(2), \cdots, \sigma(n))$ 的逆序数 $\tau(\sigma)$。
 $\tau(\sigma)$ 的来源有两部分：
+
 1.  由第一项 $\sigma(1)$ 产生的逆序对：即在后续的 $(\sigma(2), \cdots, \sigma(n))$ 中有多少个数比 $\sigma(1)$ 小。因为 $\sigma(1)=j$，而在集合 $\{\sigma(2), \cdots, \sigma(n)\} = \{1, \cdots, n\} \setminus \{j\}$ 中，比 $j$ 小的数正好有 $j-1$ 个。所以这部分贡献了 $j-1$ 个逆序对。
 2.  由 $(\sigma(2), \cdots, \sigma(n))$ 内部产生的逆序对：这部分的逆序数就是 $\tau(\pi')$。
 
