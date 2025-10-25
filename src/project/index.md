@@ -39,3 +39,41 @@ WIP Branch Watcher 是一个Python工具，它监控当前Git仓库的文件变�
 ### [url_shorter_server](https://github.com/faithleysath/url_shorter_server)
 
 基于Nest.js框架的短链接生成器
+
+## IDEA 想法（按实现优先级排序）
+
+### [Kagari](https://github.com/faithleysath/Kagari)
+
+🔥 Kagari: 为下一代 AI 叙事游戏而生。一个体验驱动、小模型友好的开源框架。
+
+### [表情包机器人](https://github.com/faithleysath/meme-bot)
+
+### vsc开发者去中心化社交协作平台（Synapse） / 查看好友状态的vsc插件
+
+https://g.co/gemini/share/993b0edba507
+
+### [谣言机器人](https://github.com/faithleysath/astrbot_plugin_rumor_stopper)
+
+### [打印机云打印系统](https://github.com/faithleysath/light-print-cloud)
+
+半成品，还可以加小程序和网页权限管理
+
+### 个人作品官网
+
+### 电梯模拟器
+
+### [豆包播客](https://github.com/faithleysath/Doubao-Podcast-Automate)
+
+### [锻炼批判性阅读和写作能力的网站](https://github.com/faithleysath/PaceWrite)
+
+从网上抓取文章，用户阅读后写评论，AI根据评论给出反馈和评分，支持社区
+
+### 刷题系统
+
+### 自动从番剧生成表情包
+
+### 第三类接触游戏（可以用kagari实现）
+
+https://gemini.google.com/share/8cf3f350847c
+
+### 模拟法庭（kagari实现）
