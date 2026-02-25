@@ -1,0 +1,564 @@
+<section class="nft-tutorial" id="nft-tutorial">
+	<div class="nft-card">
+		<div class="nft-progress-track">
+			<div class="nft-progress-fill" id="nft-progress"></div>
+		</div>
+
+		<div class="nft-content">
+			<div class="nft-head">
+				<div class="nft-icon" id="nft-icon">⚡</div>
+				<h1 id="nft-title">打造极简万兆软路由</h1>
+				<h2 id="nft-subtitle">基于 Debian 13 &amp; Nftables</h2>
+			</div>
+
+			<div class="nft-body" id="nft-body"></div>
+		</div>
+
+		<div class="nft-footer">
+			<button id="nft-prev" class="nft-btn nft-btn-ghost" disabled>← 上一页</button>
+			<div class="nft-dots" id="nft-dots"></div>
+			<button id="nft-next" class="nft-btn nft-btn-primary">下一步 →</button>
+		</div>
+	</div>
+</section>
+
+<style>
+	.nft-tutorial {
+		--nft-bg: #0f172a;
+		--nft-panel: rgba(30, 41, 59, 0.7);
+		--nft-panel-2: #1e293b;
+		--nft-border: #334155;
+		--nft-text: #cbd5e1;
+		--nft-muted: #94a3b8;
+		--nft-title: #f8fafc;
+		--nft-accent: #3b82f6;
+		--nft-accent-2: #8b5cf6;
+
+		min-height: 100vh;
+		background: var(--nft-bg);
+		padding: 1rem;
+		box-sizing: border-box;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-family: "Noto Sans SC", "PingFang SC", sans-serif;
+	}
+
+	.nft-card {
+		width: 100%;
+		max-width: 980px;
+		background: var(--nft-panel);
+		border: 1px solid var(--nft-border);
+		border-radius: 16px;
+		overflow: hidden;
+		box-shadow: 0 24px 48px rgba(2, 6, 23, 0.45);
+		backdrop-filter: blur(8px);
+	}
+
+	.nft-progress-track {
+		height: 6px;
+		background: #1f2937;
+	}
+
+	.nft-progress-fill {
+		height: 100%;
+		width: 0;
+		background: linear-gradient(90deg, var(--nft-accent), var(--nft-accent-2));
+		transition: width 0.35s ease;
+	}
+
+	.nft-content {
+		min-height: 540px;
+		padding: 2rem;
+		color: var(--nft-text);
+	}
+
+	.nft-head {
+		text-align: center;
+		margin-bottom: 1.25rem;
+		animation: nftFade .35s ease;
+	}
+
+	.nft-icon {
+		font-size: 2.6rem;
+		margin-bottom: 0.4rem;
+	}
+
+	.nft-head h1 {
+		margin: 0;
+		font-size: clamp(1.65rem, 3.2vw, 2.3rem);
+		color: var(--nft-title);
+	}
+
+	.nft-head h2 {
+		margin: 0.35rem 0 0;
+		font-size: 1.05rem;
+		font-weight: 500;
+		color: var(--nft-muted);
+	}
+
+	.nft-body {
+		max-width: 820px;
+		margin: 0 auto;
+		line-height: 1.75;
+		animation: nftFadeUp .45s ease;
+	}
+
+	.nft-body p {
+		margin: 0 0 0.95rem;
+	}
+
+	.nft-body .lead {
+		font-size: 1.15rem;
+	}
+
+	.nft-note,
+	.nft-panel {
+		background: #0b1220;
+		border: 1px solid #1e293b;
+		border-radius: 12px;
+		padding: 1rem 1.1rem;
+		margin: 0.9rem 0;
+	}
+
+	.nft-tip {
+		display: flex;
+		gap: 0.7rem;
+		padding: 0.8rem 0.95rem;
+		border-radius: 10px;
+		border: 1px solid #1e40af;
+		background: rgba(30, 58, 138, 0.2);
+		margin-top: 0.95rem;
+	}
+
+	.nft-tip strong { color: #93c5fd; }
+
+	.nft-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 0.85rem;
+		margin-top: 1rem;
+	}
+
+	.nft-grid > div {
+		background: var(--nft-panel-2);
+		border: 1px solid var(--nft-border);
+		border-radius: 10px;
+		padding: 0.8rem;
+		text-align: center;
+	}
+
+	.nft-grid h4 {
+		margin: 0 0 0.35rem;
+		color: var(--nft-title);
+		font-size: 1.02rem;
+	}
+
+	.nft-grid p {
+		margin: 0;
+		color: var(--nft-muted);
+		font-size: 0.92rem;
+		line-height: 1.55;
+	}
+
+	.nft-code {
+		background: #020617;
+		border: 1px solid #1f2937;
+		border-radius: 10px;
+		padding: 0.95rem;
+		overflow-x: auto;
+		font-family: "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+		font-size: 0.84rem;
+		line-height: 1.6;
+		color: #e2e8f0;
+		white-space: pre;
+	}
+
+	.nft-code .comment { color: #64748b; }
+	.nft-code .kw { color: #c084fc; }
+	.nft-code .chain { color: #93c5fd; }
+	.nft-code .ok { color: #4ade80; }
+	.nft-code .hl { color: #fcd34d; font-weight: 700; }
+	.nft-code .pink { color: #f472b6; font-weight: 700; }
+
+	.nft-cmd {
+		display: inline-block;
+		background: #020617;
+		border-radius: 6px;
+		border: 1px solid #1f2937;
+		padding: 0.05rem 0.45rem;
+		font-family: "Roboto Mono", ui-monospace, monospace;
+		font-size: 0.9em;
+		color: #60a5fa;
+	}
+
+	.nft-list {
+		margin: 0.6rem 0 0;
+		padding-left: 1.25rem;
+	}
+
+	.nft-list li {
+		margin-bottom: 0.35rem;
+	}
+
+	.nft-maintain {
+		display: grid;
+		gap: 0.65rem;
+		margin-top: 0.9rem;
+	}
+
+	.nft-maintain-item {
+		background: var(--nft-panel-2);
+		border: 1px solid var(--nft-border);
+		border-radius: 10px;
+		padding: 0.9rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 0.8rem;
+	}
+
+	.nft-maintain-item h4 {
+		margin: 0 0 0.2rem;
+		color: var(--nft-title);
+		font-size: 1rem;
+	}
+
+	.nft-maintain-item p {
+		margin: 0;
+		color: var(--nft-muted);
+		font-size: 0.9rem;
+	}
+
+	.nft-footer {
+		border-top: 1px solid var(--nft-border);
+		background: rgba(15, 23, 42, 0.65);
+		padding: 1rem 1.35rem;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.9rem;
+	}
+
+	.nft-btn {
+		border: none;
+		border-radius: 9px;
+		padding: 0.52rem 0.9rem;
+		font-size: 0.95rem;
+		font-weight: 600;
+		cursor: pointer;
+		transition: all .2s ease;
+	}
+
+	.nft-btn-ghost {
+		color: #cbd5e1;
+		background: transparent;
+	}
+
+	.nft-btn-ghost:hover:enabled { background: #334155; color: #fff; }
+
+	.nft-btn-primary {
+		color: #fff;
+		background: #2563eb;
+		box-shadow: 0 8px 22px rgba(37, 99, 235, 0.35);
+	}
+
+	.nft-btn-primary:hover:enabled { background: #3b82f6; }
+
+	.nft-btn:disabled {
+		opacity: 0.45;
+		cursor: not-allowed;
+		box-shadow: none;
+	}
+
+	.nft-dots {
+		display: flex;
+		align-items: center;
+		gap: 0.4rem;
+	}
+
+	.nft-dot {
+		width: 8px;
+		height: 8px;
+		border-radius: 999px;
+		background: #475569;
+		transition: all .2s ease;
+	}
+
+	.nft-dot.active {
+		width: 22px;
+		background: #3b82f6;
+	}
+
+	@keyframes nftFade {
+		from { opacity: 0; }
+		to { opacity: 1; }
+	}
+
+	@keyframes nftFadeUp {
+		from {
+			opacity: 0;
+			transform: translateY(8px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@media (max-width: 860px) {
+		.nft-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.nft-maintain-item {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.nft-content { padding: 1.15rem; min-height: 580px; }
+		.nft-footer { padding: 0.8rem; }
+		.nft-btn { padding: 0.5rem 0.72rem; font-size: 0.9rem; }
+	}
+</style>
+
+<script>
+	(function () {
+		const slides = [
+			{
+				id: 'intro',
+				icon: '⚡',
+				title: '打造极简万兆软路由',
+				subtitle: '基于 Debian 13 & Nftables',
+				content: `
+					<p class="lead">欢迎！本教程将教你如何将一台双网卡的 Debian 13 变成一个高性能的 IPv4 转发路由器。</p>
+					<div class="nft-panel">
+						<h3 style="margin-top:0;color:#f8fafc;">✅ 课前准备</h3>
+						<ul class="nft-list">
+							<li>一台装好 Debian 13 的机器（或 LXC 容器）</li>
+							<li>已经安装了 <span class="nft-cmd" style="color:#4ade80;">nftables</span></li>
+							<li>双网卡就绪：例如 <span class="nft-cmd">eth0</span>（连接外网）和 <span class="nft-cmd" style="color:#a78bfa;">eth1</span>（连接万兆内网）</li>
+						</ul>
+					</div>
+					<p style="font-size:0.92rem;color:#94a3b8;"><i>点击右下角“下一步”开始。</i></p>
+				`
+			},
+			{
+				id: 'step1',
+				icon: '🖥️',
+				title: '第一步：开启内核 IP 转发',
+				subtitle: '让 Linux 允许数据包穿过',
+				content: `
+					<p>Linux 默认出于安全考虑，不允许网卡之间互相转发数据。要把它变成路由器，第一件事就是打开内核转发开关。</p>
+					<div class="nft-code"><span class="comment"># 1. 编辑 sysctl 配置文件</span>
+nano /etc/sysctl.conf
+
+<span class="comment"># 2. 找到并取消注释这一行（或直接添加）：</span>
+net.ipv4.ip_forward=1
+
+<span class="comment"># 3. 让配置立即生效</span>
+sysctl -p</div>
+					<div class="nft-tip">
+						<div>🛡️</div>
+						<p style="margin:0;"><strong>注意：</strong>如果没开这一项，后面的 nftables 规则再完美，数据包也会被内核直接丢弃。</p>
+					</div>
+				`
+			},
+			{
+				id: 'concept',
+				icon: '🌐',
+				title: '理解 Nftables 的工作原理',
+				subtitle: '表、链与规则',
+				content: `
+					<p>不要害怕代码，把 Nftables 想象成一个海关检查站：</p>
+					<div class="nft-grid">
+						<div>
+							<h4>表 (Table)</h4>
+							<p>不同部门。比如：filter（安检拦截）、nat（地址改写）。</p>
+						</div>
+						<div>
+							<h4>链 (Chain)</h4>
+							<p>不同通道。比如：input、forward、postrouting。</p>
+						</div>
+						<div>
+							<h4>规则 (Rule)</h4>
+							<p>具体动作。比如：来自内网的数据包统一伪装后再出网。</p>
+						</div>
+					</div>
+				`
+			},
+			{
+				id: 'config',
+				icon: '📄',
+				title: '管理配置文件',
+				subtitle: '一切尽在 /etc/nftables.conf',
+				content: `
+					<p>在 Debian 中，nftables 规则通常保存在单一文件里，你可以随时编辑。</p>
+					<div class="nft-code"><span class="comment"># 打开配置文件</span>
+nano /etc/nftables.conf</div>
+					<p>标准配置文件头部通常如下：</p>
+					<div class="nft-code">#!/usr/sbin/nft -f
+<span class="comment"># 每次加载先清空旧规则，防止冲突</span>
+flush ruleset
+
+<span class="comment"># 下面开始写 table / chain / rule...</span></div>
+				`
+			},
+			{
+				id: 'app1',
+				icon: '🔁',
+				title: '核心应用：NAT 伪装 (上网)',
+				subtitle: '让内网设备通过软路由访问外网',
+				content: `
+					<p>我们需要让放行的数据包从外网卡 <span class="nft-cmd">eth0</span> 出去时，统一做伪装（masquerade）。</p>
+					<div class="nft-code"><span class="comment">#!/usr/sbin/nft -f</span>
+<span class="comment">flush ruleset</span>
+
+<span class="kw">table ip filter</span> {
+	<span class="chain">chain forward</span> { type filter hook forward priority 0; <span class="ok">policy accept</span>; }
+}
+
+<span class="kw">table ip nat</span> {
+	<span class="chain">chain postrouting</span> {
+		type nat hook postrouting priority 100; policy accept;
+		<span class="comment"># 核心指令：从 eth0 出去的数据全部伪装</span>
+		<span class="hl">oifname "eth0" masquerade</span>
+	}
+}</div>
+				`
+			},
+			{
+				id: 'app2',
+				icon: '🧭',
+				title: '进阶应用：端口转发 (DNAT)',
+				subtitle: '将内网服务暴露给外部',
+				content: `
+					<p>如果别人访问软路由 8080 端口，你想转发给 Mac mini（10.254.100.2）的 80 端口，就加 DNAT 规则。</p>
+					<p>规则写在 <span class="nft-cmd">nat</span> 表的 <span class="nft-cmd" style="color:#93c5fd;">prerouting</span> 链：</p>
+					<div class="nft-code"><span class="kw">table ip nat</span> {
+	<span class="chain">chain prerouting</span> {
+		type nat hook prerouting priority -100; policy accept;
+		<span class="comment"># 端口转发指令</span>
+		<span class="pink">iifname "eth0" tcp dport 8080 dnat to 10.254.100.2:80</span>
+	}
+
+	<span class="comment"># 下方保留 postrouting 和 masquerade 规则</span>
+}</div>
+				`
+			},
+			{
+				id: 'full_example',
+				icon: '🧩',
+				title: '完整配置文件示例',
+				subtitle: '直接复制使用的终极模板',
+				content: `
+					<p>这是结合基础转发、NAT 伪装和端口转发的完整 <span class="nft-cmd" style="color:#34d399;">/etc/nftables.conf</span> 示例：</p>
+					<div class="nft-code">#!/usr/sbin/nft -f
+
+<span class="comment"># 1. 清空旧规则</span>
+flush ruleset
+
+<span class="comment"># 2. 过滤规则（全放行模式）</span>
+<span class="kw">table ip filter</span> {
+	<span class="chain">chain input</span> { type filter hook input priority 0; policy accept; }
+	<span class="chain">chain forward</span> { type filter hook forward priority 0; policy accept; }
+	<span class="chain">chain output</span> { type filter hook output priority 0; policy accept; }
+}
+
+<span class="comment"># 3. NAT 规则（地址转换）</span>
+<span class="kw">table ip nat</span> {
+	<span class="chain">chain prerouting</span> {
+		type nat hook prerouting priority -100; policy accept;
+		iifname "eth0" tcp dport 8080 dnat to 10.254.100.2:80
+	}
+
+	<span class="chain">chain postrouting</span> {
+		type nat hook postrouting priority 100; policy accept;
+		<span class="hl">oifname "eth0" masquerade</span>
+	}
+}</div>
+				`
+			},
+			{
+				id: 'end',
+				icon: '✅',
+				title: '日常维护备忘录',
+				subtitle: 'You are all set!',
+				content: `
+					<p style="text-align:center;font-size:1.08rem;">你的极简软路由已经配置完毕！只需记住这三行命令：</p>
+					<div class="nft-maintain">
+						<div class="nft-maintain-item">
+							<div>
+								<h4>1. 编辑规则</h4>
+								<p>修改 /etc/nftables.conf 文件</p>
+							</div>
+							<span class="nft-cmd">nano /etc/nftables.conf</span>
+						</div>
+						<div class="nft-maintain-item">
+							<div>
+								<h4>2. 应用规则</h4>
+								<p>修改后重启服务生效</p>
+							</div>
+							<span class="nft-cmd" style="color:#4ade80;">systemctl restart nftables</span>
+						</div>
+						<div class="nft-maintain-item">
+							<div>
+								<h4>3. 查看当前规则</h4>
+								<p>排错利器，查看实时生效规则</p>
+							</div>
+							<span class="nft-cmd" style="color:#a78bfa;">nft list ruleset</span>
+						</div>
+					</div>
+				`
+			}
+		];
+
+		let current = 0;
+
+		const progressEl = document.getElementById('nft-progress');
+		const iconEl = document.getElementById('nft-icon');
+		const titleEl = document.getElementById('nft-title');
+		const subtitleEl = document.getElementById('nft-subtitle');
+		const bodyEl = document.getElementById('nft-body');
+		const prevBtn = document.getElementById('nft-prev');
+		const nextBtn = document.getElementById('nft-next');
+		const dotsEl = document.getElementById('nft-dots');
+
+		function renderDots() {
+			dotsEl.innerHTML = slides
+				.map((_, i) => `<span class="nft-dot ${i === current ? 'active' : ''}"></span>`)
+				.join('');
+		}
+
+		function render() {
+			const slide = slides[current];
+			const progress = ((current + 1) / slides.length) * 100;
+			progressEl.style.width = progress + '%';
+			iconEl.textContent = slide.icon;
+			titleEl.textContent = slide.title;
+			subtitleEl.textContent = slide.subtitle;
+			bodyEl.innerHTML = slide.content;
+			prevBtn.disabled = current === 0;
+			nextBtn.disabled = current === slides.length - 1;
+			renderDots();
+		}
+
+		prevBtn.addEventListener('click', function () {
+			if (current > 0) {
+				current -= 1;
+				render();
+			}
+		});
+
+		nextBtn.addEventListener('click', function () {
+			if (current < slides.length - 1) {
+				current += 1;
+				render();
+			}
+		});
+
+		render();
+	})();
+</script>
