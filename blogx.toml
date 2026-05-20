@@ -1,0 +1,37 @@
+[site]
+title = "laysath的博客"
+base_url = "https://faithleysath.github.io/"
+
+[paths]
+content = "content"
+output = "public"
+theme = "theme"
+cache = ".blogx/cache"
+
+[theme]
+default_layout = "page.html"
+url_mode = "clean"
+
+[markdown]
+heading_anchors = true
+unsafe_html = true
+
+[katex]
+throw_on_error = true
+error_color = "#cc0000"
+trust = false
+
+[code]
+theme = "base16-ocean.dark"
+line_numbers = true
+
+[assets]
+fingerprint = false
+
+[serve]
+host = "127.0.0.1"
+port = 8000
+
+[site_infra]
+sitemap = true
+robots = true

@@ -1,0 +1,62 @@
+name: Deploy BlogX site to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Install BlogX
+        env:
+          BLOGX_VERSION: v0.4.1
+          BLOGX_TARGET: x86_64-unknown-linux-gnu
+        run: |
+          curl -fsSL "https://github.com/faithleysath/BlogX/releases/download/${BLOGX_VERSION}/blogx-${BLOGX_TARGET}.tar.gz" -o blogx.tar.gz
+          tar -xzf blogx.tar.gz
+          chmod +x blogx
+          sudo mv blogx /usr/local/bin/blogx
+          blogx --version
+
+      - name: Build site
+        run: blogx build --clean --no-cache --profile
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: public
+
+  deploy:
+    name: Deploy
+    if: github.event_name != 'pull_request'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
