@@ -29,15 +29,14 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
       - name: Install BlogX
-        env:
-          BLOGX_VERSION: v0.4.6
-          BLOGX_TARGET: x86_64-unknown-linux-gnu
         run: |
-          curl -fsSL "https://github.com/faithleysath/BlogX/releases/download/${BLOGX_VERSION}/blogx-${BLOGX_TARGET}.tar.gz" -o blogx.tar.gz
-          tar -xzf blogx.tar.gz
-          chmod +x blogx
-          sudo mv blogx /usr/local/bin/blogx
+          npm install --global @faithleysath/blogx@0.4.9 --registry=https://registry.npmjs.org
           blogx --version
 
       - name: Build site
