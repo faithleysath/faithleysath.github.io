@@ -31,7 +31,7 @@ jobs:
 
       - name: Install BlogX
         env:
-          BLOGX_VERSION: v0.4.3
+          BLOGX_VERSION: v0.4.4
           BLOGX_TARGET: x86_64-unknown-linux-gnu
         run: |
           curl -fsSL "https://github.com/faithleysath/BlogX/releases/download/${BLOGX_VERSION}/blogx-${BLOGX_TARGET}.tar.gz" -o blogx.tar.gz
